@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Telegram\\Bot\\": "vendor/telegram-bot/api/src/"
+        }
+    },
+    "require": {
+        "telegram-bot/api": "^2.5"
+    }
+}

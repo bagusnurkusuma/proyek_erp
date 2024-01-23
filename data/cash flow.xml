@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:retgoo="http://www.retgoo.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exporter="RetGoo Designer, http://www.retgoo.com" exporterVersion="1.0.0.0" expressionLanguage="http://www.w3.org/1999/XPath" id="pid-7B337830-CFA5-41B6-9821-38009DB1A900" targetNamespace="http://www.retgoo.com/bpmn20" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+    <collaboration id="COL-D20F412C-C64D-462F-8B12-96C59331E26C" isClosed="false">
+        <participant id="lane-a6a304b8-ac35-49f4-8be4-d815f92f7861" name="Cash Flow" processRef="COL-D87B81A5-F0C0-4BE0-AE01-1A12182837A5" />
+    </collaboration>
+    <process id="COL-D87B81A5-F0C0-4BE0-AE01-1A12182837A5" isExecutable="true">
+        <dataMapping />
+        <privateVariableList>
+            <privateVariable id="pv-2013DBE1-B258-41AD-AD9E-BBD49DF41B08" name="DQ_Cetak_1_CF_Summary" type="String" createdBy="Enrico Fatkhurrozi Lombardo" createdAt="2020-04-17T10:19:32.0484373+07:00" updatedBy="Enrico Fatkhurrozi Lombardo" updatedAt="2020-04-20T09:20:51.5141133+07:00" dataSourceType="0" dataSourceTypeName="DataVariable" valueType="1" editorType="0" isVariableType="false" description="" listDefaultControlType="4">
+                <dataSourceField type="3">
+                    <dbImplementation providerId="0" commandType="0" implementationType="1" providerName="PostgreSQL" name="DBServiceImplementation" enabled="true">
+                        <connection host="" database="" port="" user="" password="" unicode="true" />
+                        <Query isExecuted="false" result="true" lastExecuted="2020-04-20T09:19:19.0582426+07:00" IsRemoveColumnUnique="false">
+                            <Statement><![CDATA[SELECT
+  'laporan cash flow' as nama,
+  a.*
+FROM
+  accounting.get_summary_cash_flow([@End_Date]) a]]></Statement>
+                            <StoreResult><![CDATA[]]></StoreResult>
+                            <fieldResult>
+                                <field index="-1" name="nama" caption="nama" type="" />
+                                <field index="-1" name="ret_total_name1" caption="ret_total_name1" type="" />
+                                <field index="-1" name="ret_total_name2" caption="ret_total_name2" type="" />
+                                <field index="-1" name="ret_total_name3" caption="ret_total_name3" type="" />
+                                <field index="-1" name="ret_total1" caption="ret_total1" type="" />
+                                <field index="-1" name="ret_total2" caption="ret_total2" type="" />
+                                <field index="-1" name="ret_total3" caption="ret_total3" type="" />
+                            </fieldResult>
+                            <variableDataMappingList>
+                                <dataVariableMapping name="@End_Date" idVar="pv-FB402568-E452-4391-B18D-BB20CC343786" />
+                            </variableDataMappingList>
+                        </Query>
+                    </dbImplementation>
+                </dataSourceField>
+                <gridColumnList>
+                    <gridColumn name="f954d802_f0fd_4767_b594_4b455a14751a" caption="Nama" fieldName="nama" database="" schema="" table="" field="nama" />
+                    <gridColumn name="89254f66_14df_4cca_9319_601449aca7bc" caption="Kenaikan (penurunan) Kas dan Bank" fieldName="ret_total_name1" database="" schema="" table="" field="ret_total_name1" />
+                    <gridColumn name="b632b5f3_3dfc_4697_8350_cf66a536422c" caption="Kas dan Bank  awal periode" fieldName="ret_total_name2" database="" schema="" table="" field="ret_total_name2" />
+                    <gridColumn name="d83094cf_2201_48e4_b151_7cab10b337e8" caption="Kas dan Bank  akhir periode" fieldName="ret_total_name3" database="" schema="" table="" field="ret_total_name3" />
+                    <gridColumn name="fbab6c9e_3c57_4a83_a347_03c17b551fcc" caption="Total Kenaikan (penurunan) Kas dan Bank" fieldName="ret_total1" database="" schema="" table="" field="ret_total1" />
+                    <gridColumn name="39f3dde3_f1ad_4316_8890_a120cf837572" caption="Total Kas dan Bank  awal periode" fieldName="ret_total2" database="" schema="" table="" field="ret_total2" />
+                    <gridColumn name="954bf18b_e2ee_4d92_852e_73d0e038ea20" caption="Total Kas dan Bank  akhir periode" fieldName="ret_total3" database="" schema="" table="" field="ret_total3" />
+                </gridColumnList>
+            </privateVariable>
+            <privateVariable id="pv-394A1BB2-DADB-4424-8087-CA34EF6C253C" name="DQ_Cetak_2_CF_GroupAccount" type="String" createdBy="Enrico Fatkhurrozi Lombardo" createdAt="2020-04-20T10:21:18.0783381+07:00" updatedBy="Enrico Fatkhurrozi Lombardo" updatedAt="2020-04-20T10:39:07.3669290+07:00" dataSourceType="0" dataSourceTypeName="DataVariable" valueType="1" editorType="0" isVariableType="false" description="" listDefaultControlType="4">
+                <dataSourceField type="3">
+                    <dbImplementation providerId="0" commandType="0" implementationType="1" providerName="PostgreSQL" name="DBServiceImplementation" enabled="true">
+                        <connection host="" database="" port="" user="" password="" unicode="true" />
+                        <Query isExecuted="false" result="true" lastExecuted="2020-04-20T10:37:58.1871957+07:00" IsRemoveColumnUnique="false">
+                            <Statement><![CDATA[SELECT
+  'laporan cash flow' as nama,
+  a.*
+FROM
+  accounting.get_group_account_cash_flow([@End_Date] ) a
+ORDER BY
+  a.ret_group_id]]></Statement>
+                            <StoreResult><![CDATA[]]></StoreResult>
+                            <fieldResult>
+                                <field index="-1" name="nama" caption="nama" type="" />
+                                <field index="-1" name="ret_group_name" caption="ret_group_name" type="" />
+                                <field index="-1" name="ret_group_total_name" caption="ret_group_total_name" type="" />
+                                <field index="-1" name="ret_group_total" caption="ret_group_total" type="" />
+                                <field index="-1" name="ret_group_id" caption="ret_group_id" type="" />
+                                <field index="-1" name="ret_is_default" caption="ret_is_default" type="" />
+                            </fieldResult>
+                            <variableDataMappingList>
+                                <dataVariableMapping name="@End_Date" idVar="pv-FB402568-E452-4391-B18D-BB20CC343786" />
+                            </variableDataMappingList>
+                        </Query>
+                    </dbImplementation>
+                </dataSourceField>
+                <gridColumnList>
+                    <gridColumn name="324eece9_f576_4968_b8f2_f0f1184d1463" caption="Nama" fieldName="nama" database="" schema="" table="" field="nama" />
+                    <gridColumn name="29d61177_52c5_4db9_ac90_ce0c72464ed8" caption="Nama Grup" fieldName="ret_group_name" database="" schema="" table="" field="ret_group_name" />
+                    <gridColumn name="cf2c4e28_b41c_408d_8d03_7b08cb0735c4" caption="Nama Grup total" fieldName="ret_group_total_name" database="" schema="" table="" field="ret_group_total_name" />
+                    <gridColumn name="b6d1cc35_ca8c_42e7_8378_3693967bd771" caption="Total" fieldName="ret_group_total" database="" schema="" table="" field="ret_group_total" />
+                    <gridColumn name="0214a477_60c6_44ff_8c27_e891adf5babd" caption="ID Grup" fieldName="ret_group_id" database="" schema="" table="" field="ret_group_id" />
+                    <gridColumn name="40081ca4_ba4e_4af5_9fe6_7f96a97d9549" caption="Is Default" fieldName="ret_is_default" database="" schema="" table="" field="ret_is_default" />
+                </gridColumnList>
+            </privateVariable>
+            <privateVariable id="pv-96F87043-812C-418A-B530-55832934A4F3" name="DQ_Cetak_3_CF_Account" type="String" createdBy="Enrico Fatkhurrozi Lombardo" createdAt="2020-04-20T10:41:20.2440723+07:00" updatedBy="Enrico Fatkhurrozi Lombardo" updatedAt="2020-04-20T15:50:58.8313846+07:00" dataSourceType="0" dataSourceTypeName="DataVariable" valueType="1" editorType="0" isVariableType="false" description="" listDefaultControlType="4">
+                <dataSourceField type="3">
+                    <dbImplementation providerId="0" commandType="0" implementationType="1" providerName="PostgreSQL" name="DBServiceImplementation" enabled="true">
+                        <connection host="" database="" port="" user="" password="" unicode="true" />
+                        <Query isExecuted="false" result="true" lastExecuted="2020-04-20T15:50:58.3312573+07:00" IsRemoveColumnUnique="false">
+                            <Statement><![CDATA[SELECT
+  *
+FROM
+  accounting.get_account_cash_flow([@End_Date] ) a]]></Statement>
+                            <StoreResult><![CDATA[]]></StoreResult>
+                            <fieldResult>
+                                <field index="-1" name="ret_group_id" caption="ret_group_id" type="" />
+                                <field index="-1" name="ret_account_id" caption="ret_account_id" type="" />
+                                <field index="-1" name="ret_account_code" caption="ret_account_code" type="" />
+                                <field index="-1" name="ret_account_name" caption="ret_account_name" type="" />
+                                <field index="-1" name="ret_total" caption="ret_total" type="" />
+                                <field index="-1" name="ret_is_default" caption="ret_is_default" type="" />
+                            </fieldResult>
+                            <variableDataMappingList>
+                                <dataVariableMapping name="@End_Date" idVar="pv-FB402568-E452-4391-B18D-BB20CC343786" />
+                            </variableDataMappingList>
+                        </Query>
+                    </dbImplementation>
+                </dataSourceField>
+                <gridColumnList>
+                    <gridColumn name="97fc63b4_1eab_403c_93cc_9b2314e1e74f" caption="ID Group" fieldName="ret_group_id" database="" schema="" table="" field="ret_group_id" />
+                    <gridColumn name="20d0cdbc_c930_40d8_8543_cdd0b59c917f" caption="ID Account" fieldName="ret_account_id" database="" schema="" table="" field="ret_account_id" />
+                    <gridColumn name="032929d2_519b_4aa3_b9ea_47002068dd21" caption="Kode Akun" fieldName="ret_account_code" database="" schema="" table="" field="ret_account_code" />
+                    <gridColumn name="af684b91_21ff_4c92_8377_a43589e7ddc4" caption="Nama Akun" fieldName="ret_account_name" database="" schema="" table="" field="ret_account_name" />
+                    <gridColumn name="3646a2b8_9ee2_4e0e_9a8a_804769bc32c8" caption="Total" fieldName="ret_total" database="" schema="" table="" field="ret_total" />
+                    <gridColumn name="c67f791a_926e_4dad_ab98_ed3633855b56" caption="Is Default" fieldName="ret_is_default" database="" schema="" table="" field="ret_is_default" />
+                </gridColumnList>
+            </privateVariable>
+            <privateVariable id="pv-BCAF1CA6-8660-4748-9097-E328265EECE7" name="DQ_Laporan_CashFlow" type="String" createdBy="Enrico Fatkhurrozi Lombardo" createdAt="2020-04-17T10:17:12.2398246+07:00" updatedBy="Enrico Fatkhurrozi Lombardo" updatedAt="2021-09-08T15:45:34.5511641+07:00" dataSourceType="0" dataSourceTypeName="DataVariable" valueType="1" editorType="0" isVariableType="false" description="" listDefaultControlType="4">
+                <dataSourceField type="3">
+                    <dbImplementation providerId="0" commandType="0" implementationType="1" providerName="PostgreSQL" name="DBServiceImplementation" enabled="true">
+                        <connection host="" database="" port="" user="" password="" unicode="true" />
+                        <Query isExecuted="false" result="true" lastExecuted="2021-09-08T15:42:04.6627487+07:00" IsRemoveColumnUnique="false">
+                            <Statement><![CDATA[SELECT
+  'laporan cash flow' as name,
+  UPPER(a.company_name) as company_name,
+  'Cash Flow Report' as judul,
+  a.logo,
+  a.address,
+  'Telp : '||a.phone as phone,
+  'Email : '||a.email as email,
+  'For the period ending on '|| date_part('day', [@End_Date] ::DATE) || ' ' ||
+   master.get_month_name([@End_Date] ::DATE) || ' ' || date_part('year', [@End_Date] ::DATE) ||
+   ' (Monthly)' as keterangan
+FROM
+  company.company_profile a]]></Statement>
+                            <StoreResult><![CDATA[]]></StoreResult>
+                            <fieldResult>
+                                <field index="-1" name="name" caption="name" type="" />
+                                <field index="-1" name="company_name" caption="company_name" type="" />
+                                <field index="-1" name="judul" caption="judul" type="" />
+                                <field index="-1" name="logo" caption="logo" type="" />
+                                <field index="-1" name="address" caption="address" type="" />
+                                <field index="-1" name="phone" caption="phone" type="" />
+                                <field index="-1" name="email" caption="email" type="" />
+                                <field index="-1" name="keterangan" caption="keterangan" type="" />
+                            </fieldResult>
+                            <variableDataMappingList>
+                                <dataVariableMapping name="@End_Date" idVar="pv-FB402568-E452-4391-B18D-BB20CC343786" />
+                            </variableDataMappingList>
+                        </Query>
+                    </dbImplementation>
+                </dataSourceField>
+                <gridColumnList>
+                    <gridColumn name="f6287005_4423_4044_aad8_f235dc4da143" caption="name" fieldName="name" database="" schema="" table="" field="name" />
+                    <gridColumn name="22852812_05f2_4e0e_917e_6b396523c1af" caption="Nama Perusahaan" fieldName="company_name" database="" schema="" table="" field="company_name" />
+                    <gridColumn name="67f4274c_f7f1_4783_bc02_e77194d8effd" caption="Judul" fieldName="judul" database="" schema="" table="" field="judul" />
+                    <gridColumn name="a65aae6b_650c_495f_ada5_c1c077454c1b" caption="Keterangan" fieldName="keterangan" database="" schema="" table="" field="keterangan" />
+                    <gridColumn name="d697d15b_413e_43be_92f2_f1bbec8a79d0" caption="Logo" fieldName="logo" database="" schema="" table="" field="logo" />
+                    <gridColumn name="3ec61383_4a5f_4da7_abea_caa504eba449" caption="Alamat" fieldName="address" database="" schema="" table="" field="address" />
+                    <gridColumn name="11dda847_f4ce_4b31_8547_dad1efc22ad2" caption="Telp" fieldName="phone" database="" schema="" table="" field="phone" />
+                    <gridColumn name="2650e7a8_e8db_4022_8682_a279b4e835b0" caption="Email" fieldName="email" database="" schema="" table="" field="email" />
+                </gridColumnList>
+            </privateVariable>
+            <privateVariable id="pv-B760E659-4F6E-42ED-BA98-AD5BA93C85AB" name="DS_Cetak_CF" type="String" createdBy="Enrico Fatkhurrozi Lombardo" createdAt="2020-04-20T10:39:10.1021536+07:00" updatedBy="Enrico Fatkhurrozi Lombardo" updatedAt="2020-04-20T11:11:01.8759621+07:00" dataSourceType="0" dataSourceTypeName="DataVariable" valueType="1" editorType="0" isVariableType="false" description="" listDefaultControlType="4">
+                <dataSourceField type="1">
+                    <dataTable id="pv-2013DBE1-B258-41AD-AD9E-BBD49DF41B08" />
+                    <dataTable id="pv-394A1BB2-DADB-4424-8087-CA34EF6C253C" />
+                    <dataTable id="pv-96F87043-812C-418A-B530-55832934A4F3" />
+                    <dataTable id="pv-BCAF1CA6-8660-4748-9097-E328265EECE7" />
+                    <relation name="Cash Flow Ke Summary" keyTableId="pv-BCAF1CA6-8660-4748-9097-E328265EECE7" fkTableId="pv-2013DBE1-B258-41AD-AD9E-BBD49DF41B08" keyColumn="f6287005_4423_4044_aad8_f235dc4da143" fkColumn="f954d802_f0fd_4767_b594_4b455a14751a" />
+                    <relation name="Cash Flow Ke Group Account" keyTableId="pv-BCAF1CA6-8660-4748-9097-E328265EECE7" fkTableId="pv-394A1BB2-DADB-4424-8087-CA34EF6C253C" keyColumn="f6287005_4423_4044_aad8_f235dc4da143" fkColumn="324eece9_f576_4968_b8f2_f0f1184d1463" />
+                    <relation name="Group Account ke Account" keyTableId="pv-394A1BB2-DADB-4424-8087-CA34EF6C253C" fkTableId="pv-96F87043-812C-418A-B530-55832934A4F3" keyColumn="0214a477_60c6_44ff_8c27_e891adf5babd" fkColumn="97fc63b4_1eab_403c_93cc_9b2314e1e74f" />
+                </dataSourceField>
+            </privateVariable>
+            <privateVariable id="pv-FB402568-E452-4391-B18D-BB20CC343786" name="End_Date" type="Date" createdBy="Enrico Fatkhurrozi Lombardo" createdAt="2020-04-17T10:16:53.0987537+07:00" updatedBy="Enrico Fatkhurrozi Lombardo" updatedAt="2020-04-17T10:17:11.4581616+07:00" dataSourceType="0" dataSourceTypeName="DataVariable" valueType="1" editorType="0" isVariableType="false" description="" />
+        </privateVariableList>
+        <laneSet>
+            <lane id="lane-5c360492-405f-49d5-bc86-0d135023b18d" name="Accounting Staff" partitionElementRef="rid-f78ab5d1-6619-44e4-acf9-bc7b7aee0bb3" />
+        </laneSet>
+        <startEvent id="sid-c5f7b068-a85a-445e-8f5a-31241eabfb9b" name="Start Event">
+            <outgoing>sfid-08819831-9d37-4388-8122-2f19b358a7be</outgoing>
+        </startEvent>
+        <subProcess triggeredByEvent="false" completionQuantity="1" isForCompensation="false" startQuantity="1" name="Show Cash Flow Report" id="sid-3c28447e-da2e-4ec3-af78-884ca1bda341" elementSubProcessType="26" elementSubProcessTypeName="userTask" isUserTask="true" taskValue="34" isOpened="true">
+            <potentialOwner resourceRef="rid-f78ab5d1-6619-44e4-acf9-bc7b7aee0bb3" mentionVariable="" type="0" />
+            <startEvent id="sid-42a11cf5-bdc1-42c5-a1c2-ebbe067cc14f" name="">
+                <outgoing>sfid-2df552cf-2431-49d2-823e-9aa34cec0f15</outgoing>
+            </startEvent>
+            <task completionQuantity="1" id="sid-e20ad0fc-9bc3-44ca-b4c2-8a0020d776d7" name="Cash Flow" isForCompensation="false" startQuantity="1" taskType="9" HelpIndex="" eagleEyesTag="" isCoach="true">
+                <incoming>sfid-2df552cf-2431-49d2-823e-9aa34cec0f15</incoming>
+                <outgoing>sfid-5746ae1f-cb8d-4fa2-a928-3603d0feedf5</outgoing>
+                <formCoach><![CDATA[<?xml version="1.0" encoding="utf-16"?><object_collection HideCloseButton="False" TreasuryVersion="1"><object asm="DesignerCore.uPanelDesigner, DesignerCore, Version=4.4.3.6, Culture=neutral, PublicKeyToken=null" name="mpanelDesigner" assembly="ASM-D92AA0EC87211147BB673CCE566E2B37"><MaximumBox>False</MaximumBox><FormBorderStyle>None</FormBorderStyle><HideCloseButton>False</HideCloseButton><Anchor>Top, Bottom, Left, Right</Anchor><BackColor>White</BackColor><Cursor>Arrow</Cursor><ForeColor>ControlText</ForeColor><Location>4, 33</Location><Name>mpanelDesigner</Name><Size>1292, 463</Size><TabIndex>0</TabIndex><object asm="Meitan.BPM.bpmn.gui.coach.component.ReportingService, Meitan.BPM, Version=4.4.3.6, Culture=neutral, PublicKeyToken=null" name="ReportingService1" assembly="ASM-52D4D532441EA6E2A1F24B958E0E4AC4"><MasterTableSelected>DQ_Laporan_CashFlow</MasterTableSelected><ReportGuid>1e4920c0-7a92-4e2e-9e24-726c54fed991</ReportGuid><ReportingContentString>/// &lt;XRTypeInfo&gt;
+///   &lt;AssemblyFullName&gt;DevExpress.XtraReports.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a&lt;/AssemblyFullName&gt;
+///   &lt;AssemblyLocation&gt;C:\Program Files\RetGoo\Studio\DevExpress.XtraReports.v20.1.dll&lt;/AssemblyLocation&gt;
+///   &lt;TypeName&gt;DevExpress.XtraReports.UI.XtraReport&lt;/TypeName&gt;
+///   &lt;Localization&gt;en-US&lt;/Localization&gt;
+///   &lt;Version&gt;20.1&lt;/Version&gt;
+///   &lt;Resources&gt;
+///     &lt;Resource Name="XtraReportSerialization.XtraReport"&gt;
+/// zsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAA&lt;/Resource&gt;
+///   &lt;/Resources&gt;
+/// &lt;/XRTypeInfo&gt;
+namespace XtraReportSerialization {
+    
+    public class XtraReport : DevExpress.XtraReports.UI.XtraReport {
+        private DevExpress.XtraReports.UI.TopMarginBand topMarginBand1;
+        private DevExpress.XtraReports.UI.DetailBand detailBand1;
+        private DevExpress.XtraReports.UI.BottomMarginBand bottomMarginBand1;
+        private DevExpress.XtraReports.UI.XRPageInfo pageInfo1;
+        private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
+        private DevExpress.XtraReports.UI.XRPictureBox pictureBox1;
+        private DevExpress.XtraReports.UI.XRLabel label4;
+        private DevExpress.XtraReports.UI.XRLabel label5;
+        private DevExpress.XtraReports.UI.XRLabel label6;
+        private DevExpress.XtraReports.UI.XRLabel label7;
+        private DevExpress.XtraReports.UI.XRLine line1;
+        private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
+        private DevExpress.XtraReports.UI.DetailBand Detail;
+        private DevExpress.XtraReports.UI.DetailReportBand DetailReport2;
+        private DevExpress.XtraReports.UI.DetailBand Detail2;
+        private DevExpress.XtraReports.UI.XRTable table7;
+        private DevExpress.XtraReports.UI.XRTableRow tableRow7;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell13;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell14;
+        private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
+        private DevExpress.XtraReports.UI.XRTable table4;
+        private DevExpress.XtraReports.UI.XRTableRow tableRow4;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell7;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell8;
+        private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
+        private DevExpress.XtraReports.UI.XRTable table6;
+        private DevExpress.XtraReports.UI.XRTableRow tableRow6;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell11;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell12;
+        private DevExpress.XtraReports.UI.XRTable table5;
+        private DevExpress.XtraReports.UI.XRTableRow tableRow5;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell9;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell10;
+        private DevExpress.XtraReports.UI.FormattingRule formattingRule1;
+        private DevExpress.XtraReports.UI.DetailReportBand DetailReport1;
+        private DevExpress.XtraReports.UI.DetailBand Detail1;
+        private DevExpress.XtraReports.UI.XRTable table3;
+        private DevExpress.XtraReports.UI.XRTableRow tableRow3;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell5;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell6;
+        private DevExpress.XtraReports.UI.XRTable table2;
+        private DevExpress.XtraReports.UI.XRTableRow tableRow2;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell3;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell4;
+        private DevExpress.XtraReports.UI.XRTable table1;
+        private DevExpress.XtraReports.UI.XRTableRow tableRow1;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell1;
+        private DevExpress.XtraReports.UI.XRTableCell tableCell2;
+        private DevExpress.XtraReports.UI.PageHeaderBand PageHeader;
+        private DevExpress.XtraReports.UI.XRLabel label2;
+        private DevExpress.XtraReports.UI.XRLabel label3;
+        private System.Resources.ResourceManager _resources;
+        private string _resourceString;
+        public XtraReport() {
+            this._resourceString = DevExpress.XtraReports.Serialization.XRResourceManager.GetResourceFor("XtraReportSerialization.XtraReport");
+            this.InitializeComponent();
+        }
+        private System.Resources.ResourceManager resources {
+            get {
+                if (_resources == null) {
+                    this._resources = new DevExpress.XtraReports.Serialization.XRResourceManager(this._resourceString);
+                }
+                return this._resources;
+            }
+        }
+        private void InitializeComponent() {
+            this.topMarginBand1 = new DevExpress.XtraReports.UI.TopMarginBand();
+            this.detailBand1 = new DevExpress.XtraReports.UI.DetailBand();
+            this.bottomMarginBand1 = new DevExpress.XtraReports.UI.BottomMarginBand();
+            this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
+            this.DetailReport1 = new DevExpress.XtraReports.UI.DetailReportBand();
+            this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
+            this.pictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
+            this.label4 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label5 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label6 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label7 = new DevExpress.XtraReports.UI.XRLabel();
+            this.line1 = new DevExpress.XtraReports.UI.XRLine();
+            this.Detail = new DevExpress.XtraReports.UI.DetailBand();
+            this.DetailReport2 = new DevExpress.XtraReports.UI.DetailReportBand();
+            this.Detail2 = new DevExpress.XtraReports.UI.DetailBand();
+            this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.table7 = new DevExpress.XtraReports.UI.XRTable();
+            this.tableRow7 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.tableCell13 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell14 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.table4 = new DevExpress.XtraReports.UI.XRTable();
+            this.tableRow4 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.tableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.table6 = new DevExpress.XtraReports.UI.XRTable();
+            this.table5 = new DevExpress.XtraReports.UI.XRTable();
+            this.tableRow6 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.tableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableRow5 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.tableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.Detail1 = new DevExpress.XtraReports.UI.DetailBand();
+            this.table3 = new DevExpress.XtraReports.UI.XRTable();
+            this.table2 = new DevExpress.XtraReports.UI.XRTable();
+            this.table1 = new DevExpress.XtraReports.UI.XRTable();
+            this.tableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.tableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.tableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.tableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.tableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.label2 = new DevExpress.XtraReports.UI.XRLabel();
+            this.label3 = new DevExpress.XtraReports.UI.XRLabel();
+            this.formattingRule1 = new DevExpress.XtraReports.UI.FormattingRule();
+            this.pageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
+            ((System.ComponentModel.ISupportInitialize)(this.table7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            // 
+            // topMarginBand1
+            // 
+            this.topMarginBand1.HeightF = 25F;
+            this.topMarginBand1.Name = "topMarginBand1";
+            // 
+            // detailBand1
+            // 
+            this.detailBand1.HeightF = 0F;
+            this.detailBand1.Name = "detailBand1";
+            // 
+            // bottomMarginBand1
+            // 
+            this.bottomMarginBand1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.pageInfo1});
+            this.bottomMarginBand1.HeightF = 25F;
+            this.bottomMarginBand1.Name = "bottomMarginBand1";
+            // 
+            // ReportHeader
+            // 
+            this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.pictureBox1,
+                        this.label4,
+                        this.label5,
+                        this.label6,
+                        this.label7,
+                        this.line1});
+            this.ReportHeader.HeightF = 80.00001F;
+            this.ReportHeader.Name = "ReportHeader";
+            // 
+            // DetailReport
+            // 
+            this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+                        this.Detail,
+                        this.DetailReport2});
+            this.DetailReport.DataMember = "DQ_Laporan_CashFlow.Cash Flow Ke Group Account";
+            this.DetailReport.Level = 0;
+            this.DetailReport.Name = "DetailReport";
+            // 
+            // DetailReport1
+            // 
+            this.DetailReport1.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+                        this.Detail1});
+            this.DetailReport1.DataMember = "DQ_Laporan_CashFlow.Cash Flow Ke Summary";
+            this.DetailReport1.Level = 1;
+            this.DetailReport1.Name = "DetailReport1";
+            // 
+            // PageHeader
+            // 
+            this.PageHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.label2,
+                        this.label3});
+            this.PageHeader.HeightF = 65F;
+            this.PageHeader.Name = "PageHeader";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("ImageSource", null, "DQ_Laporan_CashFlow.logo")});
+            this.pictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(0.0001271566F, 0F);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.SizeF = new System.Drawing.SizeF(80F, 76F);
+            this.pictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
+            // 
+            // label4
+            // 
+            this.label4.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.company_name")});
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+            this.label4.LocationFloat = new DevExpress.Utils.PointFloat(103.8573F, 0F);
+            this.label4.Multiline = true;
+            this.label4.Name = "label4";
+            this.label4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.label4.SizeF = new System.Drawing.SizeF(250F, 17F);
+            this.label4.StylePriority.UseFont = false;
+            this.label4.Text = "label1";
+            // 
+            // label5
+            // 
+            this.label5.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.address")});
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.label5.LocationFloat = new DevExpress.Utils.PointFloat(103.8572F, 17F);
+            this.label5.Multiline = true;
+            this.label5.Name = "label5";
+            this.label5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.label5.SizeF = new System.Drawing.SizeF(250F, 17F);
+            this.label5.StylePriority.UseFont = false;
+            this.label5.Text = "label1";
+            // 
+            // label6
+            // 
+            this.label6.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.phone")});
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.label6.LocationFloat = new DevExpress.Utils.PointFloat(103.8572F, 34F);
+            this.label6.Multiline = true;
+            this.label6.Name = "label6";
+            this.label6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.label6.SizeF = new System.Drawing.SizeF(250F, 17F);
+            this.label6.StylePriority.UseFont = false;
+            this.label6.Text = "label1";
+            // 
+            // label7
+            // 
+            this.label7.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.email")});
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.label7.LocationFloat = new DevExpress.Utils.PointFloat(103.8573F, 51F);
+            this.label7.Multiline = true;
+            this.label7.Name = "label7";
+            this.label7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.label7.SizeF = new System.Drawing.SizeF(250F, 17F);
+            this.label7.StylePriority.UseFont = false;
+            this.label7.Text = "label1";
+            // 
+            // line1
+            // 
+            this.line1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 77.80702F);
+            this.line1.Name = "line1";
+            this.line1.SizeF = new System.Drawing.SizeF(750F, 2.192982F);
+            // 
+            // Detail
+            // 
+            this.Detail.HeightF = 0F;
+            this.Detail.Name = "Detail";
+            // 
+            // DetailReport2
+            // 
+            this.DetailReport2.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+                        this.Detail2,
+                        this.GroupHeader1,
+                        this.ReportFooter});
+            this.DetailReport2.DataMember = "DQ_Laporan_CashFlow.Cash Flow Ke Group Account.Group Account ke Account";
+            this.DetailReport2.Level = 0;
+            this.DetailReport2.Name = "DetailReport2";
+            // 
+            // Detail2
+            // 
+            this.Detail2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.table7});
+            this.Detail2.HeightF = 25F;
+            this.Detail2.Name = "Detail2";
+            // 
+            // GroupHeader1
+            // 
+            this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.table4});
+            this.GroupHeader1.HeightF = 25F;
+            this.GroupHeader1.Name = "GroupHeader1";
+            // 
+            // ReportFooter
+            // 
+            this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.table6,
+                        this.table5});
+            this.ReportFooter.FormattingRules.Add(this.formattingRule1);
+            this.ReportFooter.HeightF = 40F;
+            this.ReportFooter.Name = "ReportFooter";
+            // 
+            // table7
+            // 
+            this.table7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.table7.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.table7.Name = "table7";
+            this.table7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.table7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+                        this.tableRow7});
+            this.table7.SizeF = new System.Drawing.SizeF(750F, 25F);
+            this.table7.StylePriority.UseFont = false;
+            this.table7.StylePriority.UsePadding = false;
+            // 
+            // tableRow7
+            // 
+            this.tableRow7.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+                        this.tableCell13,
+                        this.tableCell14});
+            this.tableRow7.Name = "tableRow7";
+            this.tableRow7.Weight = 1D;
+            // 
+            // tableCell13
+            // 
+            this.tableCell13.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Group Account.Group Account ke Account.ret_accou" +
+                                "nt_name")});
+            this.tableCell13.Name = "tableCell13";
+            this.tableCell13.StylePriority.UseTextAlignment = false;
+            this.tableCell13.Text = "tableCell1";
+            this.tableCell13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell13.Weight = 1.0666666666666667D;
+            // 
+            // tableCell14
+            // 
+            this.tableCell14.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Group Account.Group Account ke Account.ret_total" +
+                                "", "{0:#,#.00;(#,#.00);0}")});
+            this.tableCell14.Name = "tableCell14";
+            this.tableCell14.StylePriority.UseTextAlignment = false;
+            this.tableCell14.Text = "tableCell2";
+            this.tableCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell14.Weight = 0.93333333333333335D;
+            // 
+            // table4
+            // 
+            this.table4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.table4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.table4.Name = "table4";
+            this.table4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.table4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+                        this.tableRow4});
+            this.table4.SizeF = new System.Drawing.SizeF(750F, 25F);
+            this.table4.StylePriority.UseFont = false;
+            this.table4.StylePriority.UsePadding = false;
+            // 
+            // tableRow4
+            // 
+            this.tableRow4.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+                        this.tableCell7,
+                        this.tableCell8});
+            this.tableRow4.Name = "tableRow4";
+            this.tableRow4.Weight = 1D;
+            // 
+            // tableCell7
+            // 
+            this.tableCell7.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Group Account.ret_group_name")});
+            this.tableCell7.Name = "tableCell7";
+            this.tableCell7.StylePriority.UseTextAlignment = false;
+            this.tableCell7.Text = "tableCell1";
+            this.tableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell7.Weight = 1.0666666666666667D;
+            // 
+            // tableCell8
+            // 
+            this.tableCell8.Name = "tableCell8";
+            this.tableCell8.StylePriority.UseTextAlignment = false;
+            this.tableCell8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell8.Weight = 0.93333333333333335D;
+            // 
+            // table6
+            // 
+            this.table6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.table6.LocationFloat = new DevExpress.Utils.PointFloat(0F, 25F);
+            this.table6.Name = "table6";
+            this.table6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.table6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+                        this.tableRow6});
+            this.table6.SizeF = new System.Drawing.SizeF(750F, 15F);
+            this.table6.StylePriority.UseFont = false;
+            this.table6.StylePriority.UsePadding = false;
+            // 
+            // table5
+            // 
+            this.table5.BackColor = System.Drawing.Color.Transparent;
+            this.table5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.table5.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.table5.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.table5.Name = "table5";
+            this.table5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.table5.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+                        this.tableRow5});
+            this.table5.SizeF = new System.Drawing.SizeF(750F, 25F);
+            this.table5.StylePriority.UseBackColor = false;
+            this.table5.StylePriority.UseFont = false;
+            this.table5.StylePriority.UseForeColor = false;
+            this.table5.StylePriority.UsePadding = false;
+            // 
+            // tableRow6
+            // 
+            this.tableRow6.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+                        this.tableCell11,
+                        this.tableCell12});
+            this.tableRow6.Name = "tableRow6";
+            this.tableRow6.Weight = 1D;
+            // 
+            // tableCell11
+            // 
+            this.tableCell11.Name = "tableCell11";
+            this.tableCell11.StylePriority.UseTextAlignment = false;
+            this.tableCell11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell11.Weight = 1.0666666666666667D;
+            // 
+            // tableCell12
+            // 
+            this.tableCell12.Name = "tableCell12";
+            this.tableCell12.StylePriority.UseTextAlignment = false;
+            this.tableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell12.Weight = 0.93333333333333335D;
+            // 
+            // tableRow5
+            // 
+            this.tableRow5.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+                        this.tableCell9,
+                        this.tableCell10});
+            this.tableRow5.Name = "tableRow5";
+            this.tableRow5.Weight = 1D;
+            // 
+            // tableCell9
+            // 
+            this.tableCell9.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Group Account.ret_group_total_name")});
+            this.tableCell9.Name = "tableCell9";
+            this.tableCell9.StylePriority.UseTextAlignment = false;
+            this.tableCell9.Text = "tableCell1";
+            this.tableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell9.Weight = 1.0666666666666667D;
+            // 
+            // tableCell10
+            // 
+            this.tableCell10.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Group Account.ret_group_total", "{0:#,#.00;(#,#.00);0}")});
+            this.tableCell10.Name = "tableCell10";
+            this.tableCell10.StylePriority.UseTextAlignment = false;
+            this.tableCell10.Text = "tableCell2";
+            this.tableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell10.Weight = 0.93333333333333335D;
+            // 
+            // Detail1
+            // 
+            this.Detail1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+                        this.table3,
+                        this.table2,
+                        this.table1});
+            this.Detail1.HeightF = 75F;
+            this.Detail1.Name = "Detail1";
+            // 
+            // table3
+            // 
+            this.table3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.table3.ForeColor = System.Drawing.Color.Firebrick;
+            this.table3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 50F);
+            this.table3.Name = "table3";
+            this.table3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.table3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+                        this.tableRow3});
+            this.table3.SizeF = new System.Drawing.SizeF(750F, 25F);
+            this.table3.StylePriority.UseFont = false;
+            this.table3.StylePriority.UseForeColor = false;
+            this.table3.StylePriority.UsePadding = false;
+            // 
+            // table2
+            // 
+            this.table2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.table2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 25F);
+            this.table2.Name = "table2";
+            this.table2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.table2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+                        this.tableRow2});
+            this.table2.SizeF = new System.Drawing.SizeF(750F, 25F);
+            this.table2.StylePriority.UseFont = false;
+            this.table2.StylePriority.UsePadding = false;
+            // 
+            // table1
+            // 
+            this.table1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.table1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.table1.Name = "table1";
+            this.table1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.table1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+                        this.tableRow1});
+            this.table1.SizeF = new System.Drawing.SizeF(750F, 25F);
+            this.table1.StylePriority.UseFont = false;
+            this.table1.StylePriority.UsePadding = false;
+            // 
+            // tableRow3
+            // 
+            this.tableRow3.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+                        this.tableCell5,
+                        this.tableCell6});
+            this.tableRow3.Name = "tableRow3";
+            this.tableRow3.Weight = 1D;
+            // 
+            // tableCell5
+            // 
+            this.tableCell5.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Summary.ret_total_name3")});
+            this.tableCell5.Name = "tableCell5";
+            this.tableCell5.StylePriority.UseTextAlignment = false;
+            this.tableCell5.Text = "tableCell1";
+            this.tableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell5.Weight = 1.0666666666666667D;
+            // 
+            // tableCell6
+            // 
+            this.tableCell6.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Summary.ret_total3", "{0:#,#.00;(#,#.00);0}")});
+            this.tableCell6.Name = "tableCell6";
+            this.tableCell6.StylePriority.UseTextAlignment = false;
+            this.tableCell6.Text = "tableCell2";
+            this.tableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell6.Weight = 0.93333333333333335D;
+            // 
+            // tableRow2
+            // 
+            this.tableRow2.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+                        this.tableCell3,
+                        this.tableCell4});
+            this.tableRow2.Name = "tableRow2";
+            this.tableRow2.Weight = 1D;
+            // 
+            // tableCell3
+            // 
+            this.tableCell3.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Summary.ret_total_name2")});
+            this.tableCell3.Name = "tableCell3";
+            this.tableCell3.StylePriority.UseTextAlignment = false;
+            this.tableCell3.Text = "tableCell1";
+            this.tableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell3.Weight = 1.0666666666666667D;
+            // 
+            // tableCell4
+            // 
+            this.tableCell4.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Summary.ret_total2", "{0:#,#.00;(#,#.00);0}")});
+            this.tableCell4.Name = "tableCell4";
+            this.tableCell4.StylePriority.UseTextAlignment = false;
+            this.tableCell4.Text = "tableCell2";
+            this.tableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell4.Weight = 0.93333333333333335D;
+            // 
+            // tableRow1
+            // 
+            this.tableRow1.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+                        this.tableCell1,
+                        this.tableCell2});
+            this.tableRow1.Name = "tableRow1";
+            this.tableRow1.Weight = 1D;
+            // 
+            // tableCell1
+            // 
+            this.tableCell1.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Summary.ret_total_name1")});
+            this.tableCell1.Name = "tableCell1";
+            this.tableCell1.StylePriority.UseTextAlignment = false;
+            this.tableCell1.Text = "tableCell1";
+            this.tableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.tableCell1.Weight = 1.0666666666666667D;
+            // 
+            // tableCell2
+            // 
+            this.tableCell2.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.Cash Flow Ke Summary.ret_total1", "{0:#,#.00;(#,#.00);0}")});
+            this.tableCell2.Name = "tableCell2";
+            this.tableCell2.StylePriority.UseTextAlignment = false;
+            this.tableCell2.Text = "tableCell2";
+            this.tableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.tableCell2.Weight = 0.93333333333333335D;
+            // 
+            // label2
+            // 
+            this.label2.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.judul")});
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label2.LocationFloat = new DevExpress.Utils.PointFloat(252.0833F, 11.99999F);
+            this.label2.Name = "label2";
+            this.label2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.label2.SizeF = new System.Drawing.SizeF(246.875F, 23F);
+            this.label2.StylePriority.UseFont = false;
+            this.label2.StylePriority.UseForeColor = false;
+            this.label2.StylePriority.UseTextAlignment = false;
+            this.label2.Text = "label1";
+            this.label2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            // 
+            // label3
+            // 
+            this.label3.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+                        new DevExpress.XtraReports.UI.XRBinding("Text", null, "DQ_Laporan_CashFlow.keterangan")});
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.LocationFloat = new DevExpress.Utils.PointFloat(224.4792F, 34.99999F);
+            this.label3.Name = "label3";
+            this.label3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.label3.SizeF = new System.Drawing.SizeF(426.0416F, 23F);
+            this.label3.StylePriority.UseFont = false;
+            this.label3.StylePriority.UseTextAlignment = false;
+            this.label3.Text = "label1";
+            this.label3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // formattingRule1
+            // 
+            this.formattingRule1.Condition = "[ret_is_default] == True";
+            this.formattingRule1.DataMember = "DQ_Laporan_CashFlow.Cash Flow Ke Group Account.Group Account ke Account";
+            this.formattingRule1.Formatting.Visible = DevExpress.Utils.DefaultBoolean.False;
+            this.formattingRule1.Name = "formattingRule1";
+            // 
+            // pageInfo1
+            // 
+            this.pageInfo1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Italic);
+            this.pageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.pageInfo1.Name = "pageInfo1";
+            this.pageInfo1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.pageInfo1.PageInfo = DevExpress.XtraPrinting.PageInfo.DateTime;
+            this.pageInfo1.SizeF = new System.Drawing.SizeF(188.5417F, 23F);
+            this.pageInfo1.StylePriority.UseFont = false;
+            // 
+            // XtraReport
+            // 
+            this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+                        this.topMarginBand1,
+                        this.detailBand1,
+                        this.bottomMarginBand1,
+                        this.ReportHeader,
+                        this.DetailReport,
+                        this.DetailReport1,
+                        this.PageHeader});
+            this.DataMember = "DQ_Laporan_CashFlow";
+            this.FormattingRuleSheet.AddRange(new DevExpress.XtraReports.UI.FormattingRule[] {
+                        this.formattingRule1});
+            this.Margins = new System.Drawing.Printing.Margins(50, 50, 25, 25);
+            this.Name = "XtraReport";
+            this.PageHeight = 1100;
+            this.PageWidth = 850;
+            this.Version = "20.1";
+            ((System.ComponentModel.ISupportInitialize)(this.table7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+        }
+    }
+}
+</ReportingContentString><NameControl>rpt_DS_CashFlow</NameControl><IsReplaceNullValue>False</IsReplaceNullValue><IsControlInit>False</IsControlInit><RootParent mode="reference">&amp;DesignedForm</RootParent><IDControl>3a73904b-9705-418a-b249-8932fcbc0d09</IDControl><VariableId>pv-B760E659-4F6E-42ED-BA98-AD5BA93C85AB</VariableId><IsReadOnly>True</IsReadOnly><IsUsedInitialValue>False</IsUsedInitialValue><IsDontCareValueChanged>True</IsDontCareValueChanged><IsActionComponentInit>False</IsActionComponentInit><ReportDisplay></ReportDisplay><IsDissableEditingValue>False</IsDissableEditingValue><BackColor>White</BackColor><Location>91, 94</Location><MaximumSize>33, 33</MaximumSize><MinimumSize>33, 33</MinimumSize><Name>ReportingService1</Name><Size>33, 33</Size><TabIndex>4</TabIndex></object><object asm="Meitan.BPM.bpmn.gui.coach.component.Button, Meitan.BPM, Version=4.4.3.6, Culture=neutral, PublicKeyToken=null" name="Button3" assembly="ASM-268BBD273059561EE24AD3BB3F71566C"><VisibleComponent>False</VisibleComponent><NameControl>btn_Flow</NameControl><IsReplaceNullValue>False</IsReplaceNullValue><IsFlowButton>True</IsFlowButton><IsControlInit>False</IsControlInit><RootParent mode="reference">&amp;DesignedForm</RootParent><IDControl>88279623-fd56-4cd5-9454-5d60bad804b2</IDControl><IsDontCareValueChanged>True</IsDontCareValueChanged><IsReadOnly>False</IsReadOnly><IsUsedInitialValue>False</IsUsedInitialValue><IsActionComponentInit>False</IsActionComponentInit><IsDissableEditingValue>False</IsDissableEditingValue><Text>Flow</Text><ImageOptions control="true"><object asm="DevExpress.XtraEditors.SimpleButtonImageOptions, DevExpress.XtraEditors.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="SimpleButtonImageOptions1" assembly="ASM-23F9608339A03AD85618C93A47E09B2A"><Image mode="binary">iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOvwAADr8BOAVTJAAAAIBJREFUOE+tkNENgCAMRBnBUZiB4VjPUfzrr3KklxDSkqJeckmpvkc0eRGR3Hpps65jIVxrvdEtyQiXUnrDEgsOSywY83w2JR7cdie6lGDAwoEPrS/B4MH9hhbM2FmSXwTfPkFveP8TGSzwYH45BDOWJAwzliQMM6NkG2YoWcMpPSji0szU1/3dAAAAAElFTkSuQmCC</Image></object></ImageOptions><Location>162, 94</Location><Name>Button3</Name><Size>65, 30</Size><TabIndex>3</TabIndex><Visible>False</Visible></object><object asm="Meitan.BPM.bpmn.gui.coach.component.Button, Meitan.BPM, Version=4.4.3.6, Culture=neutral, PublicKeyToken=null" name="Button2" assembly="ASM-268BBD273059561EE24AD3BB3F71566C"><VisibleComponent>False</VisibleComponent><NameControl>btn_Print</NameControl><IsReplaceNullValue>False</IsReplaceNullValue><IsFlowButton>False</IsFlowButton><IsControlInit>False</IsControlInit><RootParent mode="reference">&amp;DesignedForm</RootParent><IDControl>d88c2fee-6b81-490c-a176-36e492eef63b</IDControl><IsDontCareValueChanged>True</IsDontCareValueChanged><IsReadOnly>False</IsReadOnly><IsUsedInitialValue>False</IsUsedInitialValue><IsActionComponentInit>False</IsActionComponentInit><IsDissableEditingValue>False</IsDissableEditingValue><Text>P&amp;rint</Text><Location>91, 58</Location><Name>Button2</Name><Size>65, 30</Size><TabIndex>2</TabIndex></object><object asm="Meitan.BPM.bpmn.gui.coach.component.Button, Meitan.BPM, Version=4.4.3.6, Culture=neutral, PublicKeyToken=null" name="Button1" assembly="ASM-268BBD273059561EE24AD3BB3F71566C"><VisibleComponent>False</VisibleComponent><NameControl>btn_Close</NameControl><IsReplaceNullValue>False</IsReplaceNullValue><IsFlowButton>False</IsFlowButton><IsControlInit>False</IsControlInit><RootParent mode="reference">&amp;DesignedForm</RootParent><IDControl>dbcfd1c8-f9a1-46fb-a561-fc0089b77e47</IDControl><IsDontCareValueChanged>True</IsDontCareValueChanged><IsReadOnly>False</IsReadOnly><IsUsedInitialValue>False</IsUsedInitialValue><IsActionComponentInit>False</IsActionComponentInit><IsDissableEditingValue>False</IsDissableEditingValue><Text>&amp;Close</Text><Location>162, 58</Location><Name>Button1</Name><Size>65, 30</Size><TabIndex>1</TabIndex></object><object asm="DevExpress.XtraLayout.LayoutControl, DevExpress.XtraLayout.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="LayoutControl1" assembly="ASM-970388AB494936B985C108623054A550"><Root mode="reference">LayoutControlGroup1</Root><Location>3, 3</Location><Name>LayoutControl1</Name><Size>233, 63</Size><TabIndex>0</TabIndex><Text>LayoutControl1</Text><object asm="Meitan.BPM.bpmn.gui.coach.component.DateSelector, Meitan.BPM, Version=4.4.3.6, Culture=neutral, PublicKeyToken=null" name="DateSelector1" assembly="ASM-55E207D721102B0A7639BA3E926B912A"><IsError>False</IsError><ErrorType>None</ErrorType><NameControl>dsl_End_Date</NameControl><NullValue></NullValue><IsReplaceNullValue>False</IsReplaceNullValue><ReplaceNullValueType>Now</ReplaceNullValueType><IsControlInit>False</IsControlInit><RootParent mode="reference">&amp;DesignedForm</RootParent><IDControl>e4c0b82e-fb87-4160-abfb-597aa48a8aa3</IDControl><VariableId>pv-FB402568-E452-4391-B18D-BB20CC343786</VariableId><IsReadOnly>False</IsReadOnly><ValueData></ValueData><InitialValue>04/17/2020 09:53:28</InitialValue><IsUsedInitialValue>False</IsUsedInitialValue><IsDontCareValueChanged>False</IsDontCareValueChanged><IsDissableEditingValue>False</IsDissableEditingValue><Properties control="true"><object asm="DevExpress.XtraEditors.Repository.RepositoryItemDateEdit, DevExpress.XtraEditors.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="RepositoryItemDateEdit1" assembly="ASM-83CFD7859B202E327EB95D509D4DFBF1"><CalendarTimeProperties control="true"><object asm="DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit, DevExpress.XtraEditors.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="RepositoryItemTimeEdit1" assembly="ASM-51972DE05F9E10607B2E1CA94B89F148"><ContextButtonOptions control="true"><object asm="DevExpress.Utils.SimpleContextItemCollectionOptions, DevExpress.Utils.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="SimpleContextItemCollectionOptions1" assembly="ASM-7B727DE1C6F222A878FD0A1E4B1752DC" /></ContextButtonOptions><Buttons collection="true" itemtype="DevExpress.XtraEditors.Controls.EditorButton, DevExpress.XtraEditors.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"><Item0 mode="instance descriptor"><Data>AAEAAAD/////AQAAAAAAAAAEAQAAAC9TeXN0ZW0uUmVmbGVjdGlvbi5NZW1iZXJJbmZvU2VyaWFsaXphdGlvbkhvbGRlcgcAAAAETmFtZQxBc3NlbWJseU5hbWUJQ2xhc3NOYW1lCVNpZ25hdHVyZQpTaWduYXR1cmUyCk1lbWJlclR5cGUQR2VuZXJpY0FyZ3VtZW50cwEBAQEBAAMIDVN5c3RlbS5UeXBlW10GAgAAAAUuY3RvcgYDAAAAYURldkV4cHJlc3MuWHRyYUVkaXRvcnMudjIwLjEsIFZlcnNpb249MjAuMS4xMS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI4OGQxNzU0ZDcwMGU0OWEGBAAAACxEZXZFeHByZXNzLlh0cmFFZGl0b3JzLkNvbnRyb2xzLkVkaXRvckJ1dHRvbgYFAAAAPFZvaWQgLmN0b3IoRGV2RXhwcmVzcy5YdHJhRWRpdG9ycy5Db250cm9scy5CdXR0b25QcmVkZWZpbmVzKQYGAAAANy5jdG9yKERldkV4cHJlc3MuWHRyYUVkaXRvcnMuQ29udHJvbHMuQnV0dG9uUHJlZGVmaW5lcykBAAAACgs=</Data><Param>Combo</Param></Item0></Buttons><Mask control="true"><object asm="DevExpress.XtraEditors.Mask.TimeEditMaskProperties, DevExpress.XtraEditors.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="TimeEditMaskProperties1" assembly="ASM-E00FD00B840EAF3E83E707971C2BE702" /></Mask></object></CalendarTimeProperties><ContextButtonOptions control="true"><object asm="DevExpress.Utils.SimpleContextItemCollectionOptions, DevExpress.Utils.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="SimpleContextItemCollectionOptions1" assembly="ASM-7B727DE1C6F222A878FD0A1E4B1752DC" /></ContextButtonOptions><Buttons collection="true" itemtype="DevExpress.XtraEditors.Controls.EditorButton, DevExpress.XtraEditors.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"><Item0 mode="instance descriptor"><Data>AAEAAAD/////AQAAAAAAAAAEAQAAAC9TeXN0ZW0uUmVmbGVjdGlvbi5NZW1iZXJJbmZvU2VyaWFsaXphdGlvbkhvbGRlcgcAAAAETmFtZQxBc3NlbWJseU5hbWUJQ2xhc3NOYW1lCVNpZ25hdHVyZQpTaWduYXR1cmUyCk1lbWJlclR5cGUQR2VuZXJpY0FyZ3VtZW50cwEBAQEBAAMIDVN5c3RlbS5UeXBlW10GAgAAAAUuY3RvcgYDAAAAYURldkV4cHJlc3MuWHRyYUVkaXRvcnMudjIwLjEsIFZlcnNpb249MjAuMS4xMS4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI4OGQxNzU0ZDcwMGU0OWEGBAAAACxEZXZFeHByZXNzLlh0cmFFZGl0b3JzLkNvbnRyb2xzLkVkaXRvckJ1dHRvbgYFAAAAPFZvaWQgLmN0b3IoRGV2RXhwcmVzcy5YdHJhRWRpdG9ycy5Db250cm9scy5CdXR0b25QcmVkZWZpbmVzKQYGAAAANy5jdG9yKERldkV4cHJlc3MuWHRyYUVkaXRvcnMuQ29udHJvbHMuQnV0dG9uUHJlZGVmaW5lcykBAAAACgs=</Data><Param>Combo</Param></Item0></Buttons><Mask control="true"><object asm="DevExpress.XtraEditors.Mask.DateEditMaskProperties, DevExpress.XtraEditors.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="DateEditMaskProperties1" assembly="ASM-5B91B9E3DFF8B2673B451298FC07B020" /></Mask><AppearanceReadOnly control="true"><object asm="DevExpress.Utils.AppearanceObject, DevExpress.Utils.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="AppearanceObject1" assembly="ASM-D1269D26D95D3678CB1D8438CD61EFC7"><Options control="true"><object asm="DevExpress.Utils.AppearanceOptions, DevExpress.Utils.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="AppearanceOptions1" assembly="ASM-E851FEFFC37586ABB43417B1285F50D7"><UseBackColor>True</UseBackColor></object></Options><BackColor>244, 240, 255</BackColor></object></AppearanceReadOnly></object></Properties><EditValue></EditValue><StyleController mode="reference">LayoutControl1</StyleController><Location>73, 29</Location><Name>DateSelector1</Name><Size>148, 20</Size><TabIndex>5</TabIndex><event- eventName="EditValueChanged">handler_DateSelector1_EditValueChanged</event-></object><object asm="Meitan.BPM.bpmn.gui.coach.component.Label, Meitan.BPM, Version=4.4.3.6, Culture=neutral, PublicKeyToken=null" name="Label1" assembly="ASM-2D0D47495B6DA88387C147FEE460DCBB"><NameControl>lbl_Judul</NameControl><IsReplaceNullValue>False</IsReplaceNullValue><IsControlInit>False</IsControlInit><RootParent mode="reference">&amp;DesignedForm</RootParent><IDControl>33ce85d4-0919-45f0-8663-41d6dd7b6c72</IDControl><IsReadOnly>False</IsReadOnly><ValueData>Cash Flow Period</ValueData><IsUsedInitialValue>False</IsUsedInitialValue><IsDontCareValueChanged>True</IsDontCareValueChanged><IsDissableEditingValue>False</IsDissableEditingValue><Appearance control="true"><object asm="DevExpress.XtraEditors.LabelControlAppearanceObject, DevExpress.XtraEditors.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="LabelControlAppearanceObject1" assembly="ASM-5C2F310BBEAC1DDC1D860C36FE1FBB3C"><Options control="true"><object asm="DevExpress.XtraEditors.LabelControlAppearanceOptions, DevExpress.XtraEditors.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="LabelControlAppearanceOptions1" assembly="ASM-743328DCB0D8D0D342954492C3502E23"><UseFont>True</UseFont></object></Options><Font>Tahoma, 8.25pt, style=Bold</Font></object></Appearance><Text>Cash Flow Period</Text><StyleController mode="reference">LayoutControl1</StyleController><Location>12, 12</Location><Name>Label1</Name><Size>96, 13</Size><TabIndex>4</TabIndex></object></object></object><object asm="DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="LayoutControlItem1" assembly="ASM-590C87D6857FA9D9767D7AD361DE50A9"><Control mode="reference">Label1</Control><Name>LayoutControlItem1</Name><TextVisible>False</TextVisible><TextSize>0, 0</TextSize><Location>0, 0</Location><Size>213, 17</Size></object><object asm="DevExpress.XtraLayout.LayoutControlGroup, DevExpress.XtraLayout.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="LayoutControlGroup1" assembly="ASM-C021F32219A3BFB63AE20BB247CFD850"><Items collection="true" itemtype="DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"><Item0 mode="reference">LayoutControlItem1</Item0><Item1 mode="reference">LayoutControlItem2</Item1></Items><GroupBordersVisible>False</GroupBordersVisible><EnableIndentsWithoutBorders>True</EnableIndentsWithoutBorders><Size>233, 63</Size><Name>LayoutControlGroup1</Name><TextVisible>False</TextVisible></object><object asm="DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout.v20.1, Version=20.1.11.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" name="LayoutControlItem2" assembly="ASM-590C87D6857FA9D9767D7AD361DE50A9"><Control mode="reference">DateSelector1</Control><Name>LayoutControlItem2</Name><TextSize>49, 13</TextSize><Location>0, 17</Location><Size>213, 26</Size><Text>End Date:</Text></object></object_collection>]]></formCoach>
+                <formDocumentAttachment isSelectAllDocument="false" typeListString="" maxDocument="5" maxDocumentSizeIndex="9" operationMode="0" serverDocIP="127.0.0.1" isUpload="False" isDownload="True" />
+                <helpAndDoc helpIndex="" />
+                <ActionManager>
+                    <ActionForms>
+                        <ActionItem id="actItem_b904d96d-82ce-40b0-ae48-1ff498065bc7" name="Mengkonfirmasi Keluar" enabled="true" shortKey="0" description="" executionMode="0" disableEventComponent="false" isShowCommandBeforeCondition="false">
+                            <Event>
+                                <eventItem id="con-da354d3f-0c7f-40d7-af39-66e084d6bcd9" type="0" controlId="dbcfd1c8-f9a1-46fb-a561-fc0089b77e47" controlName="btn_Close" eventName="Click" eventId="1" validationStatus="2" />
+                            </Event>
+                            <CriteriaList />
+                            <CommandBeforeCondition />
+                            <CommandList>
+                                <Command id="comCrit_50f3bac6-f4c9-4df9-8b85-6a2e1d299a49" idCriteriaCondition="">
+                                    <commandItem id="com-a1d1dd0d-4e04-4faf-8470-8f30a9a3a0d2" type="9" defaultControlId="FM6476b13b-5740-476c-aecf-01864535a7e1" owner="4" code="4" enabled="true"><![CDATA[<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<MessageBoxCustom type="1" button="1">
+    <message><![CDATA[Are you sure to close <b>Cash Flow</b>?]-]-></message>
+    <title><![CDATA[Warning]-]-></title>
+    <actionExecuteOKId><![CDATA[actItem_7021752c-f6f3-4791-a433-134ed050002a]-]-></actionExecuteOKId>
+    <actionExecuteCancelId><![CDATA[]-]-></actionExecuteCancelId>
+    <buttonOKString><![CDATA[Yes]-]-></buttonOKString>
+    <buttonCancelString><![CDATA[No]-]-></buttonCancelString>
+    <buttonOKIgnoreFlowButton><![CDATA[False]-]-></buttonOKIgnoreFlowButton>
+    <buttonCancelIgnoreFlowButton><![CDATA[False]-]-></buttonCancelIgnoreFlowButton>
+</MessageBoxCustom>]]></commandItem>
+                                </Command>
+                            </CommandList>
+                            <CommandFalse />
+                        </ActionItem>
+                        <ActionItem id="actItem_7021752c-f6f3-4791-a433-134ed050002a" name="Flow" enabled="true" shortKey="0" description="" executionMode="0" disableEventComponent="false" isShowCommandBeforeCondition="false">
+                            <Event>
+                                <eventItem id="con-1729b6be-51b9-4f4e-86ad-142ea9718c21" type="0" controlId="" controlName="" eventName="" eventId="0" validationStatus="2" />
+                            </Event>
+                            <CriteriaList />
+                            <CommandBeforeCondition />
+                            <CommandList>
+                                <Command id="comCrit_ddc5008c-aa2c-4e49-998e-21d5bb304a48" idCriteriaCondition="">
+                                    <commandItem id="com-767b62ab-ab27-4e3c-93f5-f26b95bcbf4d" type="9" defaultControlId="FM6476b13b-5740-476c-aecf-01864535a7e1" owner="4" code="7" enabled="true"><![CDATA[<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ExecuteFlowButton taskId="sid-e20ad0fc-9bc3-44ca-b4c2-8a0020d776d7" flowButtonId="88279623-fd56-4cd5-9454-5d60bad804b2" ignoreCommandAction="true" />]]></commandItem>
+                                </Command>
+                            </CommandList>
+                            <CommandFalse />
+                        </ActionItem>
+                        <ActionItem id="actItem_19188858-ddb7-4876-a3ca-513fc184a88a" name="Print Cash Flow" enabled="true" shortKey="0" description="" executionMode="0" disableEventComponent="false" isShowCommandBeforeCondition="false">
+                            <Event>
+                                <eventItem id="con-b66d41e4-49a3-4e9e-b9d9-84e76b90f385" type="0" controlId="d88c2fee-6b81-490c-a176-36e492eef63b" controlName="btn_Print" eventName="Click" eventId="1" validationStatus="2" />
+                            </Event>
+                            <CriteriaList />
+                            <CommandBeforeCondition />
+                            <CommandList>
+                                <Command id="comCrit_187177d8-76eb-4177-9360-038332b5c7a7" idCriteriaCondition="">
+                                    <commandItem id="com-6c94703b-8897-42e4-bc17-e39ab3682e5d" type="4" defaultControlId="3a73904b-9705-418a-b249-8932fcbc0d09" owner="0" code="1" enabled="true"><![CDATA[]]></commandItem>
+                                </Command>
+                            </CommandList>
+                            <CommandFalse />
+                        </ActionItem>
+                    </ActionForms>
+                </ActionManager>
+                <intervalMinutes isUsed="false" days="0" hours="0" minutes="0" />
+                <formCoachAndroid><![CDATA[{"$type":"RetGoo.Universal.Editor.WidgetCoach, RetGoo.Universal.Editor","widgets":{"$type":"System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[RetGoo.Universal.Editor.FormCoachData, RetGoo.Universal.Editor]], mscorlib","currentForm":{"$type":"RetGoo.Universal.Editor.FormCoachData, RetGoo.Universal.Editor","widget":{"$type":"RetGoo.Universal.Editor.Scaffold, RetGoo.Universal.Editor","class":"Scaffold"},"actions":{"$type":"System.Collections.Generic.List`1[[RetGoo.Widgets.ActionItem, RetGoo.Universal.Widgets]], mscorlib","$values":[]},"class":"FormCoachData"}},"main_widget":"currentForm","strings":{"$type":"System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String, mscorlib]], mscorlib]], mscorlib"},"class":"WidgetCoach"}]]></formCoachAndroid>
+                <formCoachAndroidJson><![CDATA[{"widgets":{"currentForm":{"widget":{"class":"Scaffold"},"actions":[],"class":"FormCoachData"}},"main_widget":"currentForm","strings":{},"class":"WidgetCoach"}]]></formCoachAndroidJson>
+                <intervalMinutes isUsed="false" days="0" hours="0" minutes="0" />
+            </task>
+            <endEvent id="sid-ba50dfa0-8fe0-46ac-b0a2-c8c75c71b038" name="">
+                <incoming>sfid-5746ae1f-cb8d-4fa2-a928-3603d0feedf5</incoming>
+            </endEvent>
+            <sequenceFlow id="sfid-2df552cf-2431-49d2-823e-9aa34cec0f15" name="" sourceRef="sid-42a11cf5-bdc1-42c5-a1c2-ebbe067cc14f" targetRef="sid-e20ad0fc-9bc3-44ca-b4c2-8a0020d776d7" />
+            <sequenceFlow id="sfid-5746ae1f-cb8d-4fa2-a928-3603d0feedf5" name="" sourceRef="sid-e20ad0fc-9bc3-44ca-b4c2-8a0020d776d7" targetRef="sid-ba50dfa0-8fe0-46ac-b0a2-c8c75c71b038" flowButtonRef="88279623-fd56-4cd5-9454-5d60bad804b2" />
+        </subProcess>
+        <endEvent id="sid-fe16a592-4574-4e94-b29b-39a7a6f819f5" name="End Event">
+            <incoming>sfid-c97414af-bff0-4179-8883-5614956370cd</incoming>
+        </endEvent>
+        <sequenceFlow id="sfid-c97414af-bff0-4179-8883-5614956370cd" name="" sourceRef="sid-3c28447e-da2e-4ec3-af78-884ca1bda341" targetRef="sid-fe16a592-4574-4e94-b29b-39a7a6f819f5" />
+        <sequenceFlow id="sfid-08819831-9d37-4388-8122-2f19b358a7be" name="" sourceRef="sid-c5f7b068-a85a-445e-8f5a-31241eabfb9b" targetRef="sid-3c28447e-da2e-4ec3-af78-884ca1bda341" />
+    </process>
+    <resource id="rid-f78ab5d1-6619-44e4-acf9-bc7b7aee0bb3" name="rid-f78ab5d1-6619-44e4-acf9-bc7b7aee0bb3" notifactionType="1">
+        <resourceParameter name="Accounting Staff - Cash Flow" type="group" isRequired="false">
+            <roleUsername id="15751" idCompany="2" idParent="0" name="Accounting Staff - Cash Flow" idStaff="0" sex="0" description="" />
+        </resourceParameter>
+    </resource>
+    <bpmndi:BPMNDiagram id="did-B720B5B5-3F7E-46A2-8959-A81F96CC299C" name="Cash Flow" colWidth="200">
+        <bpmndi:BPMNPlane bpmnElement="COL-D20F412C-C64D-462F-8B12-96C59331E26C" id="plid-12112F10-9A1B-4F78-B6D4-D3EDCBA83D51">
+            <bpmndi:BPMNShape bpmnElement="sid-c5f7b068-a85a-445e-8f5a-31241eabfb9b" id="sid-c5f7b068-a85a-445e-8f5a-31241eabfb9b_gui">
+                <omgdc:Bounds height="7" width="7" x="52" y="28">
+                    <bpmndi:BPMNLabel isVisible="true">
+                        <omgdc:Bounds height="7" width="21" x="45" y="37" />
+                    </bpmndi:BPMNLabel>
+                </omgdc:Bounds>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="sid-3c28447e-da2e-4ec3-af78-884ca1bda341" id="sid-3c28447e-da2e-4ec3-af78-884ca1bda341_gui" isExpanded="false">
+                <omgdc:Bounds height="19" width="35" x="87" y="22">
+                    <bpmndi:BPMNLabel isVisible="false">
+                        <omgdc:Bounds height="19" width="35" x="87" y="22" />
+                    </bpmndi:BPMNLabel>
+                </omgdc:Bounds>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="sid-fe16a592-4574-4e94-b29b-39a7a6f819f5" id="sid-fe16a592-4574-4e94-b29b-39a7a6f819f5_gui">
+                <omgdc:Bounds height="7" width="7" x="142" y="28">
+                    <bpmndi:BPMNLabel isVisible="true">
+                        <omgdc:Bounds height="7" width="21" x="135" y="37" />
+                    </bpmndi:BPMNLabel>
+                </omgdc:Bounds>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sfid-c97414af-bff0-4179-8883-5614956370cd" id="sfid-c97414af-bff0-4179-8883-5614956370cd_gui" IsAutoRoute="True">
+                <omgdi:waypoint x="122" y="31.5" />
+                <omgdi:waypoint x="142" y="31.5" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="sfid-08819831-9d37-4388-8122-2f19b358a7be" id="sfid-08819831-9d37-4388-8122-2f19b358a7be_gui" IsAutoRoute="True">
+                <omgdi:waypoint x="59" y="31.5" />
+                <omgdi:waypoint x="87" y="31.5" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="lane-a6a304b8-ac35-49f4-8be4-d815f92f7861" id="lane-a6a304b8-ac35-49f4-8be4-d815f92f7861_gui" isExpanded="true" isHorizontal="true">
+                <omgdc:Bounds height="50" width="20" x="0" y="10" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="lane-5c360492-405f-49d5-bc86-0d135023b18d" id="lane-5c360492-405f-49d5-bc86-0d135023b18d_gui" isExpanded="true" isHorizontal="true">
+                <omgdc:Bounds height="50" width="20" x="20" y="10" />
+            </bpmndi:BPMNShape>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+    <bpmndi:BPMNDiagram id="did-B0444504-D976-40D9-B72E-AC3338FA98E9" name="Show Cash Flow Report">
+        <bpmndi:BPMNPlane bpmnElement="sid-3c28447e-da2e-4ec3-af78-884ca1bda341" id="plid-1C713D33-2E5A-4BF5-A122-AE06CC96337A">
+            <bpmndi:BPMNShape bpmnElement="sid-42a11cf5-bdc1-42c5-a1c2-ebbe067cc14f" id="sid-42a11cf5-bdc1-42c5-a1c2-ebbe067cc14f_gui">
+                <omgdc:Bounds height="7" width="7" x="50" y="50">
+                    <bpmndi:BPMNLabel isVisible="true">
+                        <omgdc:Bounds height="7" width="21" x="43" y="59" />
+                    </bpmndi:BPMNLabel>
+                </omgdc:Bounds>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="sid-e20ad0fc-9bc3-44ca-b4c2-8a0020d776d7" id="sid-e20ad0fc-9bc3-44ca-b4c2-8a0020d776d7_gui">
+                <omgdc:Bounds height="19" width="35" x="88" y="44">
+                    <bpmndi:BPMNLabel isVisible="false">
+                        <omgdc:Bounds height="19" width="35" x="88" y="44" />
+                    </bpmndi:BPMNLabel>
+                </omgdc:Bounds>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="sid-ba50dfa0-8fe0-46ac-b0a2-c8c75c71b038" id="sid-ba50dfa0-8fe0-46ac-b0a2-c8c75c71b038_gui">
+                <omgdc:Bounds height="7" width="7" x="160" y="50">
+                    <bpmndi:BPMNLabel isVisible="true">
+                        <omgdc:Bounds height="7" width="21" x="153" y="59" />
+                    </bpmndi:BPMNLabel>
+                </omgdc:Bounds>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sfid-2df552cf-2431-49d2-823e-9aa34cec0f15" id="sfid-2df552cf-2431-49d2-823e-9aa34cec0f15_gui" IsAutoRoute="True">
+                <omgdi:waypoint x="57" y="53.5" />
+                <omgdi:waypoint x="88" y="53.5" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="sfid-5746ae1f-cb8d-4fa2-a928-3603d0feedf5" id="sfid-5746ae1f-cb8d-4fa2-a928-3603d0feedf5_gui" IsAutoRoute="True">
+                <omgdi:waypoint x="123" y="53.5" />
+                <omgdi:waypoint x="160" y="53.5" />
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</definitions>
