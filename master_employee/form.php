@@ -26,14 +26,12 @@ include "api.php";
               <div class="x_title">
                 <h2>Master Employee</h2>
                 <ul class="nav navbar-right panel_toolbox">
+                  <li><button type="button" name="show_archive" id="jq_show_archive" class="btn btn-primary show_archive"><i class="fa fa-inbox"></i></button></li>
+                  <li><button type="button" name="add_data" id="jq_add_data" class="btn btn-warning add_data"><i class="fa fa-plus-circle"></i></button></li>
+                  <li><button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button></li>
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
                 </ul>
-                <div align="right">
-                  <button type="button" name="show_archive" id="jq_show_archive" class="btn btn-primary show_archive"><i class="fa fa-inbox"></i></button>
-                  <button type="button" name="add_data" id="jq_add_data" class="btn btn-warning add_data"><i class="fa fa-plus-circle"></i></button>
-                  <button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button>
-                </div>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
@@ -105,7 +103,7 @@ include "api.php";
       success: function(data) {
         $("#data_detail").html(data);
         $("table#master_table").pretty_format_table();
-        $('table#master_table').DataTable();
+        $("table#master_table").DataTable();
       }
     });
   }
@@ -120,7 +118,7 @@ include "api.php";
       success: function(data) {
         $("#form_archive").html(data);
         $("table#archive_table").pretty_format_table();
-        $('table#archive_table').DataTable();
+        $("table#archive_table").DataTable();
       }
     });
   }
@@ -136,8 +134,8 @@ include "api.php";
         created_by: created_by
       },
       success: function(data) {
-        $('#form_edit').html(data);
-        $('#editModal').modal('show');
+        $("#form_edit").html(data);
+        $("#editModal").modal("show");
       }
     });
   }
@@ -150,31 +148,31 @@ include "api.php";
   $(document).ready(function() {
 
     //Refresh Table
-    $(document).on('click', '.refresh', function() {
+    $(document).on("click", ".refresh_data", function() {
       act_refresh_data_detail();
     })
 
     //Add Data
-    $(document).on('click', '.add_data', function() {
+    $(document).on("click", ".add_data", function() {
       get_data_detail_edit(null, "insert_detail");
     });
 
     //Detail Data
-    $(document).on('click', '.view_data', function() {
+    $(document).on("click", ".view_data", function() {
       var data_id = $(this).attr("id");
       get_data_detail_edit(data_id, "view_detail");
     });
 
     //Edit Data
-    $(document).on('click', '.edit_data', function() {
+    $(document).on("click", ".edit_data", function() {
       var data_id = $(this).attr("id");
       get_data_detail_edit(data_id, "edit_detail");
     });
 
     //Show Popup Archive Data
-    $(document).on('click', '.archive_data', function() {
+    $(document).on("click", ".archive_data", function() {
       var data_id = $(this).attr("id");
-      var action_status = 'archive_detail';
+      var action_status = "archive_detail";
       var created_by = $("#jq_pengguna").val();
       $.ajax({
         url: "property.php",
@@ -185,16 +183,16 @@ include "api.php";
           created_by: created_by
         },
         success: function(data) {
-          $('#form_archive').html(data);
-          $('#archiveModal').modal('show');
+          $("#form_archive").html(data);
+          $("#archiveModal").modal("show");
         }
       });
     });
 
 
     //Archive Detail
-    $(document).on('click', '.archive_detail', function() {
-      if ($('#jq_archive_reason').val() == '') {
+    $(document).on("click", ".archive_detail", function() {
+      if ($("#jq_archive_reason").val() == "") {
         Swal.fire({
           position: "top",
           title: "Warning",
@@ -205,13 +203,13 @@ include "api.php";
         $.ajax({
           url: "action.php",
           method: "POST",
-          data: $('#archive_form').serialize(),
+          data: $("#archive_form").serialize(),
           beforeSend: function() {
-            $('#archive').val("Archiving");
+            $("#archive").val("Archiving");
           },
           success: function(data) {
-            $('#archive_form')[0].reset();
-            $('#archiveModal').modal('hide');
+            $("#archive_form")[0].reset();
+            $("#archiveModal").modal("hide");
             act_refresh_data_detail();
           }
         });
@@ -219,15 +217,15 @@ include "api.php";
     });
 
     //Show Archive Data
-    $(document).on('click', '.show_archive', function() {
+    $(document).on("click", ".show_archive", function() {
       act_refresh_data_archive();
-      $('#archiveModal').modal('show');
+      $("#archiveModal").modal("show");
     });
 
     //Unarchive Data
-    $(document).on('click', '.unarchive_data', function() {
+    $(document).on("click", ".unarchive_data", function() {
       var data_id = $(this).attr("id");
-      var action_status = 'unarchive_detail';
+      var action_status = "unarchive_detail";
       var created_by = $("#jq_pengguna").val();
       $.ajax({
         url: "action.php",
@@ -245,32 +243,63 @@ include "api.php";
     });
 
     //Refresh Unarchive
-    $(document).on('click', '.refresh_unarchive_data', function() {
+    $(document).on("click", ".refresh_unarchive_data", function() {
       act_refresh_data_archive();
       act_refresh_data_detail();
     });
 
+    //Upload Images
+    $(document).on("change", ".upload_profile", function() {
+      const file = this.files[0];
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        $("#jq_display_profile").attr("src", event.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+
     //Update Detail
-    $(document).on('click', '.update_detail', function() {
-      if ($('#jq_nik').val() == "") {
+    $(document).on("click", ".update_detail", function() {
+      if ($("#jq_nik").val() == "") {
         Swal.fire({
           position: "top",
           title: "Warning",
           text: "NIK Must be Filled !",
           icon: "warning"
         });
-      } else if ($('#jq_name').val() == "") {
+      } else if ($("#jq_name").val() == "") {
         Swal.fire({
           position: "top",
           title: "Warning",
           text: "Name Must be Filled !",
           icon: "warning"
         });
-      } else if ($('#jq_address').val() == '') {
+      } else if ($("#jq_tempat_lahir").val() == "") {
+        Swal.fire({
+          position: "top",
+          title: "Warning",
+          text: "Place of birth Must be Filled !",
+          icon: "warning"
+        });
+      } else if ($("#jq_tanggal_lahir").val() == "") {
+        Swal.fire({
+          position: "top",
+          title: "Warning",
+          text: "Date of birth Must be Filled !",
+          icon: "warning"
+        });
+      } else if ($("#jq_address").val() == "") {
         Swal.fire({
           position: "top",
           title: "Warning",
           text: "Address Must be Filled !",
+          icon: "warning"
+        });
+      } else if ($("#jq_telp").val() == "") {
+        Swal.fire({
+          position: "top",
+          title: "Warning",
+          text: "Phone Number Must be Filled !",
           icon: "warning"
         });
       } else {
@@ -279,24 +308,30 @@ include "api.php";
           method: "POST",
           data: {
             action_status: "validate_detail",
-            id: $('#jq_id').val(),
-            code: $('#jq_nik').val(),
-            name: $('#jq_name').val()
+            id: $("#jq_id").val(),
+            code: $("#jq_nik").val(),
+            name: $("#jq_name").val()
           },
           success: function(data) {
             var parsedData = $.parseJSON(data);
             var result = parsedData[0].msg;
             if (result == "") {
+              var form_data = new FormData($("#update_form")[0]);
               $.ajax({
                 url: "action.php",
                 method: "POST",
-                data: $('#update_form').serialize(),
+                data: form_data,
+                dataType: "json",
+                contentType: false,
+                cache: false,
+                processData: false,
                 beforeSend: function() {
-                  $('#update').val("Updating");
+                  $("button#jq_update").text("Updating");
+                  $("button#jq_update").prop("disabled", true);
                 },
                 success: function(data) {
-                  $('#update_form')[0].reset();
-                  $('#editModal').modal('hide');
+                  $("#update_form")[0].reset();
+                  $("#editModal").modal("hide");
                   act_refresh_data_detail();
                 }
               });

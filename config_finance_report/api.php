@@ -1,80 +1,50 @@
 <?php
 function get_data_detail($input_function)
 {
-    include "../asset_default/koneksi.php";
     $input = json_encode($input_function);
     $query = "SELECT config.list_finance_report_structure('" . $input . "') as result";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    $results = json_decode($row['result'], true);
-    $results = $results['body'];
-    return $results;
+    require_once "../asset_default/db_function.php";
+    return get_execute_query($query);
 }
 
 function get_data_pos_detail($input_function)
 {
-    include "../asset_default/koneksi.php";
     $input = json_encode($input_function);
     $query = "SELECT pos.list_point_of_sales_detail('" . $input . "') as result";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    $results = json_decode($row['result'], true);
-    $results = $results['body'];
-    return $results;
+    require_once "../asset_default/db_function.php";
+    return get_execute_query($query);
 }
 
 function get_finance_report_type($input_function)
 {
-    include "../asset_default/koneksi.php";
     $input = json_encode($input_function);
     $query = "SELECT config.get_all_finance_report('" . $input . "') as result";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    $results = json_decode($row['result'], true);
-    $results = $results['body'];
-    return $results;
+    require_once "../asset_default/db_function.php";
+    return get_execute_query($query);
 }
 
 function set_new_finance_report_account($input_function)
 {
-    include "../asset_default/koneksi.php";
     $input = json_encode($input_function);
     $query = "SELECT config.set_new_finance_report_account('" . $input . "') as result";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    $results = json_decode($row['result'], true);
-    $results = $results['body'];
-    return $results;
+    require_once "../asset_default/db_function.php";
+    return get_execute_query($query);
 }
 
 function remove_transaction_detail($input_function)
 {
-    include "../asset_default/koneksi.php";
     $input = json_encode($input_function);
     $query = "SELECT settings.remove_permanent_data('" . $input . "') as result";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    $results = json_decode($row['result'], true);
-    $results = $results['body'];
-    return $results;
+    require_once "../asset_default/db_function.php";
+    return get_execute_query($query);
 }
 
 function get_account_data($input_function)
 {
-    include "../asset_default/koneksi.php";
     $input = json_encode($input_function);
     $query = "SELECT config.list_account_for_finance_report_structure('" . $input . "') as result";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    $results = json_decode($row['result'], true);
-    $results = $results['body'];
-    return $results;
+    require_once "../asset_default/db_function.php";
+    return get_execute_query($query);
 }
 
 function format_decimal($input_function)

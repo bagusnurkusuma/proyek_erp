@@ -21,52 +21,78 @@ if (!empty($_POST)) {
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
             $v_id = $_POST['data_id'];
+            $v_file_id = $row['file_id'];
             $v_employee_nik = $row['employee_nik'];
             $v_employee_name = $row['employee_name'];
             $v_tempat_lahir = $row['tempat_lahir'];
             $v_tanggal_lahir = $row['tanggal_lahir'];
             $v_telepon = $row['telepon'];
             $v_address = $row['address'];
+            $v_email = $row['email'];
             $v_decription = $row['description'];
          endforeach;
       } else {
          $v_id = '';
+         $v_file_id = '';
          $v_employee_nik = '';
          $v_employee_name = '';
          $v_tempat_lahir = '';
          $v_tanggal_lahir = '';
          $v_telepon = '';
          $v_address = '';
+         $v_email = '';
          $v_decription = '';
       }
 
       $output .= '
       <form method="POST" id="update_form">
-         <input type="hidden" name="id" id="jq_id" value="' . $v_id . '" class="form-control" />
-         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '" class="form-control" />
-         <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] . '" class="form-control" />
+      <div class="col-md-6 col-sm-12 form-group">
       <table id="datatable" class="table table-striped table-bordered" style="width:100%">
          <tr>
-            <td><label>NIK</label></td>
-            <td><input type="text" name="employee_nik" id="jq_nik" value="' . $v_employee_nik . '" class="form-control" ' . $is_readonly . '/></td>
+            <td><label>Profile Photo</label></td>
+         </tr>
          <tr>
-            <td><label>Nama Karyawan</label></td>
+            <td align="center"><img id="jq_display_profile" src="../asset_default/action.php?asumuk=' . $v_file_id . '&action=preview" alt="' . $v_employee_name . '"  width="300" height="300"  class="img-circle text-center"></td>
+         </tr>
+      </table>
+      <div align="center">
+      <span class="input-group-btn" ' . $is_disable_span . '>
+           <input type="file" name="upload_profile_img" accept="image/*"  id="jq_upload_profile" class="btn btn-success upload_profile" />
+         </span>
+      </div>
+      </div>
+      <div class="col-md-6 col-sm-12 form-group">
+         <input type="hidden" name="id" id="jq_id" value="' . $v_id . '"/>
+         <input type="hidden" name="file_id" id="jq_file_id" value="' . $v_file_id . '"/>
+         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '"/>
+         <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] . '"/>
+      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+         <tr>
+            <td><label>Employee NIK</label></td>
+            <td><input type="text" name="employee_nik" id="jq_nik" value="' . $v_employee_nik . '" class="form-control" ' . $is_readonly . '/></td>
+         </tr>
+         <tr>
+            <td><label>Employee Name</label></td>
             <td><input type="text" name="employee_name" id="jq_name" value="' . $v_employee_name . '" class="form-control" ' . $is_readonly . '/></td>
          </tr>
          <tr>
-            <td><label>Tempat lahir</label></td>
+            <td><label>Place of Birth</label></td>
             <td><input type="text" name="tempat_lahir" id="jq_tempat_lahir" value="' . $v_tempat_lahir . '" class="form-control" ' . $is_readonly . '/></td>
          </tr>
          <tr>
-            <td><label>Tanggal Lahir</label></td>
+            <td><label>Date of Birth</label></td>
             <td><input type="date" name="tanggal_lahir" id="jq_tanggal_lahir" value="' . $v_tanggal_lahir . '" class="form-control" ' . $is_readonly . '/></td>
          </tr>
          <tr>
-            <td><label>No Telepon</label></td>
+            <td><label>Phone Number</label></td>
             <td><input type="text" name="telepon" id="jq_telp" value="' . $v_telepon . '" class="form-control" ' . $is_readonly . '/></td>
          </tr>
          <tr>
-            <td><label>Alamat</label></td>
+            <td><label>Email</label></td>
+            <td><input type="text" name="email" id="jq_email" value="' . $v_email . '" class="form-control" ' . $is_readonly . '/></td>
+         </tr>
+         <tr>
+            <td><label>Address</label></td>
             <td><textarea name="address" id="jq_address" class="form-control" ' . $is_readonly . '>' . $v_address . '</textarea></td>
          </tr>
          <tr>
@@ -75,19 +101,21 @@ if (!empty($_POST)) {
          </tr>
       </table>
          <span class="input-group-btn" ' . $is_disable_span . '>
-           <input type="button" name="update" id="jq_update" value="Update" class="btn btn-success update_detail" />
+           <button type="button" name="update_detail" id="jq_update" class="btn btn-success update_detail">Update</button>
          </span>
       </form>
+      </div>
       ';
    } elseif ($_POST['action_status'] == 'refresh_data_detail') {
       $output .= '
       <table id="master_table" class="table table-striped table-bordered" style="width:100%">
          <thead>
          <tr>
-            <th width="25%">NIK</th>
-            <th width="25%">Karyawan</th> 
-            <th width="20%">Telepon</th> 
-            <th width="30%">Option</th> 
+            <th width="100">Photo Profile</th>
+            <th>NIK</th>
+            <th>Employee</th> 
+            <th>Telepon</th> 
+            <th>Option</th> 
          </tr>
       </thead>
       <tbody>
@@ -98,6 +126,7 @@ if (!empty($_POST)) {
          foreach ($hasil as $row) :
             $output .= '
             <tr>  
+               <td align="center"><img src="../asset_default/action.php?asumuk=' . $row['file_id'] . '&action=preview" alt="' . $row["employee_name"] . '"  width="100" height="100" class="img-circle text-center"></td>
                <td>' . $row["employee_nik"] . '</td>
                <td>' . $row["employee_name"] . '</td>
                <td>' . $row["telepon"] . '</td>
