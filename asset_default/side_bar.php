@@ -1,24 +1,17 @@
 <?php
 session_start();
-if (empty($_SESSION['username'])) {
+if (empty($_SESSION["user_role_id"])) {
   header("location:../asset_default/login.html");
 }
-$pengguna = $_SESSION['username'];
 include "api.php";
-$hasil = get_company_profile();
-if (is_array($hasil) && count($hasil)) {
-  foreach ($hasil as $baris) :
-    $company_name = $baris["company_name"];
-    $company_addres = $baris["company_addres"];
-  endforeach;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <link rel="icon" href="../asset_design/images/favicon.ico" type="image/ico" />
-  <title> <?php echo $baris["company_name"]; ?> </title>
+  <title><?php echo $_SESSION["company_name"] ?></title>
+  <link rel="icon" type="image/x-icon" href="<?php echo $_SESSION["file_location"] ?>">
   <style>
     .table-responsive {
       overflow-y: hidden;
@@ -70,14 +63,14 @@ if (is_array($hasil) && count($hasil)) {
 </head>
 
 <body class="nav-md">
+
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view footer">
           <div class="navbar nav_title" style="border: 0;">
             <a href="../asset_default/side_bar.php" class="site_title"><i class="fa fa-paw"></i>
-              <span id="jq_company_name"> <?php echo $company_name; ?> </span>
-              <span hidden="hidden" id="jq_company_addres"> <?php echo $company_addres; ?> </span></a>
+              <span id="jq_company_name"> <?php echo $_SESSION["company_name"] ?> </span></a>
           </div>
 
           <div class=" clearfix">
@@ -88,14 +81,14 @@ if (is_array($hasil) && count($hasil)) {
             <div class="row">
               <div class="col-md-12">
                 <div class="profile_pic text-center" style="margin-left: 25px; width: 60%;">
-                  <img src="<?php echo "action.php?asumuk=" . $_SESSION["file_id"] . "&action=preview" ?>" alt="<?php echo $_SESSION["employee_name"] ?>" height="100" class="img-circle profile_img text-center">
+                  <img src="<?php echo $_SESSION["file_location"] ?>" alt="<?php echo $_SESSION["employee_name"] ?>" height="100" class="img-circle profile_img text-center">
                 </div>
               </div>
             </div>
             <div class="row justify-content-center text-center">
               <div class="col-md-10">
-                <div class="profile_info" style="margin-left: 20px;">
-                  <h2><?php echo $_SESSION["employee_name"]; ?></h2>
+                <div class="profile_info">
+                  <h2 style="text-align: center;"><?php echo $_SESSION["employee_name"]; ?></h2>
                   <span><?php echo $_SESSION["email"]; ?></h2></span>
                 </div>
               </div>
@@ -110,7 +103,7 @@ if (is_array($hasil) && count($hasil)) {
                 <li><a><i class="fa fa-book"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <?php
-                    $hasil = get_menu_proces($pengguna);
+                    $hasil = get_menu_proces($_SESSION["user_role_id"]);
                     if (is_array($hasil) && count($hasil)) {
                       foreach ($hasil as $baris) : ?>
                         <li><a href=<?php echo $baris["location_file"]; ?>><?php echo $baris["menu_name"]; ?></a></li>
@@ -195,15 +188,10 @@ if (is_array($hasil) && count($hasil)) {
             <ul class=" navbar-right">
               <li class="nav-item dropdown open" style="padding-left: 15px;">
                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                  <img src="<?php echo "action.php?asumuk=" . $_SESSION["file_id"] . "&action=preview" ?>" alt="<?php echo $_SESSION["employee_name"] ?>"><?php echo $_SESSION["employee_name"]; ?>
+                  <img src="<?php echo $_SESSION["file_location"] ?>" alt="<?php echo $_SESSION["employee_name"] ?>"><?php echo $_SESSION["employee_name"]; ?>
                 </a>
                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="javascript:;"> Profile</a>
-                  <a class="dropdown-item" href="javascript:;">
-                    <span class="badge bg-red pull-right">50%</span>
-                    <span>Settings</span>
-                  </a>
-                  <a class="dropdown-item" href="javascript:;">Help</a>
+                  <a class="dropdown-item" href="../asset_profile/form.php"> Profile</a>
                   <a class="dropdown-item" href="../asset_default/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                 </div>
               </li>
@@ -220,14 +208,7 @@ if (is_array($hasil) && count($hasil)) {
       <!-- footer content -->
       <footer class="footer fixed-bottom">
         <div class="pull-right">
-          <?php
-          $hasil = get_watermark();
-          if (is_array($hasil) && count($hasil)) {
-            foreach ($hasil as $baris) :
-              echo $baris["watermark"];
-            endforeach;
-          }
-          ?>
+          <?php echo $_SESSION["watermark"] ?>
         </div>
         <div class="clearfix"></div>
       </footer>

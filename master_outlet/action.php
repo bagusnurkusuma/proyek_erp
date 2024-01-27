@@ -1,5 +1,6 @@
 <?php
-include("api.php");
+session_start();
+require_once "api.php";
 //Action
 if (!empty($_POST)) {
    if ($_POST["action_status"] == "edit_detail") {
@@ -7,7 +8,7 @@ if (!empty($_POST)) {
       $input = array("body" =>
       array(
          "id" => $_POST["id"],
-         "created_by" => $_POST["created_by"],
+         "created_by" => $_SESSION['user_role_id'],
          "outlet_code" => $_POST["outlet_code"],
          "outlet_name" => $_POST["outlet_name"],
          "warehouse_id" => $_POST["warehouse_id"],
@@ -18,7 +19,7 @@ if (!empty($_POST)) {
       //Insert Data
       $input = array("body" =>
       array(
-         "created_by" => $_POST["created_by"],
+         "created_by" => $_SESSION['user_role_id'],
          "outlet_code" => $_POST["outlet_code"],
          "outlet_name" => $_POST["outlet_name"],
          "warehouse_id" => $_POST["warehouse_id"],
@@ -30,7 +31,7 @@ if (!empty($_POST)) {
       $input = array("body" =>
       array(
          "id" => $_POST["id"],
-         "created_by" => $_POST["created_by"],
+         "created_by" => $_SESSION['user_role_id'],
          "archive_reason" => $_POST["archive_reason"],
          "table_name" => "master.outlet",
          "column_name" => "id"
@@ -41,7 +42,7 @@ if (!empty($_POST)) {
       $input = array("body" =>
       array(
          "id" => $_POST["data_id"],
-         "created_by" => $_POST["created_by"],
+         "created_by" => $_SESSION['user_role_id'],
          "table_name" => "master.outlet",
          "column_name" => "id"
       ));

@@ -1,5 +1,6 @@
 <?php
-include("api.php");
+session_start();
+require_once "api.php";
 //Action
 if (!empty($_POST)) {
    if ($_POST["action_status"] == "edit_detail") {
@@ -7,7 +8,7 @@ if (!empty($_POST)) {
       $input = array("body" =>
       array(
          "id" => $_POST["id"],
-         "created_by" => $_POST["created_by"],
+         "created_by" => $_SESSION['user_role_id'],
          "customer_name" => $_POST["nama"],
          "telp" => $_POST["telp"],
          "email" => $_POST["email"],
@@ -19,7 +20,7 @@ if (!empty($_POST)) {
       //Insert Data
       $input = array("body" =>
       array(
-         "created_by" => $_POST["created_by"],
+         "created_by" => $_SESSION['user_role_id'],
          "customer_name" => $_POST["nama"],
          "telp" => $_POST["telp"],
          "email" => $_POST["email"],

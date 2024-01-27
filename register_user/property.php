@@ -107,7 +107,6 @@ if (!empty($_POST)) {
       <form method="POST" id="change_form">
       <input type="hidden" name="id" id="jq_id" value="' . $v_id . '"/>
       <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '"/>
-      <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] . '"/>
       <table id="datatable" class="table table-striped table-bordered" style="width:100%">
          <tr>
             <td><label>Employee</label></td>

@@ -1,5 +1,6 @@
 <?php
-include("api.php");
+session_start();
+require_once "api.php";
 //Action
 if (!empty($_POST)) {
    if ($_POST["action_status"] == "change_password_user") {
@@ -17,8 +18,8 @@ if (!empty($_POST)) {
       $input = array("body" =>
       array(
          "employee_id" => $_POST["employee_id"],
+         "created_by" => $_SESSION['user_role_id'],
          "username" => $_POST["username"],
-         "created_by" => $_POST["created_by"],
          "password" => $_POST["new_password"],
       ));
       set_new_user_role($input);

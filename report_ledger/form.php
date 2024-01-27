@@ -11,7 +11,6 @@ include "../asset_default/side_bar.php";
 ?>
 
 <body class="nav-md">
-  <!-- <input type="hidden" name="penguna" id="jq_pengguna" value=<?php echo $pengguna; ?> readonly="true"> -->
   <div class="container body">
     <!-- page content -->
     <div class="right_col" role="main">

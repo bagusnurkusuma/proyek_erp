@@ -10,11 +10,9 @@
 
 <?php
 include "../asset_default/side_bar.php";
-include "api.php";
 ?>
 
 <body class="nav-md">
-  <input type="hidden" name="penguna" id="jq_pengguna" value=<?php echo $pengguna; ?> readonly="true">
   <div class="container body">
     <!-- page content -->
     <div class="right_col" role="main">
@@ -124,14 +122,12 @@ include "api.php";
   }
 
   function get_data_detail_edit(arg_data_id, arg_action_status) {
-    var created_by = $("#jq_pengguna").val();
     $.ajax({
       url: "property.php",
       method: "POST",
       data: {
         data_id: arg_data_id,
-        action_status: arg_action_status,
-        created_by: created_by
+        action_status: arg_action_status
       },
       success: function(data) {
         $("#form_edit").html(data);
@@ -173,14 +169,12 @@ include "api.php";
     $(document).on("click", ".archive_data", function() {
       var data_id = $(this).attr("id");
       var action_status = "archive_detail";
-      var created_by = $("#jq_pengguna").val();
       $.ajax({
         url: "property.php",
         method: "POST",
         data: {
           data_id: data_id,
-          action_status: action_status,
-          created_by: created_by
+          action_status: action_status
         },
         success: function(data) {
           $("#form_archive").html(data);
@@ -226,14 +220,12 @@ include "api.php";
     $(document).on("click", ".unarchive_data", function() {
       var data_id = $(this).attr("id");
       var action_status = "unarchive_detail";
-      var created_by = $("#jq_pengguna").val();
       $.ajax({
         url: "action.php",
         method: "POST",
         data: {
           data_id: data_id,
-          action_status: action_status,
-          created_by: created_by
+          action_status: action_status
         },
         success: function(data) {
           act_refresh_data_archive();

@@ -1,4 +1,6 @@
 <?php
+session_start();
+require_once "api.php";
 function get_detail_ratio_tabel($arg_inventory_id)
 {
    $output =
@@ -39,7 +41,6 @@ function get_detail_ratio_tabel($arg_inventory_id)
    return $output;
 }
 
-include "api.php";
 if (!empty($_POST)) {
    $output = '';
    if ($_POST['action_status'] == 'view_detail' | $_POST['action_status'] == 'edit_detail' | $_POST['action_status'] == 'insert_detail') {
@@ -101,9 +102,8 @@ if (!empty($_POST)) {
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="jq_tab_master" role="tabpanel" aria-labelledby="master-tab">
             <form method="POST" id="update_form">
-         <input type="hidden" name="id" id="jq_id" value="' . $v_id . '" class="form-control" />
-         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '" class="form-control" />
-         <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] . '" class="form-control" />
+         <input type="hidden" name="id" id="jq_id" value="' . $v_id . '"/>
+         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '"/>
       <table id="datatable" class="table table-striped table-bordered" style="width:100%">
          <tr>
             <td><label>Inventory Code</label></td>
@@ -243,9 +243,8 @@ if (!empty($_POST)) {
    } elseif ($_POST['action_status'] == 'archive_detail') {
       $output = '
       <form method="post" id="archive_form">
-         <input type="hidden" name="id" id="jq_id" value="' . $_POST['data_id']  . '" class="form-control" />
-         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '" class="form-control" />
-         <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] . '" class="form-control" />
+         <input type="hidden" name="id" id="jq_id" value="' . $_POST['data_id']  . '"/>
+         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '"/>
          <table class="table table-striped">
             <td><label>Archive Reason ?</label></td>
             <td><textarea name="archive_reason" id="jq_archive_reason" class="form-control" ></textarea></td>
@@ -339,7 +338,7 @@ if (!empty($_POST)) {
       $output .= '</tbody></table>';
    } elseif ($_POST["action_status"] == "select_unit_ratio_add" || $_POST["action_status"] == "select_unit_ratio_edit") {
       if ($_POST["action_status"] == "select_unit_ratio_add") {
-         $input = array("body" => array("unit_id" => $_POST["data_id"], "inventory_id" => $_POST["inventory_id"], "created_by" => $_POST["created_by"]));
+         $input = array("body" => array("unit_id" => $_POST["data_id"], "inventory_id" => $_POST["inventory_id"], "created_by" => $_SESSION['user_role_id']));
          $hasil = set_new_data_detail_ratio($input);
          $is_read_only = '';
          $is_disable_span = '';
@@ -360,10 +359,9 @@ if (!empty($_POST)) {
          foreach ($hasil as $baris) :
             $output .= '
       <form method="post" id="form_update_detail_unit_ratio">
-        <input type="hidden" name="inventory_id" id="jq_inventory_id" value="' . $_POST["inventory_id"] . '" class="form-control col-md-7 col-xs-12" readonly="true">
-        <input type="hidden" name="action_status" id="jq_action_status" value="set_new_detail_ratio" class="form-control col-md-7 col-xs-12" readonly="true">
+        <input type="hidden" name="inventory_id" id="jq_inventory_id" value="' . $_POST["inventory_id"] . '" readonly="true"/>
+        <input type="hidden" name="action_status" id="jq_action_status" value="set_new_detail_ratio" readonly="true"/>
         <input type="hidden" name="id" id="jq_id" value="' . $baris["id"] . '" class="form-control" readonly=true/>
-        <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST["created_by"] . '" class="form-control" readonly=true/>
         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
           <tr>
             <td><label>Ratio</label></td>

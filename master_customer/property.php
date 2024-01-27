@@ -38,9 +38,8 @@ if (!empty($_POST)) {
 
       $output .= '
       <form method="POST" id="update_form">
-         <input type="hidden" name="id" id="jq_id" value="' . $v_id . '" class="form-control" />
-         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '" class="form-control" />
-         <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] . '" class="form-control" />
+         <input type="hidden" name="id" id="jq_id" value="' . $v_id . '"/>
+         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '"/>
       <table id="datatable" class="table table-striped table-bordered" style="width:100%">
          <tr>
             <td><label>Customer Name</label></td>
@@ -104,9 +103,8 @@ if (!empty($_POST)) {
    if ($_POST['action_status'] == 'archive_detail') {
       $output = '
       <form method="post" id="archive_form">
-        <input type="hidden" name="id" id="jq_id" value="' . $_POST['data_id']  . '" class="form-control" />
-         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '" class="form-control" />
-         <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] . '" class="form-control" />
+        <input type="hidden" name="id" id="jq_id" value="' . $_POST['data_id']  . '"/>
+         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '"/>
       <table class="table table-striped">
           <td><label>Archive Reason ?</label></td>
             <td><textarea name="archive_reason" id="jq_archive_reason" class="form-control" ></textarea></td>

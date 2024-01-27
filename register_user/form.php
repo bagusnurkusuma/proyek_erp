@@ -10,11 +10,9 @@
 
 <?php
 include "../asset_default/side_bar.php";
-include "api.php";
 ?>
 
 <body class="nav-md">
-  <input type="hidden" name="penguna" id="jq_pengguna" value=<?php echo $pengguna; ?> readonly="true">
   <div class="container body">
     <!-- page content -->
     <div class="right_col" role="main">
@@ -216,13 +214,11 @@ include "api.php";
     $(document).on("click", ".add_user", function() {
       var data_id = $(this).attr("id");
       var action_status = "add_user";
-      var created_by = $("#jq_pengguna").val();
       $.ajax({
         url: "property.php",
         method: "POST",
         data: {
-          action_status: action_status,
-          created_by: created_by
+          action_status: action_status
         },
         success: function(data) {
           $("#form_change").html(data);
@@ -271,14 +267,12 @@ include "api.php";
     $(document).on("click", ".change_password_user", function() {
       var data_id = $(this).attr("id");
       var action_status = "change_password_user";
-      var created_by = $("#jq_pengguna").val();
       $.ajax({
         url: "property.php",
         method: "POST",
         data: {
           data_id: data_id,
-          action_status: action_status,
-          created_by: created_by
+          action_status: action_status
         },
         success: function(data) {
           $("#form_change").html(data);
@@ -457,8 +451,7 @@ include "api.php";
         data: {
           action_status: "select_menu_process",
           menu_proces_id: $(this).attr("id"),
-          user_role_id: user_role_id,
-          created_by: $("#jq_pengguna").val()
+          user_role_id: user_role_id
         },
         success: function(data) {
           act_refresh_table_menu_access();

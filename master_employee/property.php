@@ -22,6 +22,7 @@ if (!empty($_POST)) {
          foreach ($hasil as $row) :
             $v_id = $_POST['data_id'];
             $v_file_id = $row['file_id'];
+            $v_file_location = $row['file_location'];
             $v_employee_nik = $row['employee_nik'];
             $v_employee_name = $row['employee_name'];
             $v_tempat_lahir = $row['tempat_lahir'];
@@ -34,6 +35,7 @@ if (!empty($_POST)) {
       } else {
          $v_id = '';
          $v_file_id = '';
+         $v_file_location = '';
          $v_employee_nik = '';
          $v_employee_name = '';
          $v_tempat_lahir = '';
@@ -52,7 +54,7 @@ if (!empty($_POST)) {
             <td><label>Profile Photo</label></td>
          </tr>
          <tr>
-            <td align="center"><img id="jq_display_profile" src="../asset_default/action.php?asumuk=' . $v_file_id . '&action=preview" alt="' . $v_employee_name . '"  width="300" height="300"  class="img-circle text-center"></td>
+            <td align="center"><img id="jq_display_profile" src="' . $v_file_location . '" alt="' . $v_employee_name . '"  width="300" height="300"  class="img-circle text-center"></td>
          </tr>
       </table>
       <div align="center">
@@ -65,7 +67,6 @@ if (!empty($_POST)) {
          <input type="hidden" name="id" id="jq_id" value="' . $v_id . '"/>
          <input type="hidden" name="file_id" id="jq_file_id" value="' . $v_file_id . '"/>
          <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '"/>
-         <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] . '"/>
       <table id="datatable" class="table table-striped table-bordered" style="width:100%">
          <tr>
             <td><label>Employee NIK</label></td>
@@ -127,7 +128,7 @@ if (!empty($_POST)) {
          foreach ($hasil as $row) :
             $output .= '
             <tr>  
-               <td align="center"><img src="../asset_default/action.php?asumuk=' . $row['file_id'] . '&action=preview" alt="' . $row["employee_name"] . '"  width="100" height="100" class="img-circle text-center"></td>
+               <td align="center"><img src="' . $row['file_location'] . '" alt="' . $row["employee_name"] . '"  width="100" height="100" class="img-circle text-center"></td>
                <td>' . $row["employee_nik"] . '</td>
                <td>' . $row["employee_name"] . '</td>
                <td>' . $row["email"] . '</td>
@@ -145,9 +146,8 @@ if (!empty($_POST)) {
    } elseif ($_POST['action_status'] == 'archive_detail') {
       $output = '
       <form method="post" id="archive_form">
-        <input type="hidden" name="id" id="jq_id" value="' . $_POST['data_id']  . '" class="form-control" />
-         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '" class="form-control" />
-         <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] . '" class="form-control" />
+        <input type="hidden" name="id" id="jq_id" value="' . $_POST['data_id']  . '"/>
+         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '"/>
       <table class="table table-striped">
           <td><label>Archive Reason ?</label></td>
             <td><textarea name="archive_reason" id="jq_archive_reason" class="form-control" ></textarea></td>
