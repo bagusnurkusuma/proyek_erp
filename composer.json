@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "telegram-bot/api": "^2.5"
+        "telegram-bot/api": "^2.5",
+        "ramsey/uuid": "^4.2"
     }
 }
