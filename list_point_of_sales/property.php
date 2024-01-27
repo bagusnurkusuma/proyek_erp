@@ -1,4 +1,5 @@
 <?php
+session_start();
 function get_detail_pos_tabel($input_id)
 {
     $sum_total_disc = 0;
@@ -169,7 +170,7 @@ if (!empty($_POST)) {
         $output .= '<center>
         <table class="tb_header" border="0">
             <td align="center" vertical-align:top>
-                <span style="color:black;"><b>' . $_POST['company_name'] . '</b></br>' . $_POST['company_addres'] . '</span></br>
+                <span style="color:black;"><b>' . $_SESSION['company_name'] . '</b></br>' . $_SESSION['company_addres'] . '</span></br>
                 <span style="font-size:12pt">No .' . $trx_number . ', ' . format_date($trx_date) . '</span></br>
             </td>
         </table>
