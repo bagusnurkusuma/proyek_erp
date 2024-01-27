@@ -295,7 +295,7 @@ if (is_array($hasil) && count($hasil)) {
   <script src="../asset_design/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
   <!-- Custom Theme Scripts -->
   <script src="../asset_design/build/js/custom.min.js"></script>
-  <script type="text/javascript" src="../asset_default/fungsi_1.js"></script>
+  <script type="text/javascript" src="../asset_default/fungsi.js"></script>
 </body>
 
 </html>

@@ -45,7 +45,7 @@ if (!empty($_POST)) {
       }
 
       $output .= '
-      <form method="POST" id="update_form">
+      <form method="POST" id="update_form" enctype="multipart/form-data">
       <div class="col-md-6 col-sm-12 form-group">
       <table id="datatable" class="table table-striped table-bordered" style="width:100%">
          <tr>
@@ -114,6 +114,7 @@ if (!empty($_POST)) {
             <th width="100">Photo Profile</th>
             <th>NIK</th>
             <th>Employee</th> 
+            <th>Email</th> 
             <th>Telepon</th> 
             <th>Option</th> 
          </tr>
@@ -129,6 +130,7 @@ if (!empty($_POST)) {
                <td align="center"><img src="../asset_default/action.php?asumuk=' . $row['file_id'] . '&action=preview" alt="' . $row["employee_name"] . '"  width="100" height="100" class="img-circle text-center"></td>
                <td>' . $row["employee_nik"] . '</td>
                <td>' . $row["employee_name"] . '</td>
+               <td>' . $row["email"] . '</td>
                <td>' . $row["telepon"] . '</td>
                <td>
                <button type="button" name="view" value="" id="' . $row["id"] . '" class="btn btn-info view_data"><i class="fa fa-eye"></i></button>   

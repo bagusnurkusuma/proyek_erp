@@ -135,31 +135,34 @@ $.fn.pretty_format_table = function () {
       button.each(function () {
         var kelas = button.attr("class");
         var closestbtn = button.closest("button");
-        closestbtn.attr("data-toggle", "tooltip");
-        if (kelas == "fa fa-inbox") {
-          closestbtn.attr("title", "Show Archive Data");
-        } else if (kelas == "fa fa-plus-circle") {
-          closestbtn.attr("title", "Add Data");
-        } else if (kelas == "fa fa-refresh") {
-          closestbtn.attr("title", "Refresh Data");
-        } else if (kelas == "fa fa-eye") {
-          closestbtn.attr("title", "View Data");
-        } else if (kelas == "fa fa-pencil-square") {
-          closestbtn.attr("title", "Edit Data");
-        } else if (kelas == "fa fa-archive") {
-          closestbtn.attr("title", "Archive Data");
-        } else if (kelas == "fa fa-close") {
-          closestbtn.attr("title", "Clear Data");
-        } else if (kelas == "fa fa-hand-o-up") {
-          closestbtn.attr("title", "Select Data");
-        } else if (kelas == "fa fa-upload") {
-          closestbtn.attr("title", "Unarchive Data");
-        } else if (
-          kelas == "fa fa-chevron-down" ||
-          kelas == "fa fa-chevron-up" ||
-          kelas == "fa fa-briefcase"
-        ) {
-          closestbtn.attr("title", "Show Detail Data");
+        var title_not_exist = closestbtn.attr("title") == undefined;
+        if (title_not_exist) {
+          closestbtn.attr("data-toggle", "tooltip");
+          if (kelas == "fa fa-inbox") {
+            closestbtn.attr("title", "Show Archive Data");
+          } else if (kelas == "fa fa-plus-circle") {
+            closestbtn.attr("title", "Add Data");
+          } else if (kelas == "fa fa-refresh") {
+            closestbtn.attr("title", "Refresh Data");
+          } else if (kelas == "fa fa-eye") {
+            closestbtn.attr("title", "View Data");
+          } else if (kelas == "fa fa-pencil-square") {
+            closestbtn.attr("title", "Edit Data");
+          } else if (kelas == "fa fa-archive") {
+            closestbtn.attr("title", "Archive Data");
+          } else if (kelas == "fa fa-close") {
+            closestbtn.attr("title", "Clear Data");
+          } else if (kelas == "fa fa-hand-o-up") {
+            closestbtn.attr("title", "Select Data");
+          } else if (kelas == "fa fa-upload") {
+            closestbtn.attr("title", "Unarchive Data");
+          } else if (
+            kelas == "fa fa-chevron-down" ||
+            kelas == "fa fa-chevron-up" ||
+            kelas == "fa fa-briefcase"
+          ) {
+            closestbtn.attr("title", "Show Detail Data");
+          }
         }
       });
       return this;
@@ -172,31 +175,34 @@ $(document).ready(function () {
   component.each(function () {
     var kelas = $(this).attr("class");
     var closestbtn = $(this).closest("button");
-    closestbtn.attr("data-toggle", "tooltip");
-    if (kelas == "fa fa-inbox") {
-      closestbtn.attr("title", "Show Archive Data");
-    } else if (kelas == "fa fa-plus-circle") {
-      closestbtn.attr("title", "Add Data");
-    } else if (kelas == "fa fa-refresh") {
-      closestbtn.attr("title", "Refresh Data");
-    } else if (kelas == "fa fa-eye") {
-      closestbtn.attr("title", "View Data");
-    } else if (kelas == "fa fa-pencil-square") {
-      closestbtn.attr("title", "Edit Data");
-    } else if (kelas == "fa fa-archive") {
-      closestbtn.attr("title", "Archive Data");
-    } else if (kelas == "fa fa-close") {
-      closestbtn.attr("title", "Clear Data");
-    } else if (kelas == "fa fa-hand-o-up") {
-      closestbtn.attr("title", "Select Data");
-    } else if (kelas == "fa fa-upload") {
-      closestbtn.attr("title", "Unarchive Data");
-    } else if (
-      kelas == "fa fa-chevron-down" ||
-      kelas == "fa fa-chevron-up" ||
-      kelas == "fa fa-briefcase"
-    ) {
-      closestbtn.attr("title", "Show Detail Data");
+    var title_not_exist = closestbtn.attr("title") == undefined;
+    if (title_not_exist) {
+      closestbtn.attr("data-toggle", "tooltip");
+      if (kelas == "fa fa-inbox") {
+        closestbtn.attr("title", "Show Archive Data");
+      } else if (kelas == "fa fa-plus-circle") {
+        closestbtn.attr("title", "Add Data");
+      } else if (kelas == "fa fa-refresh") {
+        closestbtn.attr("title", "Refresh Data");
+      } else if (kelas == "fa fa-eye") {
+        closestbtn.attr("title", "View Data");
+      } else if (kelas == "fa fa-pencil-square") {
+        closestbtn.attr("title", "Edit Data");
+      } else if (kelas == "fa fa-archive") {
+        closestbtn.attr("title", "Archive Data");
+      } else if (kelas == "fa fa-close") {
+        closestbtn.attr("title", "Clear Data");
+      } else if (kelas == "fa fa-hand-o-up") {
+        closestbtn.attr("title", "Select Data");
+      } else if (kelas == "fa fa-upload") {
+        closestbtn.attr("title", "Unarchive Data");
+      } else if (
+        kelas == "fa fa-chevron-down" ||
+        kelas == "fa fa-chevron-up" ||
+        kelas == "fa fa-briefcase"
+      ) {
+        closestbtn.attr("title", "Show Detail Data");
+      }
     }
   });
 });
