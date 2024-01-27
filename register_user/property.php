@@ -37,13 +37,15 @@ if (!empty($_POST)) {
    if ($_POST['action_status'] == 'refresh_data_detail') {
 
       $output .= '
-      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+      <table id="list_user_register" class="table table-striped table-bordered" style="width:100%">
          <thead>
          <tr style="text-align: center;">
-            <th width="15%">Nama</th>
-            <th width="15%">Username</th>
-            <th width="15%">Status</th>
-            <th width="15%">Option</th> 
+            <th>Employee</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Username</th>
+            <th>Activation</th>
+            <th>Option</th> 
          </tr>
       </thead>
       <tbody>
@@ -54,11 +56,14 @@ if (!empty($_POST)) {
          foreach ($hasil as $row) :
             $output .= '
             <tr>  
-               <td>#</td>
+               <td>' . $row["employee_name"] . '</td>
+               <td>' . $row["email"] . '</td>
+               <td>' . $row["telepon"] . '</td>
                <td>' . $row["username"] . '</td>
                <td>' . $row["active_status"] . '</td>
-               <td style="text-align: center;"><button type="button" name="change" id="' . $row["id"] . '" class="btn btn-info btn-xs change_password_user"><i class="fa fa-key"></i></button>
-               <button type="button" name="active" id="' . $row["id"] . '" class="btn btn-warning btn-xs change_active_user"><i class="';
+               <td style="text-align: center;">
+                  <button type="button" title="Change Password" name="change" id="' . $row["id"] . '" class="btn btn-info btn-xs change_password_user"><i class="fa fa-key"></i></button>
+                  <button type="button" title="Change User Activation" name="active" id="' . $row["id"] . '" class="btn btn-warning btn-xs change_active_user"><i class="';
 
             if ($row["is_active_status"]) {
                $output .= 'fa fa-check';
@@ -66,32 +71,56 @@ if (!empty($_POST)) {
                $output .= 'fa fa-times';
             }
             $output .= '"></i></button>
-                  <button type="button" name="manage" id="' . $row["id"] . '" class="btn btn-danger btn-xs change_role_user" ><i class="fa fa-gear"></i></button></td>
+                  <button type="button" title="Change User Roles" name="manage" id="' . $row["id"] . '" class="btn btn-danger btn-xs change_role_user" ><i class="fa fa-gear"></i></button></td>
                </tr>';
          endforeach;
       }
       $output .= '</tbody></table>';
-   } elseif ($_POST['action_status'] == 'change_password_user') {
-      $is_readonly = 'readonly = true';
-      $is_disable_button = 'type = button';
-      $input = ['body' => ['data_id' => $_POST['data_id']]];
-
+   } elseif ($_POST['action_status'] == 'change_password_user' || $_POST['action_status'] == 'add_user') {
+      if ($_POST['action_status'] == 'change_password_user') {
+         $is_readonly = 'readonly = true';
+         $is_disable_span = 'hidden';
+         $button_name = 'change_password_data';
+         $input = ['body' => ['data_id' => $_POST['data_id']]];
+      } elseif ($_POST['action_status'] == 'add_user') {
+         $is_readonly = '';
+         $is_disable_span = '';
+         $button_name = 'set_add_data_user';
+         $input = ['body' => ['data_id' => null]];
+      }
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
             $v_id = $_POST['data_id'];
             $v_username = $row['username'];
+            $v_employee_id = $row['employee_id'];
+            $v_employee_name = $row['employee_name'];
          endforeach;
       } else {
          $v_id = '';
          $v_username = '';
+         $v_employee_id = '';
+         $v_employee_name = '';
       }
 
       $output .= '
       <form method="POST" id="change_form">
-      <input type="hidden" name="id" id="jq_id" value="' . $v_id . '" class="form-control" />
-      <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '" class="form-control" />
+      <input type="hidden" name="id" id="jq_id" value="' . $v_id . '"/>
+      <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '"/>
+      <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] . '"/>
       <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+         <tr>
+            <td><label>Employee</label></td>
+            <td>
+               <div class="input-group">
+                  <input type="hidden" name="employee_id" id="jq_employee_id" value="' . $v_employee_id . '" readonly=true/>
+                  <input type="text" name="employee_name" id="jq_employee_name" value="' . $v_employee_name . '" class="form-control" readonly=true/>
+                  <span class="input-group-btn" ' . $is_disable_span . '>
+                     <button type="button" name="choose_employee_data" id="" class="btn btn-warning btn-xs choose_employee_data"><i class="fa fa-hand-o-up"></i></button>
+                  </span>
+               </div>
+            </td>
+         </tr>
          <tr>
             <td><label>Username</label></td>
             <td><input type="text" name="username" id="jq_username" value="' . $v_username . '" class="form-control" ' . $is_readonly . '/></td>
@@ -115,7 +144,9 @@ if (!empty($_POST)) {
             </td>
          </tr>
       </table>
-        <input ' . $is_disable_button . ' name="change" id="change" value="Confirm" class="btn btn-success change_password_data" />
+        <span class="input-group-btn">
+           <button type="button" name="change" id="jq_change" class="btn btn-success ' . $button_name . '">Confirm</button>
+         </span>
       </form>';
    } elseif ($_POST['action_status'] == 'change_role_user') {
 
@@ -139,7 +170,7 @@ if (!empty($_POST)) {
             <tr>  
                <td>' . $row["menu_name"] . '</td>
                <td style="text-align: center;">
-               <button type="button" name="remove_hak" id="' . $row["id"] . '" class="btn btn-danger btn-xs remove_hak_data" ><i class="fa fa-trash"></i></button></td>
+               <button type="button" title="Remove" name="remove_hak" id="' . $row["id"] . '" class="btn btn-danger btn-xs remove_hak_data" ><i class="fa fa-trash"></i></button></td>
             </tr>
          ';
          endforeach;
@@ -167,7 +198,37 @@ if (!empty($_POST)) {
             <tr>  
                <td>' . $row["menu_name"] . '</td>
                <td style="text-align: center;">
-               <button type="button" name="select_menu_process" id="' . $row["id"] . '" class="btn btn-warning btn-xs select_menu_process" ><i class="fa fa-check"></i></button></td>
+               <button type="button" name="select_menu_process" id="' . $row["id"] . '" class="btn btn-warning btn-xs select_menu_process"><i class="fa fa-hand-o-up"></i></button></td>
+            </tr>
+         ';
+         endforeach;
+      }
+      $output .= '</tbody></table>';
+   } elseif ($_POST['action_status'] == 'list_employee') {
+      $output = '';
+      $output .= '
+      <table id="list_employee_table" class="table table-striped table-bordered" style="width:100%">
+         <thead>
+         <tr>
+            <th>Employee</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Option</th> 
+         </tr>
+      </thead>
+      <tbody>
+      ';
+      $input = ['body' => ['id' => null]];
+      $hasil = get_list_employee($input);
+      if (is_array($hasil) && count($hasil)) {
+         foreach ($hasil as $row) :
+            $output .= '
+            <tr>
+               <td>' . $row["employee_name"] . '</td>
+               <td>' . $row["email"] . '</td>
+               <td>' . $row["telepon"] . '</td>
+               <td><button type="button" name="select" id="' . $row["id"] . '" class="btn btn-warning btn-xs select_employee_data"><i class="fa fa-hand-o-up"></i></button>                                  
+               </td>
             </tr>
          ';
          endforeach;

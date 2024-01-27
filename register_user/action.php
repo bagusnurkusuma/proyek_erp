@@ -4,12 +4,24 @@ include("api.php");
 if (!empty($_POST)) {
    if ($_POST["action_status"] == "change_password_user") {
       //Change Password
+      $input = array(
+         "body" =>
+         array(
+            "id" => $_POST["id"],
+            "password" => $_POST["new_password"]
+         )
+      );
+      set_new_user($input);
+   } elseif ($_POST["action_status"] == "add_user") {
+      //Add User
       $input = array("body" =>
       array(
-         "id" => $_POST["id"],
-         "password" => $_POST["new_password"]
+         "employee_id" => $_POST["employee_id"],
+         "username" => $_POST["username"],
+         "created_by" => $_POST["created_by"],
+         "password" => $_POST["new_password"],
       ));
-      set_new_user($input);
+      set_new_user_role($input);
    } elseif ($_POST["action_status"] == "change_active_status") {
       //Change Active
       $input = array("body" =>
@@ -33,5 +45,9 @@ if (!empty($_POST)) {
          "created_by" => $_POST["created_by"]
       ));
       set_new_user_acces($input);
+   } elseif ($_POST["action_status"] == "select_employee_data") {
+      //Select Employee Data
+      $input = ['body' => ['data_id' => $_POST['data_id']]];
+      echo json_encode(get_list_employee($input));
    }
 }
