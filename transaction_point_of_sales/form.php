@@ -492,7 +492,7 @@ endforeach;
           },
           success: function(data) {
             $.ajax({
-              url: "../report_point_of_sales/property.php",
+              url: "../list_point_of_sales/property.php",
               method: "POST",
               data: {
                 action_status: "print_receipt",
@@ -507,7 +507,7 @@ endforeach;
                 win.document.write(data);
                 win.document.close();
                 win.print();
-                window.location = "../point_of_sales/form.php";
+                window.location = "../transaction_point_of_sales/form.php";
               }
             });
           }

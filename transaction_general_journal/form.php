@@ -381,7 +381,7 @@ include "api.php";
                 var parsedData = $.parseJSON(data);
                 var result = parsedData[0].msg;
                 if (result == "") {
-                  window.location = "../general_journal/form.php";
+                  window.location = "../transaction_general_journal/form.php";
                 } else {
                   Swal.fire({
                     position: "top",

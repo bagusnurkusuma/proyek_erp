@@ -647,7 +647,7 @@ endforeach;
           success: function(data) {
             $("#payment_form")[0].reset();
             $("#payment").modal("hide");
-            window.location = "../quick_purchase/form.php";
+            window.location = "../transaction_quick_purchase/form.php";
           }
         });
       }

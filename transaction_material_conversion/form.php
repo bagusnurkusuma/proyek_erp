@@ -438,7 +438,7 @@ include "api.php";
                 var parsedData = $.parseJSON(data);
                 var result = parsedData[0].msg;
                 if (result == "") {
-                  window.location = "../material_conversion/form.php";
+                  window.location = "../transaction_material_conversion/form.php";
                 } else {
                   Swal.fire({
                     position: "top",
