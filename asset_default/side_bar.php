@@ -3,7 +3,6 @@ session_start();
 if (empty($_SESSION["user_role_id"])) {
   header("location:../asset_default/login.html");
 }
-include "api.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,7 +102,7 @@ include "api.php";
                 <li><a><i class="fa fa-book"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <?php
-                    $hasil = get_menu_proces($_SESSION["user_role_id"]);
+                    $hasil = $_SESSION['menu_proces'];
                     if (is_array($hasil) && count($hasil)) {
                       foreach ($hasil as $baris) : ?>
                         <li><a href=<?php echo $baris["location_file"]; ?>><?php echo $baris["menu_name"]; ?></a></li>

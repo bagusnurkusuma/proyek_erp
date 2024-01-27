@@ -43,7 +43,7 @@ if (!empty($_POST)) {
       array(
          "menu_proces_id" => $_POST["menu_proces_id"],
          "user_role_id" => $_POST["user_role_id"],
-         "created_by" => $_POST["created_by"]
+         "created_by" => $_SESSION['user_role_id']
       ));
       set_new_user_acces($input);
    } elseif ($_POST["action_status"] == "select_employee_data") {

@@ -39,6 +39,7 @@ if (is_array($results) && count($results)) {
 			$_SESSION['watermark'] = $row["watermark"];
 		endforeach;
 	}
+	$_SESSION['menu_proces'] = get_menu_proces($_SESSION["user_role_id"]);
 } else {
 	echo "<center>Username atau Password anda Salah";
 	echo " <a href='login.html'>login</a></p>";

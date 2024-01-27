@@ -16,7 +16,7 @@ function get_watermark()
 
 function get_menu_proces($input_function)
 {
-    $input = array("body" => array("created_by" => $input_function));
+    $input = array("body" => array("user_role_id" => $input_function));
     $input = json_encode($input);
     $query = "SELECT user_role.get_user_menu_proces_by_user('" . $input . "') as result";
     require_once "db_function.php";
