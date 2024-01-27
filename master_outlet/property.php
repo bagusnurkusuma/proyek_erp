@@ -169,7 +169,7 @@ if (!empty($_POST)) {
             <tr>  
                <td>' . $row["warehouse_code"] . '</td>
                <td>' . $row["warehouse_name"] . '</td>
-               <td><button type="button" name="select" id="' . $row["id"] . '" class="btn btn-warning btn-xs select_warehouse_data">Select</button>                                  
+               <td><button type="button" name="select" id="' . $row["id"] . '" class="btn btn-warning btn-xs select_warehouse_data"><i class="fa fa-hand-o-up"></i></button>                                  
                </td>
             </tr>
          ';
