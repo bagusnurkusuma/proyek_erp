@@ -21,7 +21,6 @@ endforeach;
 ?>
 
 <body class="nav-md" onload="act_set_focus_barcode()">
-  <input type="hidden" name="penguna" id="jq_pengguna" value=<?php echo $pengguna; ?> readonly="true">
   <div class="container body">
     <!-- page content -->
     <div class="right_col" role="main">
@@ -41,7 +40,7 @@ endforeach;
               </div>
               <div class="x_content">
                 <br />
-                <?php foreach (get_transaction_number($pengguna) as $parent) : ?>
+                <?php foreach (get_transaction_number($_SESSION['user_role_id']) as $parent) : ?>
                   <input type="hidden" name="transaction_id" id="jq_transaction_id" value=<?php echo $parent["transaction_id"]; ?> class="form-control" readonly="true">
                   <div class="row">
                     <div class="col-md-6 col-sm-12  form-group">

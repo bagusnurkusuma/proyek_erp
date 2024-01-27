@@ -39,7 +39,6 @@ if (!empty($_POST)) {
       <form method="post" id="update_form">
         <input type="hidden" name="transaction_id" id="jq_transaction_id" value="' . $_POST["transaction_id"] . '" readonly="true">
         <input type="hidden" name="action_status" id="jq_action_status" value="' . $action_status . '" readonly="true">
-        <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST["created_by"] . '" readonly=true/>
         <input type="hidden" name="id" id="jq_id" value="' . $v_id . '" readonly=true/>
         <table id="input_data" class="table table-striped table-bordered" style="width:100%">
           <tr>

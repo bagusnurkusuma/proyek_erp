@@ -14,7 +14,6 @@ include "api.php";
 ?>
 
 <body class="nav-md">
-  <input type="hidden" name="penguna" id="jq_pengguna" value=<?php echo $pengguna; ?> readonly="true">
   <div class="container body">
     <!-- page content -->
     <div class="right_col" role="main">
@@ -34,7 +33,7 @@ include "api.php";
               </div>
               <div class="x_content">
                 <br />
-                <?php foreach (get_transaction_number($pengguna) as $parent) : ?>
+                <?php foreach (get_transaction_number($_SESSION['user_role_id']) as $parent) : ?>
                   <input type="hidden" name="transaction_id" id="jq_transaction_id" value=<?php echo $parent["transaction_id"]; ?> class="form-control" readonly="true">
                   <div class="row">
                     <div class="col-md-6 col-sm-12  form-group">
@@ -212,8 +211,7 @@ include "api.php";
       data: {
         data_id: arg_data_id,
         action_status: arg_action_status,
-        transaction_id: transaction_id,
-        created_by: $("input#jq_pengguna").val()
+        transaction_id: transaction_id
       },
       success: function(data) {
         $("#form_edit").html(data);

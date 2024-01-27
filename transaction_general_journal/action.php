@@ -1,5 +1,6 @@
 <?php
-include("api.php");
+session_start();
+require_once "api.php";
 //Action
 if (!empty($_POST)) {
   if ($_POST["action_status"] == "cancel_transaction") {
@@ -36,7 +37,7 @@ if (!empty($_POST)) {
       "account_id" => $_POST["account_id"],
       "debet" => $_POST["debet"],
       "credit" => $_POST["credit"],
-      "created_by" => $_POST["created_by"],
+      "created_by" => $_SESSION['user_role_id'],
       "description" => $_POST["description"]
     ));
     update_transaction_detail($input);
@@ -48,7 +49,7 @@ if (!empty($_POST)) {
       "account_id" => $_POST["account_id"],
       "debet" => $_POST["debet"],
       "credit" => $_POST["credit"],
-      "created_by" => $_POST["created_by"],
+      "created_by" => $_SESSION['user_role_id'],
       "description" => $_POST["description"]
     ));
     update_transaction_detail($input);

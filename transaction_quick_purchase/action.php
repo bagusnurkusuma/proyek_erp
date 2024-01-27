@@ -1,5 +1,5 @@
 <?php
-include("api.php");
+require_once "api.php";
 //Action
 if (!empty($_POST)) {
   if ($_POST["action_status"] == "cancel_transaction") {

@@ -326,9 +326,7 @@ if (!empty($_POST)) {
 
     $output .= '
       <form method="POST" id="add_customer_data">
-         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '" class="form-control" />
-         <input type="hidden" name="created_by" id="jq_created_by" value="' . $_POST['created_by'] .
-      '" class="form-control" />
+         <input type="hidden" name="action_status" id="jq_action_status" value="' . $_POST['action_status'] . '"/>
       <table id="datatable" class="table table-striped table-bordered" style="width:100%">
          <tr>
             <td><label>Customer Name</label></td>

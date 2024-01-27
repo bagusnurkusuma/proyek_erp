@@ -10,11 +10,9 @@
 
 <?php
 include "../asset_default/side_bar.php";
-include "api.php";
 ?>
 
 <body class="nav-md">
-  <input type="hidden" name="penguna" id="jq_pengguna" value=<?php echo $pengguna; ?> readonly="true">
   <div class="container body">
     <!-- page content -->
     <div class="right_col" role="main">
@@ -273,8 +271,7 @@ include "api.php";
         data: {
           action_status: "select_account",
           account_id: $(this).attr("id"),
-          structure_id: structure_id,
-          created_by: $("input#jq_pengguna").val()
+          structure_id: structure_id
         },
         success: function(data) {
           act_refresh_table();

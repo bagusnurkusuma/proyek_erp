@@ -1,5 +1,6 @@
 <?php
-include("api.php");
+session_start();
+require_once "api.php";
 //Action
 if (!empty($_POST)) {
    if ($_POST["action_status"] == "select_finance_report_type_data") {
@@ -20,7 +21,7 @@ if (!empty($_POST)) {
       array(
          "structure_id" => $_POST["structure_id"],
          "account_id" => $_POST["account_id"],
-         "created_by" => $_POST["created_by"]
+         "created_by" => $_SESSION['user_role_id'],
       ));
       set_new_finance_report_account($input);
       $input = '';

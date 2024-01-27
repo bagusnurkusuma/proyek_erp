@@ -1,5 +1,6 @@
 <?php
-include("api.php");
+session_start();
+require_once "api.php";
 //Action
 if (!empty($_POST)) {
   if ($_POST["action_status"] == "cancel_transaction") {
@@ -76,7 +77,7 @@ if (!empty($_POST)) {
     $input = array(
       "body" =>
       array(
-        "created_by" => $_POST["created_by"],
+        "created_by" => $_SESSION['user_role_id'],
         "customer_name" => $_POST["customer_nama"],
         "telp" => $_POST["customer_telp"],
         "email" => $_POST["customer_email"],

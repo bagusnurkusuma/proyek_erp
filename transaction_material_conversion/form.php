@@ -14,7 +14,6 @@ include "api.php";
 ?>
 
 <body class="nav-md">
-  <input type="hidden" name="penguna" id="jq_pengguna" value=<?php echo $pengguna; ?> readonly="true">
   <div class="container body">
     <!-- page content -->
     <div class="right_col" role="main">
@@ -34,7 +33,7 @@ include "api.php";
               </div>
               <div class="x_content">
                 <br />
-                <?php foreach (get_transaction_number($pengguna) as $parent) : ?>
+                <?php foreach (get_transaction_number($_SESSION['user_role_id']) as $parent) : ?>
                   <div class="row">
                     <div class="col-md-6 col-sm-12 form-group">
                       <label class="control-label col-md-3">Trx Number</label>
