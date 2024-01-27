@@ -88,15 +88,15 @@ if (is_array($hasil) && count($hasil)) {
             <div class="row">
               <div class="col-md-12">
                 <div class="profile_pic text-center" style="margin-left: 25px; width: 60%;">
-                  <img src="../asset_design/production/images/img.jpg" alt="..." class="img-circle profile_img text-center">
+                  <img src="<?php echo "action.php?asumuk=" . $_SESSION["file_id"] . "&action=preview" ?>" alt="<?php echo $_SESSION["employee_name"] ?>" height="100" class="img-circle profile_img text-center">
                 </div>
               </div>
             </div>
             <div class="row justify-content-center text-center">
               <div class="col-md-10">
                 <div class="profile_info" style="margin-left: 20px;">
-                  <h2><?php echo $pengguna; ?></h2>
-                  <span><?php echo $pengguna . "_admin@gmail.com"; ?></h2></span>
+                  <h2><?php echo $_SESSION["employee_name"]; ?></h2>
+                  <span><?php echo $_SESSION["email"]; ?></h2></span>
                 </div>
               </div>
             </div>
@@ -186,11 +186,29 @@ if (is_array($hasil) && count($hasil)) {
       </div>
 
       <!-- top navigation -->
-      <div class="top_nav fixed-top">
+      <div class="top_nav">
         <div class="nav_menu">
           <div class="nav toggle">
             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
           </div>
+          <nav class="nav navbar-nav">
+            <ul class=" navbar-right">
+              <li class="nav-item dropdown open" style="padding-left: 15px;">
+                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                  <img src="<?php echo "action.php?asumuk=" . $_SESSION["file_id"] . "&action=preview" ?>" alt="<?php echo $_SESSION["employee_name"] ?>"><?php echo $_SESSION["employee_name"]; ?>
+                </a>
+                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="javascript:;"> Profile</a>
+                  <a class="dropdown-item" href="javascript:;">
+                    <span class="badge bg-red pull-right">50%</span>
+                    <span>Settings</span>
+                  </a>
+                  <a class="dropdown-item" href="javascript:;">Help</a>
+                  <a class="dropdown-item" href="../asset_default/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
       <!-- /top navigation -->
