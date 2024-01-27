@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once "koneksi.php";
-// $query = "select * from user_role.user_role where username ='$_POST[user]' and password ='$_POST[pass]'";
 $input = array("body" => array("username" => $_POST['user'], "password" => $_POST['pass']));
 $input = json_encode($input);
 $query = "SELECT user_role.get_user_by_login('" . $input . "') as result";
