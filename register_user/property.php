@@ -31,8 +31,10 @@
 </script>
 
 <?php
-include "api.php";
+require_once "api.php";
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+   $_POST = casting_htmlentities_array($_POST);
    $output = '';
    if ($_POST['action_status'] == 'refresh_data_detail') {
 
@@ -54,6 +56,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["employee_name"] . '</td>
@@ -91,6 +94,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $v_id = $_POST['data_id'];
             $v_username = $row['username'];
             $v_employee_id = $row['employee_id'];
@@ -165,6 +169,7 @@ if (!empty($_POST)) {
       $hasil = get_user_acces($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["menu_name"] . '</td>
@@ -193,6 +198,7 @@ if (!empty($_POST)) {
       $hasil = get_user_menu_proces($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["menu_name"] . '</td>
@@ -221,6 +227,7 @@ if (!empty($_POST)) {
       $hasil = get_list_employee($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>
                <td>' . $row["employee_name"] . '</td>

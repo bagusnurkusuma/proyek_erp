@@ -1,4 +1,7 @@
 <?php
+require_once "api.php";
+require_once "../asset_default/global_function.php";
+
 function get_detail_ending_tabel($arg_concat_id)
 {
    $sum_amount = 0;
@@ -21,6 +24,7 @@ function get_detail_ending_tabel($arg_concat_id)
    $hasil = get_data_ending_detail($input);
    if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+         $row = casting_htmlentities_array($row);
          $output .= '
             <tr>
                <td>' . $row["batch_number"] . '</td>
@@ -46,8 +50,9 @@ function get_detail_ending_tabel($arg_concat_id)
       </table></td>';
    return $output;
 }
-include "api.php";
+
 if (!empty($_POST)) {
+   $_POST = casting_htmlentities_array($_POST);
    $output = '';
    if ($_POST['action_status'] == 'refresh_data_detail') {
       $sum_amount = 0;
@@ -75,6 +80,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr id="' . $row["concat_id"] . '">  
                <td><button name="view" id="' . $row["concat_id"] . '" class="btn btn-round btn-xs btn-info show_ending_detail"><i class="fa fa-chevron-down"></i></button></td>
@@ -116,6 +122,7 @@ if (!empty($_POST)) {
       $hasil = get_data_warehouse($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["warehouse_code"] . '</td>
@@ -144,6 +151,7 @@ if (!empty($_POST)) {
       $hasil = get_data_inventory($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["inventory_code"] . '</td>

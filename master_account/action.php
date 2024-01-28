@@ -1,7 +1,6 @@
 <?php
-session_start();
 require_once "api.php";
-//Action
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
    if ($_POST["action_status"] == "edit_detail") {
       //Edit Data
@@ -36,7 +35,7 @@ if (!empty($_POST)) {
          "table_name" => "master.account",
          "column_name" => "id"
       ));
-      archive_data($input);
+      archive_master_data($input);
    } elseif ($_POST["action_status"] == "unarchive_detail") {
       //Unarchive Data
       $input = array("body" =>
@@ -46,7 +45,7 @@ if (!empty($_POST)) {
          "table_name" => "master.account",
          "column_name" => "id"
       ));
-      unarchive_data($input);
+      unarchive_master_data($input);
    } elseif ($_POST["action_status"] == "validate_data") {
       //Validate Data
       $input = array(
@@ -60,7 +59,7 @@ if (!empty($_POST)) {
             )
          )
       );
-      echo json_encode(validate_data($input));
+      echo json_encode(validate_master_data($input));
    } elseif ($_POST["action_status"] == "select_sub_account_data") {
       //Select Warehouse Data
       $input = ['body' => ['data_id' => $_POST['data_id']]];

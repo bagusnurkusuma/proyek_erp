@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once "api.php";
+require_once "../asset_default/global_function.php";
 function get_detail_ratio_tabel($arg_inventory_id)
 {
    $output =
@@ -42,6 +42,7 @@ function get_detail_ratio_tabel($arg_inventory_id)
 }
 
 if (!empty($_POST)) {
+   $_POST = casting_htmlentities_array($_POST);
    $output = '';
    if ($_POST['action_status'] == 'view_detail' | $_POST['action_status'] == 'edit_detail' | $_POST['action_status'] == 'insert_detail') {
       if ($_POST['action_status'] == 'view_detail') {
@@ -61,6 +62,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $v_id = $_POST['data_id'];
             $v_inventory_code = $row['inventory_code'];
             $v_inventory_name = $row['inventory_name'];
@@ -225,6 +227,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["inventory_code"] . '</td>
@@ -268,6 +271,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["inventory_code"] . '</td>
@@ -298,6 +302,7 @@ if (!empty($_POST)) {
       $hasil = get_data_unit($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["unit_code"] . '</td>
@@ -325,6 +330,7 @@ if (!empty($_POST)) {
       $hasil = get_data_inventory_category($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["inventory_category_code"] . '</td>
@@ -343,8 +349,9 @@ if (!empty($_POST)) {
          $is_read_only = '';
          $is_disable_span = '';
          if (is_array($hasil) && count($hasil)) {
-            foreach ($hasil as $baris) :
-               $input = $baris["id"];
+            foreach ($hasil as $row) :
+               $row = casting_htmlentities_array($row);
+               $input = $row["id"];
             endforeach;
          }
          $input = array("body" => array("data_id" => $input));
@@ -356,26 +363,27 @@ if (!empty($_POST)) {
       }
       $hasil = get_data_detail_ratio($input);
       if (is_array($hasil) && count($hasil)) {
-         foreach ($hasil as $baris) :
+         foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
       <form method="post" id="form_update_detail_unit_ratio">
         <input type="hidden" name="inventory_id" id="jq_inventory_id" value="' . $_POST["inventory_id"] . '" readonly="true"/>
         <input type="hidden" name="action_status" id="jq_action_status" value="set_new_detail_ratio" readonly="true"/>
-        <input type="hidden" name="id" id="jq_id" value="' . $baris["id"] . '" class="form-control" readonly=true/>
+        <input type="hidden" name="id" id="jq_id" value="' . $row["id"] . '" class="form-control" readonly=true/>
         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
           <tr>
             <td><label>Ratio</label></td>
-            <td> <input  type="number" name="ratio" id="jq_ratio" value="' . $baris["ratio"] . '"onmouseover="this.focus();" class="form-control jq_input_numeric"' . $is_read_only . '/></td>
+            <td> <input  type="number" name="ratio" id="jq_ratio" value="' . $row["ratio"] . '"onmouseover="this.focus();" class="form-control jq_input_numeric"' . $is_read_only . '/></td>
           </tr>
           <tr>
             <td><label>Unit Ratio</label></td>
             <td>
-            <input type="hidden" name="unit_id" id="jq_unit_id" value="' . $baris["unit_id"] . '" class="form-control" readonly=true/>
-            <input type="text" name="unit_name" id="jq_unit_name" value="' . $baris["unit_name"] . '" class="form-control" readonly=true/></td>
+            <input type="hidden" name="unit_id" id="jq_unit_id" value="' . $row["unit_id"] . '" class="form-control" readonly=true/>
+            <input type="text" name="unit_name" id="jq_unit_name" value="' . $row["unit_name"] . '" class="form-control" readonly=true/></td>
           </tr>
           <tr>
             <td><label>Description</label></td>
-            <td><textarea name="description" id="jq_description" class="form-control" ' . $is_read_only . '>' . $baris["description"] . '</textarea></</td>
+            <td><textarea name="description" id="jq_description" class="form-control" ' . $is_read_only . '>' . $row["description"] . '</textarea></</td>
           </tr>
       </table>
          <span class="input-group-btn" ' . $is_disable_span . '>

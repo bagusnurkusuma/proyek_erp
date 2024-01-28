@@ -1,8 +1,8 @@
 <?php
-session_start();
 require_once "api.php";
-//Action
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+   $_POST = casting_htmlentities_array($_POST);
    if ($_POST["action_status"] == "change_password_user") {
       //Change Password
       $input = array(

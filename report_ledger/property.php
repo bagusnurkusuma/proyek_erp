@@ -1,4 +1,7 @@
 <?php
+require_once "api.php";
+require_once "../asset_default/global_function.php";
+
 function get_detail_ledger_tabel($arg_start_date, $arg_end_date, $arg_account_id, $arg_colspan)
 {
    $sum_debet = 0;
@@ -24,6 +27,7 @@ function get_detail_ledger_tabel($arg_start_date, $arg_end_date, $arg_account_id
    $hasil = get_data_ledger_detail($input);
    if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+         $row = casting_htmlentities_array($row);
          $output .= '
             <tr>
                <td align ="right">' . $row["no"] . '</td>
@@ -52,8 +56,9 @@ function get_detail_ledger_tabel($arg_start_date, $arg_end_date, $arg_account_id
       </table></td>';
    return $output;
 }
-include "api.php";
+
 if (!empty($_POST)) {
+   $_POST = casting_htmlentities_array($_POST);
    $output = '';
    if ($_POST['action_status'] == 'refresh_data_main_table') {
       $output .= '
@@ -82,6 +87,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
                 <tr id= ' . $row["account_id"] . ' class=' . $row["parent_id"] . ' data-level=' . $row["level"] . ' data-type="account">
                     <td><button name="view" id="' . $row["account_id"] . '" class="btn btn-round btn-xs btn-info show_ledger_detail"><i class="fa fa-chevron-down"></i></button></td>       
@@ -114,6 +120,7 @@ if (!empty($_POST)) {
       $hasil = get_data_structure(null);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .=
                '<tr id=' . $row["account_id"] . ' class=' . $row["parent_id"] . ' data-level=' . $row["level"] . '>
                         <td>' . $row["account_concat"] . '</td>
@@ -143,6 +150,7 @@ if (!empty($_POST)) {
       $hasil = get_data_journal($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td align ="right">' . $row["no"] . '</td>
@@ -179,6 +187,7 @@ if (!empty($_POST)) {
       $hasil = get_data_account($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["account_concat"] . '</td>

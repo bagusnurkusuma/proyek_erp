@@ -1,6 +1,8 @@
 <?php
-include "api.php";
+require_once "api.php";
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+   $_POST = casting_htmlentities_array($_POST);
    $output = '';
    if ($_POST['action_status'] == 'refresh_data_detail') {
       $sum_debet = 0;
@@ -43,6 +45,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td align ="right">' . $row["no"] . '</td>
@@ -100,6 +103,7 @@ if (!empty($_POST)) {
       $hasil = get_data_warehouse($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["warehouse_code"] . '</td>
@@ -128,6 +132,7 @@ if (!empty($_POST)) {
       $hasil = get_data_inventory($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["inventory_code"] . '</td>
@@ -155,6 +160,7 @@ if (!empty($_POST)) {
       $hasil = get_data_unit($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["unit_name"] . '</td>

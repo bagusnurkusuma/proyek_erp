@@ -1,6 +1,8 @@
 <?php
-include "api.php";
+require_once "api.php";
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+   $_POST = casting_htmlentities_array($_POST);
    $output = '';
    if ($_POST['action_status'] == 'view_detail' | $_POST['action_status'] == 'edit_detail' | $_POST['action_status'] == 'insert_detail') {
       if ($_POST['action_status'] == 'view_detail') {
@@ -20,6 +22,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $v_id = $_POST['data_id'];
             $v_file_id = $row['file_id'];
             $v_file_location = $row['file_location'];
@@ -126,6 +129,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td align="center"><img src="' . $row['file_location'] . '" alt="' . $row["employee_name"] . '"  width="100" height="100" class="img-circle text-center"></td>
@@ -171,6 +175,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["employee_nik"] . '</td>

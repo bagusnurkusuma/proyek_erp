@@ -297,7 +297,12 @@ check_user_menu_acces("1aaae136-1a61-4d9f-a900-90dcda9e5781");
     //Archive Detail
     $(document).on('click', '.archive_detail', function() {
       if ($('#jq_archive_reason').val() == '') {
-        alert("Archive Reason Must be Filled");
+        Swal.fire({
+          position: "top",
+          title: "Warning",
+          text: "Archive Reason Must be Filled !",
+          icon: "warning"
+        });
       } else {
         $.ajax({
           url: "action.php",
@@ -412,13 +417,33 @@ check_user_menu_acces("1aaae136-1a61-4d9f-a900-90dcda9e5781");
     //Update Detail
     $(document).on('click', '.update_detail', function() {
       if ($('#jq_inventory_name').val() == "") {
-        alert("Mohon Isi Inventory Name");
+        Swal.fire({
+          position: "top",
+          title: "Warning",
+          text: "Inventory Name Must be Filled !",
+          icon: "warning"
+        });
       } else if ($('#jq_inventory_code').val() == '') {
-        alert("Mohon Isi Inventory Code");
+        Swal.fire({
+          position: "top",
+          title: "Warning",
+          text: "Inventory Code Must be Filled !",
+          icon: "warning"
+        });
       } else if ($('#jq_inventory_category_id').val() == '') {
-        alert("Mohon Inventory Category dipilih");
+        Swal.fire({
+          position: "top",
+          title: "Warning",
+          text: "Inventory Category Must be Selected !",
+          icon: "warning"
+        });
       } else if ($('#jq_unit_id').val() == '') {
-        alert("Mohon Unit dipilih");
+        Swal.fire({
+          position: "top",
+          title: "Warning",
+          text: "Unit Must be Selected !",
+          icon: "warning"
+        });
       } else {
         $.ajax({
           url: "action.php",
@@ -430,6 +455,8 @@ check_user_menu_acces("1aaae136-1a61-4d9f-a900-90dcda9e5781");
             name: $('#jq_inventory_name').val()
           },
           success: function(data) {
+            var parsedData = $.parseJSON(data);
+            var result = parsedData[0].msg;
             if (data == "") {
               $.ajax({
                 url: "action.php",
@@ -445,7 +472,12 @@ check_user_menu_acces("1aaae136-1a61-4d9f-a900-90dcda9e5781");
                 }
               });
             } else {
-              alert(data);
+              Swal.fire({
+                position: "top",
+                title: "Warning",
+                text: result,
+                icon: "warning"
+              });
             }
           }
         });
@@ -455,9 +487,19 @@ check_user_menu_acces("1aaae136-1a61-4d9f-a900-90dcda9e5781");
     //Update Detail Unit Rasio
     $(document).on('click', '.update_detail_unit_ratio', function() {
       if ($('#jq_unit_name').val() == "") {
-        alert("Mohon Isi Unit");
+        Swal.fire({
+          position: "top",
+          title: "Warning",
+          text: "Unit Must be Selected !",
+          icon: "warning"
+        });
       } else if ($('#jq_ratio').val() <= 0) {
-        alert("Mohon isi Ratio harus lebih dari 0.00");
+        Swal.fire({
+          position: "top",
+          title: "Warning",
+          text: "Please fill in the Ratio must be more than 0.00",
+          icon: "warning"
+        });
       } else {
         $.ajax({
           url: "action.php",

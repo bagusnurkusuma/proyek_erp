@@ -1,6 +1,8 @@
 <?php
-include "api.php";
+require_once "api.php";
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+   $_POST = casting_htmlentities_array($_POST);
    $output = '';
    if ($_POST['action_status'] == 'view_detail' | $_POST['action_status'] == 'edit_detail' | $_POST['action_status'] == 'insert_detail') {
       if ($_POST['action_status'] == 'view_detail') {
@@ -20,6 +22,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $v_id = $_POST['data_id'];
             $v_unit_code = $row['unit_code'];
             $v_unit_name = $row['unit_name'];
@@ -70,6 +73,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["unit_code"] . '</td>
@@ -110,6 +114,7 @@ if (!empty($_POST)) {
       $hasil = get_data_detail($input);
       if (is_array($hasil) && count($hasil)) {
          foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
             <tr>  
                <td>' . $row["unit_code"] . '</td>
