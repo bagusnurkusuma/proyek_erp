@@ -1,3 +1,10 @@
+<?php
+require_once "../asset_default/global_function.php";
+$result_check_user_menu_acces = check_user_menu_acces("7eaaf534-f119-46b2-a0c7-1ff608462b63");
+if ($result_check_user_menu_acces) {
+  require_once "api.php";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,11 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="images/favicon.ico" type="image/ico" />
 </head>
-
-<?php
-include "../asset_default/side_bar.php";
-include "api.php";
-?>
 
 <body class="nav-md">
   <div class="container body">

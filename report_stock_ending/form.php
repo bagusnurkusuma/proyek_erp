@@ -1,3 +1,7 @@
+<?php
+require_once "../asset_default/global_function.php";
+check_user_menu_acces("62b12256-7b2b-46d9-8ca5-b870738ee603");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,10 +11,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="images/favicon.ico" type="image/ico" />
 </head>
-
-<?php
-include "../asset_default/side_bar.php";
-?>
 
 <body class="nav-md">
   <div class="container body">

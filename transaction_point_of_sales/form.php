@@ -1,3 +1,17 @@
+<?php
+require_once "../asset_default/global_function.php";
+$result_check_user_menu_acces = check_user_menu_acces("62b12256-7b2b-46d9-8ca5-b870738ee603");
+if ($result_check_user_menu_acces) {
+  require_once "api.php";
+  $input = array("body" => array("is_default" => true));
+  foreach (get_default($input) as $result) :
+    $def_customer_id = $result["customer_id"];
+    $def_customer_name = $result["customer_name"];
+    $def_outlet_id = $result["outlet_id"];
+    $def_outlet_name = $result["outlet_name"];
+  endforeach;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,18 +21,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="images/favicon.ico" type="image/ico" />
 </head>
-
-<?php
-include "../asset_default/side_bar.php";
-include "api.php";
-$input = array("body" => array("is_default" => true));
-foreach (get_default($input) as $result) :
-  $def_customer_id = $result["customer_id"];
-  $def_customer_name = $result["customer_name"];
-  $def_outlet_id = $result["outlet_id"];
-  $def_outlet_name = $result["outlet_name"];
-endforeach;
-?>
 
 <body class="nav-md" onload="act_set_focus_barcode()">
   <div class="container body">

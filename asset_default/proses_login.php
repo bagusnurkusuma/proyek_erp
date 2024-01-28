@@ -1,6 +1,7 @@
 <?php
-session_start();
 require_once "koneksi.php";
+require_once "../asset_default/global_function.php";
+$_POST = casting_htmlentities_array($_POST);
 $input = array("body" => array("username" => $_POST['user'], "password" => $_POST['pass']));
 $input = json_encode($input);
 $query = "SELECT user_role.get_user_by_login('" . $input . "') as result";
@@ -39,6 +40,7 @@ if (is_array($results) && count($results)) {
 		endforeach;
 	}
 	$_SESSION['menu_proces'] = get_menu_proces($_SESSION["user_role_id"]);
+	$_SESSION['go_to_home_pages'] = "location:../asset_default/side_bar.php";
 } else {
 	echo "<center>Username atau Password anda Salah";
 	echo " <a href='login.html'>login</a></p>";

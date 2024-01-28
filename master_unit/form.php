@@ -1,3 +1,7 @@
+<?php
+require_once "../asset_default/global_function.php";
+check_user_menu_acces("092ccc25-1996-4568-8230-19bff3bfc8ea");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,10 +11,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
-<?php
-include "../asset_default/side_bar.php";
-?>
 
 <body class="nav-md">
   <div class="container body">

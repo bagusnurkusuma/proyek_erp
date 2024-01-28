@@ -1,3 +1,15 @@
+<?php
+require_once "../asset_default/global_function.php";
+$result_check_user_menu_acces = check_user_menu_acces("1794041c-4b66-4c19-9a4c-8dd3aaa96ce6");
+if ($result_check_user_menu_acces) {
+  require_once "api.php";
+  $input = array("body" => array("is_default" => true));
+  foreach (get_default($input) as $result) :
+    $def_supplier_id = $result["supplier_id"];
+    $def_supplier_name = $result["supplier_name"];
+  endforeach;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,28 +18,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="images/favicon.ico" type="image/ico" />
-  <style>
-    img {
-      max-width: 100%;
-      border-radius: 50%;
-      margin-bottom: 20px;
-    }
-
-    input[type="file"] {
-      display: none;
-    }
-  </style>
 </head>
-
-<?php
-include "../asset_default/side_bar.php";
-include "api.php";
-$input = array("body" => array("is_default" => true));
-foreach (get_default($input) as $result) :
-  $def_supplier_id = $result["supplier_id"];
-  $def_supplier_name = $result["supplier_name"];
-endforeach;
-?>
 
 <body class="nav-md" onload="act_set_focus_barcode()">
   <div class="container body">

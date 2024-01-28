@@ -1,14 +1,13 @@
+<?php
+require_once "../asset_default/global_function.php";
+check_user_menu_acces("c15f88c8-ac9e-4574-a284-0a98585ef006");
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
   <title>Ledger</title>
 </head>
-
-
-<?php
-include "../asset_default/side_bar.php";
-?>
 
 <body class="nav-md">
   <div class="container body">

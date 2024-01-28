@@ -1,3 +1,7 @@
+<?php
+require_once "../asset_default/global_function.php";
+check_user_menu_acces("4c201916-7054-4801-9010-645929c4d6fc");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,10 +11,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="images/favicon.ico" type="image/ico" />
 </head>
-
-<?php
-include "../asset_default/side_bar.php";
-?>
 
 <body class="nav-md">
   <div class="container body">
@@ -58,13 +58,11 @@ include "../asset_default/side_bar.php";
 
                   <div class=" x_panel">
                     <div class="x_title">
-                      <h2>Ledger Detail </h2>
+                      <h2>List Transaction</h2>
                       <ul class="nav navbar-right panel_toolbox">
+                        <li><button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button></li>
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                       </ul>
-                      <div align="right">
-                        <button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button>
-                      </div>
                       <div class="clearfix"></div>
                     </div>
 

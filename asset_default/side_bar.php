@@ -1,7 +1,10 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 if (empty($_SESSION["user_role_id"])) {
   header("location:../asset_default/login.html");
+  exit;
 }
 ?>
 <!DOCTYPE html>

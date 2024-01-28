@@ -1,3 +1,10 @@
+<?php
+require_once "../asset_default/global_function.php";
+$result_check_user_menu_acces = check_user_menu_acces("62b12256-7b2b-46d9-8ca5-b870738ee603");
+if ($result_check_user_menu_acces) {
+  require_once "api.php";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +16,21 @@
 </head>
 
 <?php
-include "../asset_default/side_bar.php";
-include "api.php";
+if (is_array($hasil) && count($hasil)) {
+  foreach ($hasil as $baris) :
+    if ($baris["id"] == "81a4fda2-4d5e-4f43-a54d-ef5b57ea5df8") {
+      include_once "../asset_default/side_bar.php";
+      require_once "api.php";
+      break;
+    } else {
+      header($_SESSION["go_to_home_pages"]);
+      exit;
+    }
+  endforeach;
+} else {
+  header($_SESSION["go_to_home_pages"]);
+  exit;
+}
 ?>
 
 <body class="nav-md">
