@@ -4,11 +4,12 @@ $result_check_user_menu_acces = check_user_menu_acces("62b12256-7b2b-46d9-8ca5-b
 if ($result_check_user_menu_acces) {
   require_once "api.php";
   $input = array("body" => array("is_default" => true));
-  foreach (get_default($input) as $result) :
-    $def_customer_id = $result["customer_id"];
-    $def_customer_name = $result["customer_name"];
-    $def_outlet_id = $result["outlet_id"];
-    $def_outlet_name = $result["outlet_name"];
+  foreach (get_default($input) as $row) :
+    $row = casting_htmlentities_array($row);
+    $def_customer_id = $row["customer_id"];
+    $def_customer_name = $row["customer_name"];
+    $def_outlet_id = $row["outlet_id"];
+    $def_outlet_name = $row["outlet_name"];
   endforeach;
 }
 ?>

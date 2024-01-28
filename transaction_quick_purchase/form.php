@@ -4,9 +4,10 @@ $result_check_user_menu_acces = check_user_menu_acces("1794041c-4b66-4c19-9a4c-8
 if ($result_check_user_menu_acces) {
   require_once "api.php";
   $input = array("body" => array("is_default" => true));
-  foreach (get_default($input) as $result) :
-    $def_supplier_id = $result["supplier_id"];
-    $def_supplier_name = $result["supplier_name"];
+  foreach (get_default($input) as $row) :
+    $row = casting_htmlentities_array($row);
+    $def_supplier_id = $row["supplier_id"];
+    $def_supplier_name = $row["supplier_name"];
   endforeach;
 }
 ?>

@@ -1,8 +1,8 @@
 <?php
-session_start();
 require_once "api.php";
-//Action
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+   $_POST = casting_htmlentities_array($_POST);
    if ($_POST["action_status"] == "select_finance_report_type_data") {
       //Select Warehouse Data
       $input = ['body' => ['data_id' => $_POST['data_id']]];
@@ -15,7 +15,6 @@ if (!empty($_POST)) {
          "column_name" => "id"
       ));
       remove_transaction_detail($input);
-      $input = '';
    } elseif ($_POST["action_status"] == "select_account") {
       $input = array("body" =>
       array(
@@ -24,6 +23,5 @@ if (!empty($_POST)) {
          "created_by" => $_SESSION['user_role_id'],
       ));
       set_new_finance_report_account($input);
-      $input = '';
    }
 }

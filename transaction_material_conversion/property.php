@@ -1,6 +1,8 @@
 <?php
-include("api.php");
+require_once "api.php";
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+  $_POST = casting_htmlentities_array($_POST);
   $output = '';
 
   // Menampilkan Popup Edit Detail Product
@@ -13,6 +15,7 @@ if (!empty($_POST)) {
       $is_disable_span = '';
       if (is_array($hasil) && count($hasil)) {
         foreach ($hasil as $row) :
+          $hasil = insert_transaction_detail($input);
           $input = $row["id"];
         endforeach;
       }
@@ -32,6 +35,7 @@ if (!empty($_POST)) {
     $hasil = get_transaction_detail($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $hasil = insert_transaction_detail($input);
         $output .= '
           <form method="post" id="update_form">
             <input type="hidden" name="transaction_id" id="jq_transaction_id" value="' . $_POST["transaction_id"] . '" class="form-control col-md-7 col-xs-12" readonly="true">
@@ -112,6 +116,7 @@ if (!empty($_POST)) {
     $hasil = get_product_for_transaction($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $hasil = insert_transaction_detail($input);
         $output .= '
           <tr>
             <td>' . $row['inventory_code'] . '</td>
@@ -144,6 +149,7 @@ if (!empty($_POST)) {
     $hasil = get_transaction_detail($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $hasil = insert_transaction_detail($input);
         $output .= '
           <tr>
             <td>' . $row['inventory_name'] . '</td>
@@ -177,6 +183,7 @@ if (!empty($_POST)) {
     $hasil = get_data_warehouse($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $hasil = insert_transaction_detail($input);
         $output .= '
             <tr>  
                <td>' . $row["warehouse_code"] . '</td>
@@ -205,6 +212,7 @@ if (!empty($_POST)) {
     $hasil = get_data_inventory($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $hasil = insert_transaction_detail($input);
         $output .= '
             <tr>  
                <td>' . $row["inventory_code"] . '</td>
@@ -232,6 +240,7 @@ if (!empty($_POST)) {
     $hasil = get_data_unit($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $hasil = insert_transaction_detail($input);
         $output .= '
             <tr>  
                <td>' . $row["unit_name"] . '</td>

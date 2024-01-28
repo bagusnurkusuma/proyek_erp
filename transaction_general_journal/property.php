@@ -1,7 +1,8 @@
 <?php
-include "api.php";
-
+require_once "api.php";
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+  $_POST = casting_htmlentities_array($_POST);
   $output = '';
 
   // Menampilkan Popup Edit Detail Product
@@ -20,6 +21,7 @@ if (!empty($_POST)) {
     $hasil = get_transaction_detail($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $hasil = insert_transaction_detail($input);
         $v_id = $row['id'];
         $v_account_id = $row['account_id'];
         $v_account_name = $row['account_name'];
@@ -90,24 +92,25 @@ if (!empty($_POST)) {
     $input = array("body" => array("general_journal_id" => $_POST["transaction_id"]));
     $hasil = get_transaction_detail($input);
     if (is_array($hasil) && count($hasil)) {
-      foreach ($hasil as $baris) :
+      foreach ($hasil as $row) :
+        $hasil = insert_transaction_detail($input);
         $output .= '
           <tr>
-            <td>' . $baris["description"] . '</td>
-            <td>' . $baris["account_name"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["debet"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["credit"] . '</td>
-            <td><button type="button" name="view" id="' . $baris["id"] . '" class="btn btn-info btn-xs view_data"><i class="fa fa-eye"></i></button>
-                <button type="button" name="edit" id="' . $baris["id"] . '" class="btn btn-warning btn-xs edit_data"><i class="fa fa-pencil-square"></i></button>                                  
-                <button type="button" name="remove" id="' . $baris["id"] . '" class="btn btn-danger btn-xs delete_data"><i class="fa fa-trash"></i></button></td>
+            <td>' . $row["description"] . '</td>
+            <td>' . $row["account_name"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["debet"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["credit"] . '</td>
+            <td><button type="button" name="view" id="' . $row["id"] . '" class="btn btn-info btn-xs view_data"><i class="fa fa-eye"></i></button>
+                <button type="button" name="edit" id="' . $row["id"] . '" class="btn btn-warning btn-xs edit_data"><i class="fa fa-pencil-square"></i></button>                                  
+                <button type="button" name="remove" id="' . $row["id"] . '" class="btn btn-danger btn-xs delete_data"><i class="fa fa-trash"></i></button></td>
             </tr>
         ';
-        $sum_debet = $sum_debet + $baris["debet"];
-        $sum_credit = $sum_credit + $baris["credit"];
+        $sum_debet = $sum_debet + $row["debet"];
+        $sum_credit = $sum_credit + $row["credit"];
       endforeach;
     }
     $output .=
-    '</tbody>
+      '</tbody>
       <tfoot>
         <tr>
           <th colspan = 2></th>
@@ -163,6 +166,7 @@ if (!empty($_POST)) {
     $hasil = get_account_data($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $hasil = insert_transaction_detail($input);
         $output .= '
             <tr>  
                <td>' . $row["account_code"] . '</td>

@@ -1,6 +1,8 @@
 <?php
-include "api.php";
+require_once "api.php";
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+    $_POST = casting_htmlentities_array($_POST);
     $output = '';
     if ($_POST['action_status'] == 'refresh_data_detail') {
         $output .= '
@@ -16,6 +18,7 @@ if (!empty($_POST)) {
         $hasil = get_data_detail($input);
         if (is_array($hasil) && count($hasil)) {
             foreach ($hasil as $row) :
+                $row = casting_htmlentities_array($row);
                 //Config Button ditampilkan
                 if ($row["structure_option"] == "add") {
                     $add_element = '<button type="button" name="view" id="' . $row["structure_id"] . '" class="btn btn-warning btn-xs add_account"><i class="fa fa-plus-circle"></i></button>';
@@ -58,6 +61,7 @@ if (!empty($_POST)) {
         $hasil = get_finance_report_type($input);
         if (is_array($hasil) && count($hasil)) {
             foreach ($hasil as $row) :
+                $row = casting_htmlentities_array($row);
                 $output .= '
             <tr>  
                <td>' . $row["structure_name"] . '</td>
@@ -85,14 +89,14 @@ if (!empty($_POST)) {
         $hasil = get_account_data($input);
         if (is_array($hasil) && count($hasil)) {
             foreach ($hasil as $row) :
+                $row = casting_htmlentities_array($row);
                 $output .= '
-            <tr>  
-               <td>' . $row["account_code"] . '</td>
-               <td>' . $row["account_name"] . '</td>
-               <td><button type="button" name="select" id="' . $row["id"] . '" class="btn btn-warning btn-xs select_account">Select</button>                                  
-               </td>
-            </tr>
-         ';
+                    <tr>  
+                    <td>' . $row["account_code"] . '</td>
+                    <td>' . $row["account_name"] . '</td>
+                    <td><button type="button" name="select" id="' . $row["id"] . '" class="btn btn-warning btn-xs select_account">Select</button>                                  
+                    </td>
+                    </tr>';
             endforeach;
         }
         $output .= '</tbody></table>';
@@ -101,6 +105,7 @@ if (!empty($_POST)) {
         $hasil = get_data_detail($input);
         if (is_array($hasil) && count($hasil)) {
             foreach ($hasil as $row) :
+                $row = casting_htmlentities_array($row);
                 $trx_number = $row["transaction_number"];
                 $trx_date = $row["transaction_date"];
                 $customer = $row["customer_name"];
@@ -190,12 +195,13 @@ if (!empty($_POST)) {
         $input = ['body' => ['point_of_sales_id' => $_POST['transaction_id']]];
         $hasil = get_data_pos_detail($input);
         if (is_array($hasil) && count($hasil)) {
-            foreach ($hasil as $baris) :
+            foreach ($hasil as $row) :
+                $row = casting_htmlentities_array($row);
                 $output .= '
           <tr>
             <td>' . $baris["product_name"] . '</td>
-            <td class ="contet_numeric">' . format_decimal($baris["qty"]) . '</td>
-            <td class ="contet_numeric">' . format_decimal($baris["grand_total"]) . '</td>
+            <td class ="contet_numeric">' . format_decimal($row["qty"]) . '</td>
+            <td class ="contet_numeric">' . format_decimal($row["grand_total"]) . '</td>
          </tr>';
             endforeach;
         }

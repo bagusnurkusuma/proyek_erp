@@ -61,11 +61,11 @@
 </script>
 
 <?php
-include "api.php";
-
+require_once "api.php";
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+  $_POST = casting_htmlentities_array($_POST);
   $output = '';
-
   // Menampilkan Popup Edit Detail Product
   if (
     $_POST["action_status"] == "edit_product" || $_POST["action_status"] == "select_product" ||
@@ -77,8 +77,9 @@ if (!empty($_POST)) {
       $is_read_only = '';
       $is_disable_span = '';
       if (is_array($hasil) && count($hasil)) {
-        foreach ($hasil as $baris) :
-          $input = $baris["id"];
+        foreach ($hasil as $row) :
+          $row = casting_htmlentities_array($row);
+          $input = $row["id"];
         endforeach;
       }
       $input = array("body" => array("id" => $input));
@@ -97,6 +98,7 @@ if (!empty($_POST)) {
     $hasil = get_transaction_detail($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $row = casting_htmlentities_array($row);
         $output .= '
       <form method="post" id="update_form">
         <input type="hidden" name="transaction_id" id="jq_transaction_id" value="' . $_POST["transaction_id"] . '" class="form-control col-md-7 col-xs-12" readonly="true">
@@ -190,14 +192,15 @@ if (!empty($_POST)) {
         ';
     $hasil = get_inventory_for_transaction($_POST["transaction_id"]);
     if (is_array($hasil) && count($hasil)) {
-      foreach ($hasil as $baris) :
+      foreach ($hasil as $row) :
+        $row = casting_htmlentities_array($row);
         $output .= '
           <tr>
-            <td>' . $baris["inventory_code"] . '</td>
-            <td>' . $baris["inventory_name"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["unit_price"] . '</td>
-            <td>' . $baris["unit_name"] . '</td>
-            <td><button type="button" name="Select" value="Select" id="' . $baris["id"] . '" class="btn btn-warning btn-xs select_data"><i class="fa fa-check-square-o"></i></button></td> 
+            <td>' . $row["inventory_code"] . '</td>
+            <td>' . $row["inventory_name"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["unit_price"] . '</td>
+            <td>' . $row["unit_name"] . '</td>
+            <td><button type="button" name="Select" value="Select" id="' . $row["id"] . '" class="btn btn-warning btn-xs select_data"><i class="fa fa-check-square-o"></i></button></td> 
           </tr>
           ';
       endforeach;
@@ -225,23 +228,24 @@ if (!empty($_POST)) {
     $input = array("body" => array("quick_purchase_id" => $_POST["transaction_id"]));
     $hasil = get_transaction_detail($input);
     if (is_array($hasil) && count($hasil)) {
-      foreach ($hasil as $baris) :
+      foreach ($hasil as $row) :
+        $row = casting_htmlentities_array($row);
         $output .= '
           <tr>
-            <td>' . $baris["inventory_code"] . '</td>
-            <td>' . $baris["inventory_name"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["qty"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["unit_price"] . '</td>
-            <td>' . $baris["unit_name"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["total_disc"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["grand_total"] . '</td>
-            <td><button type="button" name="view" id="' . $baris["id"] . '" class="btn btn-info btn-xs view_data"><i class="fa fa-eye"></i></button>
-                <button type="button" name="edit" id="' . $baris["id"] . '" class="btn btn-warning btn-xs edit_data"><i class="fa fa-pencil-square"></i></button>                                  
-                <button type="button" name="remove" id="' . $baris["id"] . '" class="btn btn-danger btn-xs delete_data"><i class="fa fa-trash"></i></button></td>
+            <td>' . $row["inventory_code"] . '</td>
+            <td>' . $row["inventory_name"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["qty"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["unit_price"] . '</td>
+            <td>' . $row["unit_name"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["total_disc"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["grand_total"] . '</td>
+            <td><button type="button" name="view" id="' . $row["id"] . '" class="btn btn-info btn-xs view_data"><i class="fa fa-eye"></i></button>
+                <button type="button" name="edit" id="' . $row["id"] . '" class="btn btn-warning btn-xs edit_data"><i class="fa fa-pencil-square"></i></button>                                  
+                <button type="button" name="remove" id="' . $row["id"] . '" class="btn btn-danger btn-xs delete_data"><i class="fa fa-trash"></i></button></td>
             </tr>
         ';
-        $sum_total_disc = $sum_total_disc + $baris["total_disc"];
-        $sum_grand_total = $sum_grand_total + $baris["grand_total"];
+        $sum_total_disc = $sum_total_disc + $row["total_disc"];
+        $sum_grand_total = $sum_grand_total + $row["grand_total"];
       endforeach;
     }
     $output .=
@@ -302,6 +306,7 @@ if (!empty($_POST)) {
     $hasil = get_data_supplier($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $row = casting_htmlentities_array($row);
         $output .= '
             <tr>  
                <td>' . $row["supplier_name"] . '</td>
@@ -330,6 +335,7 @@ if (!empty($_POST)) {
     $hasil = get_data_warehouse($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $row = casting_htmlentities_array($row);
         $output .= '
             <tr>  
                <td>' . $row["warehouse_code"] . '</td>

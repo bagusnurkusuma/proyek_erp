@@ -22,19 +22,20 @@ function get_detail_pos_tabel($input_id)
     $input = ['body' => ['point_of_sales_id' => $input_id]];
     $hasil = get_data_pos_detail($input);
     if (is_array($hasil) && count($hasil)) {
-        foreach ($hasil as $baris) :
+        foreach ($hasil as $row) :
+            $row = casting_htmlentities_array($row);
             $output .= '
           <tr>
-            <td>' . $baris["product_code"] . '</td>
-            <td>' . $baris["product_name"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["qty"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["unit_price"] . '</td>
-            <td>' . $baris["unit_name"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["total_disc"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["grand_total"] . '</td>
+            <td>' . $row["product_code"] . '</td>
+            <td>' . $row["product_name"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["qty"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["unit_price"] . '</td>
+            <td>' . $row["unit_name"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["total_disc"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["grand_total"] . '</td>
          </tr>';
-            $sum_total_disc = $sum_total_disc + $baris["total_disc"];
-            $sum_grand_total = $sum_grand_total + $baris["grand_total"];
+            $sum_total_disc = $sum_total_disc + $row["total_disc"];
+            $sum_grand_total = $sum_grand_total + $row["grand_total"];
         endforeach;
     }
     $output .=
@@ -72,17 +73,18 @@ if (!empty($_POST)) {
         $hasil = get_data_detail($input);
         if (is_array($hasil) && count($hasil)) {
             foreach ($hasil as $row) :
+                $row = casting_htmlentities_array($row);
                 $output .= '
-            <tr id="tr-' . $row["id"] . '"> 
-               <td><button name="view" id="' . $row["id"] . '" class="btn btn-round btn-xs btn-info show_pos_detail"><i class="fa fa-chevron-down"></i></button>
-               <button type="button" name="view" id="' . $row["id"] . '" class="btn btn-round btn-info btn-xs view_data"><i class="fa fa-eye"></i></button></td>
-               <td>' . $row["transaction_number"] . '</td>
-               <td class ="jq_format_date_table">' . $row["transaction_date"] . '</td>
-               <td>' . $row["customer_name"] . '</td>
-               <td>' . $row["outlet_name"] . '</td>
-               <td class ="jq_format_decimal_table">' . $row["total_disc"] . '</td>
-               <td class ="jq_format_decimal_table">' . $row["grand_total"] . '</td>
-            </tr>';
+                <tr id="tr-' . $row["id"] . '"> 
+                <td><button name="view" id="' . $row["id"] . '" class="btn btn-round btn-xs btn-info show_pos_detail"><i class="fa fa-chevron-down"></i></button>
+                <button type="button" name="view" id="' . $row["id"] . '" class="btn btn-round btn-info btn-xs view_data"><i class="fa fa-eye"></i></button></td>
+                <td>' . $row["transaction_number"] . '</td>
+                <td class ="jq_format_date_table">' . $row["transaction_date"] . '</td>
+                <td>' . $row["customer_name"] . '</td>
+                <td>' . $row["outlet_name"] . '</td>
+                <td class ="jq_format_decimal_table">' . $row["total_disc"] . '</td>
+                <td class ="jq_format_decimal_table">' . $row["grand_total"] . '</td>
+                </tr>';
                 $sum_total_disc = $sum_total_disc + $row["total_disc"];
                 $sum_grand_total = $sum_grand_total + $row["grand_total"];
             endforeach;
@@ -103,6 +105,7 @@ if (!empty($_POST)) {
         $hasil = get_data_detail($input);
         if (is_array($hasil) && count($hasil)) {
             foreach ($hasil as $row) :
+                $row = casting_htmlentities_array($row);
                 $trx_number = $row["transaction_number"];
                 $trx_date = $row["transaction_date"];
                 $customer = $row["customer_name"];
@@ -172,7 +175,7 @@ if (!empty($_POST)) {
                 <span style="color:black;"><b>' . $_POST['company_name'] . '</b></br>' . $_POST['company_addres'] . '</span></br>
                 <span style="font-size:12pt">No .' . $trx_number . ', ' . format_date($trx_date) . '</span></br>
             </td>
-        </table>
+        </table>(
         <table id="tb_content" cellspacing="0" cellpadding="0" border="0">
             <tr>
                 <td colspan="3">
@@ -192,13 +195,14 @@ if (!empty($_POST)) {
         $input = ['body' => ['point_of_sales_id' => $_POST['transaction_id']]];
         $hasil = get_data_pos_detail($input);
         if (is_array($hasil) && count($hasil)) {
-            foreach ($hasil as $baris) :
+            foreach ($hasil as $row) :
+                $row = casting_htmlentities_array($row);
                 $output .= '
-          <tr>
-            <td>' . $baris["product_name"] . '</td>
-            <td class ="contet_numeric">' . format_decimal($baris["qty"]) . '</td>
-            <td class ="contet_numeric">' . format_decimal($baris["grand_total"]) . '</td>
-         </tr>';
+                <tr>
+                    <td>' . $row["product_name"] . '</td>
+                    <td class ="contet_numeric">' . format_decimal($row["qty"]) . '</td>
+                    <td class ="contet_numeric">' . format_decimal($row["grand_total"]) . '</td>
+                </tr>';
             endforeach;
         }
         $output .= '

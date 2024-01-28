@@ -66,8 +66,10 @@
 </script>
 
 <?php
-include("api.php");
+require_once "api.php";
+require_once "../asset_default/global_function.php";
 if (!empty($_POST)) {
+  $_POST = casting_htmlentities_array($_POST);
   $output = '';
 
   // Menampilkan Popup Edit Detail Product
@@ -81,8 +83,9 @@ if (!empty($_POST)) {
       $is_read_only = '';
       $is_disable_span = '';
       if (is_array($hasil) && count($hasil)) {
-        foreach ($hasil as $baris) :
-          $input = $baris["id"];
+        foreach ($hasil as $row) :
+          $row = casting_htmlentities_array($row);
+          $input = $row["id"];
         endforeach;
       }
       $input = array("body" => array("id" => $input));
@@ -101,72 +104,73 @@ if (!empty($_POST)) {
 
     $hasil = get_transaction_detail($input);
     if (is_array($hasil) && count($hasil)) {
-      foreach ($hasil as $baris) :
+      foreach ($hasil as $row) :
+        $row = casting_htmlentities_array($row);
         $output .= '
       <form method="post" id="update_form">
         <input type="hidden" name="transaction_id" id="jq_transaction_id" value="' . $_POST["transaction_id"] . '" class="form-control col-md-7 col-xs-12" readonly="true">
         <input type="hidden" name="action_status" id="jq_action_status" value="' . $action_status . '" class="form-control col-md-7 col-xs-12" readonly="true">
-        <input type="hidden" name="id" id="jq_id" value="' . $baris["id"] . '" class="form-control" readonly=true/>
+        <input type="hidden" name="id" id="jq_id" value="' . $row["id"] . '" class="form-control" readonly=true/>
         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
           <tr>
             <td><label>Product</label></td>
-            <td> <input type="text" name="product_name" id="jq_product_name" value="' . $baris["product_name"] . '" class="form-control" readonly=true/></td>
+            <td> <input type="text" name="product_name" id="jq_product_name" value="' . $row["product_name"] . '" class="form-control" readonly=true/></td>
           </tr>
           <tr>
             <td><label>Qty</label></td>
-            <td> <input align="right" type="number" step="0.01" name="qty" id="jq_qty" value="' . $baris["qty"] . '"onmouseover="this.focus();" class="form-control"' . $is_read_only . '/></td>
+            <td> <input align="right" type="number" step="0.01" name="qty" id="jq_qty" value="' . $row["qty"] . '"onmouseover="this.focus();" class="form-control"' . $is_read_only . '/></td>
           </tr>
           <tr>
             <td><label>Unit Price</label></td>
-            <td> <input type="number" step="0.01" name="unit_price" id="jq_unit_price" value="' . $baris["unit_price"] . '" class="form-control" readonly=true/></td>
+            <td> <input type="number" step="0.01" name="unit_price" id="jq_unit_price" value="' . $row["unit_price"] . '" class="form-control" readonly=true/></td>
           </tr>
           <tr>
             <td><label>Unit</label></td>
-            <td> <input type="text" name="unit_name" id="jq_unit_name" value="' . $baris["unit_name"] . '" class="form-control" readonly=true/></td>
+            <td> <input type="text" name="unit_name" id="jq_unit_name" value="' . $row["unit_name"] . '" class="form-control" readonly=true/></td>
           </tr>
           <tr>
             <td><label>Total</label></td>
-            <td> <input type="number" step="0.01" name="total" id="jq_total" value="' . $baris["total"] . '" class="form-control" readonly=true/></td>
+            <td> <input type="number" step="0.01" name="total" id="jq_total" value="' . $row["total"] . '" class="form-control" readonly=true/></td>
           </tr>
           <tr>
             <td><label>Disc 1 (%)</label></td>
-            <td> <input type="number" step="0.01" name="disc_1_percent" id="jq_disc_1_percent" value="' . $baris["disc_1_percent"] . '" class="form-control" ' . $is_read_only . '/></td>
+            <td> <input type="number" step="0.01" name="disc_1_percent" id="jq_disc_1_percent" value="' . $row["disc_1_percent"] . '" class="form-control" ' . $is_read_only . '/></td>
           </tr>
           <tr>
             <td><label>Disc 1 (Rp)</label></td>
-            <td> <input type="number" step="0.01" name="disc_1_nominal" id="jq_disc_1_nominal" value="' . $baris["disc_1_nominal"] . '" class="form-control" ' . $is_read_only . '/></td>
+            <td> <input type="number" step="0.01" name="disc_1_nominal" id="jq_disc_1_nominal" value="' . $row["disc_1_nominal"] . '" class="form-control" ' . $is_read_only . '/></td>
           </tr>
           <tr>
             <td><label>Disc 2 (%)</label></td>
-            <td> <input type="number" step="0.01" name="disc_2_percent" id="jq_disc_2_percent" value="' . $baris["disc_2_percent"] . '" class="form-control" ' . $is_read_only . '/></td>
+            <td> <input type="number" step="0.01" name="disc_2_percent" id="jq_disc_2_percent" value="' . $row["disc_2_percent"] . '" class="form-control" ' . $is_read_only . '/></td>
           </tr>
           <tr>
             <td><label>Disc 2 (Rp)</label></td>
-            <td> <input type="number" step="0.01" name="disc_2_nominal" id="jq_disc_2_nominal" value="' . $baris["disc_2_nominal"] . '" class="form-control" ' . $is_read_only . '/></td>
+            <td> <input type="number" step="0.01" name="disc_2_nominal" id="jq_disc_2_nominal" value="' . $row["disc_2_nominal"] . '" class="form-control" ' . $is_read_only . '/></td>
           </tr>
           <tr>
             <td><label>Total Disc</label></td>
-            <td> <input type="number" step="0.01" name="total_disc" id="jq_total_disc" value="' . $baris["total_disc"] . '" class="form-control" readonly=true/></td>
+            <td> <input type="number" step="0.01" name="total_disc" id="jq_total_disc" value="' . $row["total_disc"] . '" class="form-control" readonly=true/></td>
           </tr>
           <tr>
             <td><label>Total DPP</label></td>
-            <td> <input type="number" step="0.01" name="total_dpp" id="jq_total_dpp" value="' . $baris["total_dpp"] . '" class="form-control" readonly=true/></td>
+            <td> <input type="number" step="0.01" name="total_dpp" id="jq_total_dpp" value="' . $row["total_dpp"] . '" class="form-control" readonly=true/></td>
           </tr>
           <tr>
             <td><label>Vat</label></td>
-            <td> <input type="number" step="0.01" name="vat" id="jq_vat" value="' . $baris["vat"] . '" class="form-control" ' . $is_read_only . '/></td>
+            <td> <input type="number" step="0.01" name="vat" id="jq_vat" value="' . $row["vat"] . '" class="form-control" ' . $is_read_only . '/></td>
           </tr>
           <tr>
             <td><label>Total Vat</label></td>
-            <td> <input type="number" step="0.01" name="total_vat" id="jq_total_vat" value="' . $baris["total_vat"] . '" class="form-control" readonly=true/></td>
+            <td> <input type="number" step="0.01" name="total_vat" id="jq_total_vat" value="' . $row["total_vat"] . '" class="form-control" readonly=true/></td>
           </tr>
           <tr>
             <td><label>Grand Total</label></td>
-            <td> <input type="number" step="0.01" name="grand_total" id="jq_grand_total" value="' . $baris["grand_total"] . '" class="form-control" readonly=true/></td>
+            <td> <input type="number" step="0.01" name="grand_total" id="jq_grand_total" value="' . $row["grand_total"] . '" class="form-control" readonly=true/></td>
           </tr>
           <tr>
             <td><label>Description</label></td>
-            <td><textarea name="description" id="jq_description" class="form-control" ' . $is_read_only . '>' . $baris["description"] . '</textarea></</td>
+            <td><textarea name="description" id="jq_description" class="form-control" ' . $is_read_only . '>' . $row["description"] . '</textarea></</td>
           </tr>
       </table>
          <span class="input-group-btn" ' . $is_disable_span . '>
@@ -197,15 +201,16 @@ if (!empty($_POST)) {
     $input = array("body" => array("point_of_sales_id" => $_POST["transaction_id"], "outlet_id" => $_POST["outlet_id"]));
     $hasil = get_product_for_transaction($input);
     if (is_array($hasil) && count($hasil)) {
-      foreach ($hasil as $baris) :
+      foreach ($hasil as $row) :
+        $row = casting_htmlentities_array($row);
         $output .= '
           <tr>
-            <td>' . $baris["product_code"] . '</td>
-            <td>' . $baris["product_name"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["unit_price"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["stock"] . '</td>
-            <td>' . $baris["unit_name"] . '</td>
-            <td><input type="button" name="Select" value="Select" id="' . $baris["id"] . '" class="btn btn-warning btn-xs select_data" /></td> 
+            <td>' . $row["product_code"] . '</td>
+            <td>' . $row["product_name"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["unit_price"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["stock"] . '</td>
+            <td>' . $row["unit_name"] . '</td>
+            <td><input type="button" name="Select" value="Select" id="' . $row["id"] . '" class="btn btn-warning btn-xs select_data" /></td> 
           </tr>
           ';
       endforeach;
@@ -233,22 +238,23 @@ if (!empty($_POST)) {
     $input = array("body" => array("point_of_sales_id" => $_POST["transaction_id"]));
     $hasil = get_transaction_detail($input);
     if (is_array($hasil) && count($hasil)) {
-      foreach ($hasil as $baris) :
+      foreach ($hasil as $row) :
+        $row = casting_htmlentities_array($row);
         $output .= '
           <tr>
-            <td>' . $baris["product_code"] . '</td>
-            <td>' . $baris["product_name"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["qty"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["unit_price"] . '</td>
-            <td>' . $baris["unit_name"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["total_disc"] . '</td>
-            <td class ="jq_format_decimal_table">' . $baris["grand_total"] . '</td>
-            <td><button type="button" name="view" id="' . $baris["id"] . '" class="btn btn-info btn-xs view_data"><i class="fa fa-eye"></i></button>
-                <button type="button" name="edit" id="' . $baris["id"] . '" class="btn btn-warning btn-xs edit_data"><i class="fa fa-pencil-square"></i></button>                                  
-                <button type="button" name="remove" id="' . $baris["id"] . '" class="btn btn-danger btn-xs delete_data"><i class="fa fa-trash"></i></button></td>
+            <td>' . $row["product_code"] . '</td>
+            <td>' . $row["product_name"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["qty"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["unit_price"] . '</td>
+            <td>' . $row["unit_name"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["total_disc"] . '</td>
+            <td class ="jq_format_decimal_table">' . $row["grand_total"] . '</td>
+            <td><button type="button" name="view" id="' . $row["id"] . '" class="btn btn-info btn-xs view_data"><i class="fa fa-eye"></i></button>
+                <button type="button" name="edit" id="' . $row["id"] . '" class="btn btn-warning btn-xs edit_data"><i class="fa fa-pencil-square"></i></button>                                  
+                <button type="button" name="remove" id="' . $row["id"] . '" class="btn btn-danger btn-xs delete_data"><i class="fa fa-trash"></i></button></td>
             </tr>';
-        $sum_total_disc = $sum_total_disc + $baris["total_disc"];
-        $sum_grand_total = $sum_grand_total + $baris["grand_total"];
+        $sum_total_disc = $sum_total_disc + $row["total_disc"];
+        $sum_grand_total = $sum_grand_total + $row["grand_total"];
       endforeach;
     }
     $output .= '</tbody>
@@ -310,6 +316,7 @@ if (!empty($_POST)) {
     $hasil = get_data_customer($input);
     if (is_array($hasil) && count($hasil)) {
       foreach ($hasil as $row) :
+        $row = casting_htmlentities_array($row);
         $output .= '
             <tr>  
                <td>' . $row["customer_name"] . '</td>
