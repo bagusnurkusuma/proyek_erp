@@ -29,7 +29,31 @@ function check_user_menu_acces($input_function)
 function casting_htmlentities_array($array)
 {
     foreach ($array as $key => $value) {
-        $array[$key] = htmlentities($value);
+        $array[$key] = htmlspecialchars($value);
     }
     return $array;
+}
+
+function archive_master_data($input_function)
+{
+    $input = json_encode($input_function);
+    $query = "SELECT settings.archive_data(:input) as result";
+    require_once "../asset_default/db_function.php";
+    return get_execute_query($query, $input);
+}
+
+function unarchive_master_data($input_function)
+{
+    $input = json_encode($input_function);
+    $query = "SELECT settings.unarchive_data(:input) as result";
+    require_once "../asset_default/db_function.php";
+    return get_execute_query($query, $input);
+}
+
+function validate_master_data($input_function)
+{
+    $input = json_encode($input_function);
+    $query = "SELECT settings.validate_data(:input) as result";
+    require_once "../asset_default/db_function.php";
+    return get_execute_query($query, $input);
 }

@@ -18,7 +18,7 @@ function get_menu_proces($input_function)
 {
     $input = array("body" => array("user_role_id" => $input_function));
     $input = json_encode($input);
-    $query = "SELECT user_role.get_user_menu_proces_by_user('" . $input . "') as result";
+    $query = "SELECT user_role.get_user_menu_proces_by_user(:input) as result";
     require_once "db_function.php";
-    return get_execute_query($query);
+    return get_execute_query($query, $input);
 }
