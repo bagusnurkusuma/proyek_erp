@@ -2,52 +2,36 @@
 require_once "../asset_default/global_function.php";
 check_user_menu_acces("5b5ea92d-d885-4e18-ae72-b2aa820aa38c");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body class="nav-md">
-  <div class="container body">
-    <!-- page content -->
-    <div class="right_col" role="main">
-      <div class="content">
-        <div class="clearfix"></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 ">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Master Supplier</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                </ul>
-                <div align="right">
-                  <button type="button" name="show_archive" id="jq_show_archive" class="btn btn-primary show_archive"><i class="fa fa-inbox"></i></button>
-                  <button type="button" name="add_data" id="jq_add_data" class="btn btn-warning add_data"><i class="fa fa-plus-circle"></i></button>
-                  <button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <div class="card-box table-responsive" id="data_detail">
-                  <!-- Import From Form File -->
-                </div>
+<div class="container body">
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="content">
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2 id="jq_process_name"><?php echo $_SESSION["jq_process_name"] ?></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><button type="button" name="show_archive" id="jq_show_archive" class="btn btn-primary show_archive"><i class="fa fa-inbox"></i></button></li>
+                <li><button type="button" name="add_data" id="jq_add_data" class="btn btn-warning add_data"><i class="fa fa-plus-circle"></i></button></li>
+                <li><button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button></li>
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="card-box table-responsive" id="data_detail">
+                <!-- Import From Form File -->
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- /page content -->
     </div>
+    <!-- /page content -->
   </div>
-
-</html>
+</div>
 
 <!-- Popup Archive-->
 <div id="archiveModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -102,8 +86,9 @@ check_user_menu_acces("5b5ea92d-d885-4e18-ae72-b2aa820aa38c");
       },
       success: function(data) {
         $("#data_detail").html(data);
-        $("table#master_table").pretty_format_table();
-        $('table#master_table').DataTable();
+        $("table#master_table").data_table_with_export({
+          title_name: $("#jq_process_name").text()
+        });
       }
     });
   }
@@ -117,8 +102,7 @@ check_user_menu_acces("5b5ea92d-d885-4e18-ae72-b2aa820aa38c");
       },
       success: function(data) {
         $("#form_archive").html(data);
-        $("table#archive_table").pretty_format_table();
-        $('table#archive_table').DataTable();
+        $("table#archive_table").data_table();
       }
     });
   }
@@ -146,7 +130,7 @@ check_user_menu_acces("5b5ea92d-d885-4e18-ae72-b2aa820aa38c");
   $(document).ready(function() {
 
     //Refresh Table
-    $(document).on("click", ".refresh", function() {
+    $(document).on("click", ".refresh_data", function() {
       act_refresh_data_detail();
     })
 
@@ -288,13 +272,13 @@ check_user_menu_acces("5b5ea92d-d885-4e18-ae72-b2aa820aa38c");
               $.ajax({
                 url: "action.php",
                 method: "POST",
-                data: $('#update_form').serialize(),
+                data: $("#update_form").serialize(),
                 beforeSend: function() {
-                  $('#update').val("Updating");
+                  $("#update").val("Updating");
                 },
                 success: function(data) {
-                  $('#update_form')[0].reset();
-                  $('#editModal').modal('hide');
+                  $("#update_form")[0].reset();
+                  $("#editModal").modal("hide");
                   act_refresh_data_detail();
                 }
               });

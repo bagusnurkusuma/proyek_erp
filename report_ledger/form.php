@@ -2,72 +2,63 @@
 require_once "../asset_default/global_function.php";
 check_user_menu_acces("c15f88c8-ac9e-4574-a284-0a98585ef006");
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Ledger</title>
-</head>
-
-<body class="nav-md">
-  <div class="container body">
-    <!-- page content -->
-    <div class="right_col" role="main">
-      <div class="content">
-        <div class="clearfix"></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 ">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Ledger</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up justify-content-end"></i></a></li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <br />
-                <div class="row">
-                  <div class="col-md-6 col-sm-12  form-group">
-                    <label class="control-label col-md-3">Start Date</label>
-                    <div class="col-md-9 input-group">
-                      <input type="date" name="start_date" id="jq_start_date" value="" class="form-control" style="margin-bottom: 10px;">
-                    </div>
-                    <label class="control-label col-md-3">End Date</label>
-                    <div class="col-md-9 input-group">
-                      <input type="date" name="end_date" id="jq_end_date" value="" class="form-control" style="margin-bottom: 10px;">
-                    </div>
-                    <label class="control-label col-md-3">Show Sum By Account Parent</label>
-                    <div class="col-md-9 input-group">
-                      <input type="checkbox" id="checkbox" class="form-control" style="margin-bottom: 10px;">
-                    </div>
-                    <label class="control-label col-md-3">Account </label>
-                    <div class="col-md-9 input-group">
-                      <input type="hidden" name="filter_account_id" id="jq_filter_account_id" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
-                      <input type="text" name="filter_account_name" id="jq_filter_account_name" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
-                      <span class="input-group-btn">
-                        <button type="button" name="choose_filter_account_data" id="" class="btn btn-warning btn-xs choose_filter_account_data"><i class="fa fa-pencil-square"></i></button>
-                      </span>
-                      <span class="input-group-btn">
-                        <button type="button" name="clear_filter_account_data" id="" class="btn btn-danger btn-xs clear_filter_account_data"><i class="fa fa-close"></i></button>
-                      </span>
-                    </div>
+<div class="container body">
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="content">
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2 id="jq_process_name"><?php echo $_SESSION["jq_process_name"] ?></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up justify-content-end"></i></a></li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <br />
+              <div class="row">
+                <div class="col-md-6 col-sm-12  form-group">
+                  <label class="control-label col-md-3">Start Date</label>
+                  <div class="col-md-9 input-group">
+                    <input type="date" name="start_date" id="jq_start_date" value="" class="form-control" style="margin-bottom: 10px;">
                   </div>
-                  <div id="structure_table" hidden="hidden"></div>
-                  <div class=" x_panel">
-                    <div class="x_title">
-                      <h2>Ledger Detail </h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button></li>
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                      </ul>
-                      <div class="clearfix"></div>
-                    </div>
+                  <label class="control-label col-md-3">End Date</label>
+                  <div class="col-md-9 input-group">
+                    <input type="date" name="end_date" id="jq_end_date" value="" class="form-control" style="margin-bottom: 10px;">
+                  </div>
+                  <label class="control-label col-md-3">Show Sum By Account Parent</label>
+                  <div class="col-md-9 input-group">
+                    <input type="checkbox" id="checkbox" class="form-control" style="margin-bottom: 10px;">
+                  </div>
+                  <label class="control-label col-md-3">Account </label>
+                  <div class="col-md-9 input-group">
+                    <input type="hidden" name="filter_account_id" id="jq_filter_account_id" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
+                    <input type="text" name="filter_account_name" id="jq_filter_account_name" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
+                    <span class="input-group-btn">
+                      <button type="button" name="choose_filter_account_data" id="" class="btn btn-warning btn-xs choose_filter_account_data"><i class="fa fa-pencil-square"></i></button>
+                    </span>
+                    <span class="input-group-btn">
+                      <button type="button" name="clear_filter_account_data" id="" class="btn btn-danger btn-xs clear_filter_account_data"><i class="fa fa-close"></i></button>
+                    </span>
+                  </div>
+                </div>
+                <div id="structure_table" hidden="hidden"></div>
+                <div class=" x_panel">
+                  <div class="x_title">
+                    <h2>Ledger Detail </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button></li>
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
 
-                    <div class="x_content">
-                      <div class="card-box table-responsive" id="div_main_table">
-                        <!-- Import From Form File -->
-                      </div>
+                  <div class="x_content">
+                    <div class="card-box table-responsive" id="div_main_table">
+                      <!-- Import From Form File -->
                     </div>
                   </div>
                 </div>
@@ -76,12 +67,10 @@ check_user_menu_acces("c15f88c8-ac9e-4574-a284-0a98585ef006");
           </div>
         </div>
       </div>
-      <!--page content -->
     </div>
+    <!--page content -->
   </div>
-</body>
-
-</html>
+</div>
 
 <!-- Pop up Selected -->
 <div id="selectModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -118,9 +107,8 @@ check_user_menu_acces("c15f88c8-ac9e-4574-a284-0a98585ef006");
       },
       success: function(data) {
         $("div#div_main_table").html(data);
-        $("table#main_table").pretty_format_table();
-        $("table#main_table").DataTable({
-          pageLength: "100"
+        $("table#main_table").data_table_with_export({
+          title_name: $("#jq_process_name").text
         });
       }
     });
@@ -249,10 +237,7 @@ check_user_menu_acces("c15f88c8-ac9e-4574-a284-0a98585ef006");
         },
         success: function(data) {
           $("tr#" + account_id).after(data);
-          $("table#detail_ledger_table" + account_id).pretty_format_table();
-          $("table#detail_ledger_table" + account_id).DataTable({
-            pageLength: "100"
-          });
+          $("table#detail_ledger_table" + account_id).data_table();
         }
       });
     } else {
@@ -338,8 +323,7 @@ check_user_menu_acces("c15f88c8-ac9e-4574-a284-0a98585ef006");
         },
         success: function(data) {
           $("#form_select").html(data);
-          $("table#select_table").pretty_format_table();
-          $("table#select_table").DataTable();
+          $("table#select_table").data_table();
           $("#selectModal").modal("show");
         }
       });
@@ -356,10 +340,7 @@ check_user_menu_acces("c15f88c8-ac9e-4574-a284-0a98585ef006");
         },
         success: function(data) {
           $("#form_select").html(data);
-          $("table#select_table").pretty_format_table();
-          $("table#select_table").DataTable({
-            pageLength: "100"
-          });
+          $("table#select_table").data_table();
           $("#selectModal").modal("show");
         }
       });

@@ -11,7 +11,15 @@ if (empty($_SESSION["user_role_id"])) {
 <html lang="en">
 
 <head>
-  <link rel="icon" href="../asset_design/images/favicon.ico" type="image/ico" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../asset_design/datatable/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../asset_design/datatable/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../asset_design/datatable/DataTables/Buttons-1.5.6/css/buttons.bootstrap4.min.css">
+
   <title><?php echo $_SESSION["company_name"] ?></title>
   <link rel="icon" type="image/x-icon" href="<?php echo $_SESSION["file_location"] ?>">
   <style>
@@ -20,8 +28,8 @@ if (empty($_SESSION["user_role_id"])) {
     }
 
     .content {
-      margin-top: 40px;
-      margin-bottom: 20px;
+      margin-top: 60px;
+      margin-bottom: 35px;
     }
 
     thead {
@@ -53,13 +61,6 @@ if (empty($_SESSION["user_role_id"])) {
   <!-- bootstrap-daterangepicker -->
   <link href="../asset_design/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
   <link href="../asset_design/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
-
-  <!-- Datatables -->
-  <link href="../asset_design/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-  <link href="../asset_design/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-  <link href="../asset_design/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-  <link href="../asset_design/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-  <link href="../asset_design/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   <!-- Custom Theme Style -->
   <link href="../asset_design/build/css/custom.min.css" rel="stylesheet">
 </head>
@@ -181,16 +182,16 @@ if (empty($_SESSION["user_role_id"])) {
       </div>
 
       <!-- top navigation -->
-      <div class="top_nav">
+      <div class="top_nav fixed-top">
         <div class="nav_menu">
           <div class="nav toggle">
             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
           </div>
           <nav class="nav navbar-nav">
-            <ul class=" navbar-right">
+            <ul class="navbar-right">
               <li class="nav-item dropdown open" style="padding-left: 15px;">
                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                  <img src="<?php echo $_SESSION["file_location"] ?>" alt="<?php echo $_SESSION["employee_name"] ?>"><?php echo $_SESSION["employee_name"]; ?>
+                  <img src="<?php echo $_SESSION["file_location"] ?>" alt="<?php echo $_SESSION["employee_name"] ?>" height="15px"><?php echo $_SESSION["employee_name"]; ?>
                 </a>
                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="../asset_profile/form.php"> Profile</a>
@@ -276,22 +277,19 @@ if (empty($_SESSION["user_role_id"])) {
   <script src="../asset_design/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
   <!-- starrr -->
   <script src="../asset_design/vendors/starrr/dist/starrr.js"></script>
+
   <!-- Datatables -->
-  <script src="../asset_design/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="../asset_design/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-  <script src="../asset_design/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-  <script src="../asset_design/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-  <script src="../asset_design/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-  <script src="../asset_design/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-  <script src="../asset_design/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-  <script src="../asset_design/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-  <script src="../asset_design/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-  <script src="../asset_design/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-  <script src="../asset_design/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-  <script src="../asset_design/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-  <script src="../asset_design/vendors/jszip/dist/jszip.min.js"></script>
-  <script src="../asset_design/vendors/pdfmake/build/pdfmake.min.js"></script>
-  <script src="../asset_design/vendors/pdfmake/build/vfs_fonts.js"></script>
+  <script src="../asset_design/datatable/js/bootstrap.bundle.min.js"></script>
+  <script src="../asset_design/datatable/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+  <script src="../asset_design/datatable/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../asset_design/datatable/DataTables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+  <script src="../asset_design/datatable/DataTables/Buttons-1.5.6/js/buttons.bootstrap4.min.js"></script>
+  <script src="../asset_design/datatable/DataTables/JSZip-2.5.0/jszip.min.js"></script>
+  <script src="../asset_design/datatable/DataTables/pdfmake-0.1.36/pdfmake.min.js"></script>
+  <script src="../asset_design/datatable/DataTables/pdfmake-0.1.36/vfs_fonts.js"></script>
+  <script src="../asset_design/datatable/DataTables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+  <script src="../asset_design/datatable/DataTables/Buttons-1.5.6/js/buttons.print.min.js"></script>
+  <script src="../asset_design/datatable/DataTables/Buttons-1.5.6/js/buttons.colVis.min.js"></script>
   <!-- jQuery custom content scroller -->
   <script src="../asset_design/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
   <!-- Custom Theme Scripts -->

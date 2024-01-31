@@ -1,3 +1,12 @@
+function get_current_time() {
+  let today = new Date();
+  let hours = String(today.getHours()).padStart(2, "0");
+  let minutes = String(today.getMinutes()).padStart(2, "0");
+  let seconds = String(today.getSeconds()).padStart(2, "0");
+  today = hours + ":" + minutes + ":" + seconds;
+  return today;
+}
+
 function get_current_date() {
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, "0");
@@ -6,6 +15,10 @@ function get_current_date() {
 
   today = yyyy + "-" + mm + "-" + dd;
   return today;
+}
+
+function get_current_timestamp() {
+  return get_current_date() + " " + get_current_time();
 }
 
 function get_current_first_date() {
@@ -119,7 +132,7 @@ $.fn.pretty_format_table = function () {
       }
     } else if ($(this).hasClass("jq_format_date_table")) {
       $(this).css("text-align", "center");
-      $(this).css("width", "75px");
+      $(this).css("width", "100px");
       var date = $(this).text();
       var formattedDate = format_input_date(date);
       $(this).text(formattedDate);
@@ -206,3 +219,144 @@ $(document).ready(function () {
     }
   });
 });
+
+(function ($) {
+  $.fn.data_table_with_export = function (options) {
+    var component_input = $(this);
+    var settings = $.extend(
+      {
+        title_name: "Export Data",
+      },
+      options
+    );
+
+    var title_name = settings.title_name;
+    var file_name = settings.title_name + " " + get_current_timestamp();
+    var table_parent = component_input;
+    table_parent.pretty_format_table();
+    var button = table_parent.find("button");
+    var button_td = button.closest("td");
+    var index = button_td.index();
+    var table = table_parent.DataTable({
+      buttons: [
+        {
+          extend: "print",
+          footer: true,
+          exportOptions: {
+            columns: ":visible:not(:eq(" + index + "))",
+          },
+          title: title_name,
+        },
+        {
+          extend: "copyHtml5",
+          footer: true,
+          exportOptions: {
+            columns: ":visible:not(:eq(" + index + "))",
+          },
+          title: title_name,
+        },
+        {
+          extend: "csvHtml5",
+          filename: file_name,
+          footer: true,
+          exportOptions: {
+            columns: ":visible:not(:eq(" + index + "))",
+          },
+          title: title_name,
+        },
+        {
+          extend: "excelHtml5",
+          filename: file_name,
+          footer: true,
+          exportOptions: {
+            columns: ":visible:not(:eq(" + index + "))",
+          },
+          title: title_name,
+          autoFilter: true,
+          sheetName: title_name,
+        },
+        {
+          extend: "pdfHtml5",
+          filename: file_name,
+          footer: true,
+          exportOptions: {
+            columns: ":visible:not(:eq(" + index + "))",
+          },
+          orientation: "potrait",
+          pageSize: "A4",
+          download: "open",
+          title: title_name,
+          customize: function (doc) {
+            doc["header"] = function (currentPage, pageCount) {
+              return {
+                text: document.title,
+                alignment: "center",
+              };
+            };
+            doc["footer"] = function (currentPage, pageCount) {
+              return {
+                text: "Page " + currentPage.toString() + " of " + pageCount,
+                alignment: "center",
+              };
+            };
+            doc.watermark = {
+              text: document.title,
+              color: "#3498db ",
+              opacity: 0.3,
+              bold: true,
+              italics: false,
+            };
+          },
+        },
+        {
+          extend: "colvis",
+          postfixButtons: ["colvisRestore"],
+        },
+      ],
+      dom:
+        "<'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>" +
+        "<'row'<'col-md-12'tr>>" +
+        "<'row'<'col-md-5'i><'col-md-7'p>>",
+      lengthMenu: [
+        [5, 10, 25, 50, 100, 250, 500, -1],
+        [5, 10, 25, 50, 100, 250, 500, "All"],
+      ],
+      processing: true,
+      pageLength: 100,
+      pagingType: "full_numbers",
+    });
+
+    table.buttons().container().appendTo("#table_wrapper .col-md-5:eq(0)");
+    return this;
+  };
+})(jQuery);
+
+(function ($) {
+  $.fn.data_table = function (options) {
+    var component_input = $(this);
+    var settings = $.extend(
+      {
+        title_name: "Export Data",
+      },
+      options
+    );
+
+    var title_name = settings.title_name;
+    var file_name = settings.title_name + " " + get_current_timestamp();
+    var table_parent = component_input;
+    table_parent.pretty_format_table();
+    var button = table_parent.find("button");
+    var button_td = button.closest("td");
+    var index = button_td.index();
+    var table = table_parent.DataTable({
+      lengthMenu: [
+        [5, 10, 25, 50, 100, 250, 500, -1],
+        [5, 10, 25, 50, 100, 250, 500, "All"],
+      ],
+      processing: true,
+      pageLength: 100,
+      pagingType: "full_numbers",
+    });
+    return this;
+  };
+})(jQuery);

@@ -2,79 +2,67 @@
 require_once "../asset_default/global_function.php";
 check_user_menu_acces("62b12256-7b2b-46d9-8ca5-b870738ee603");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" type="image/ico" />
-</head>
-
-<body class="nav-md">
-  <div class="container body">
-    <!-- page content -->
-    <div class="right_col" role="main">
-      <div class="content">
-        <div class="clearfix"></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 ">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Stock Ending</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up justify-content-end"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <br />
-                <div class="row">
-                  <div class="col-md-6 col-sm-12  form-group">
-                    <label class="control-label col-md-3"> Filter Inventory </label>
-                    <div class="col-md-9 input-group">
-                      <input type="hidden" name="inventory_id" id="jq_inventory_id" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
-                      <input type="text" name="inventory_name" id="jq_inventory_name" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
-                      <span class="input-group-btn">
-                        <button type="button" name="choose_inventory_data" id="" class="btn btn-warning btn-xs choose_inventory_data"><i class="fa fa-pencil-square"></i></button>
-                      </span>
-                      <span class="input-group-btn">
-                        <button type="button" name="clear_inventory_data" id="" class="btn btn-danger btn-xs clear_inventory_data"><i class="fa fa-close"></i></button>
-                      </span>
-                    </div>
+<div class="container body">
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="content">
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2 id="jq_process_name"><?php echo $_SESSION["jq_process_name"] ?></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up justify-content-end"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <br />
+              <div class="row">
+                <div class="col-md-6 col-sm-12  form-group">
+                  <label class="control-label col-md-3"> Filter Inventory </label>
+                  <div class="col-md-9 input-group">
+                    <input type="hidden" name="inventory_id" id="jq_inventory_id" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
+                    <input type="text" name="inventory_name" id="jq_inventory_name" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
+                    <span class="input-group-btn">
+                      <button type="button" name="choose_inventory_data" id="" class="btn btn-warning btn-xs choose_inventory_data"><i class="fa fa-pencil-square"></i></button>
+                    </span>
+                    <span class="input-group-btn">
+                      <button type="button" name="clear_inventory_data" id="" class="btn btn-danger btn-xs clear_inventory_data"><i class="fa fa-close"></i></button>
+                    </span>
                   </div>
-                  <div class="col-md-6 col-sm-12 form-group">
-                    <label class="control-label col-md-3">Filter Warehouse</label>
-                    <div class="col-md-9 input-group">
-                      <input type="hidden" name="warehouse_id" id="jq_warehouse_id" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
-                      <input type="text" name="warehouse_name" id="jq_warehouse_name" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
-                      <span class="input-group-btn">
-                        <button type="button" name="choose_warehouse_data" id="" class="btn btn-warning btn-xs choose_warehouse_data"><i class="fa fa-hand-o-up"></i></button>
-                      </span>
-                      <span class="input-group-btn">
-                        <button type="button" name="clear_warehouse_data" id="" class="btn btn-danger btn-xs clear_warehouse_data"><i class="fa fa-close"></i></button>
-                      </span>
+                </div>
+                <div class="col-md-6 col-sm-12 form-group">
+                  <label class="control-label col-md-3">Filter Warehouse</label>
+                  <div class="col-md-9 input-group">
+                    <input type="hidden" name="warehouse_id" id="jq_warehouse_id" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
+                    <input type="text" name="warehouse_name" id="jq_warehouse_name" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
+                    <span class="input-group-btn">
+                      <button type="button" name="choose_warehouse_data" id="" class="btn btn-warning btn-xs choose_warehouse_data"><i class="fa fa-hand-o-up"></i></button>
+                    </span>
+                    <span class="input-group-btn">
+                      <button type="button" name="clear_warehouse_data" id="" class="btn btn-danger btn-xs clear_warehouse_data"><i class="fa fa-close"></i></button>
+                    </span>
+                  </div>
+                </div>
+
+                <div class=" x_panel">
+                  <div class="x_title">
+                    <h2>Inventory Detail </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div align="right">
+                      <button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button>
                     </div>
+                    <div class="clearfix"></div>
                   </div>
 
-                  <div class=" x_panel">
-                    <div class="x_title">
-                      <h2>Inventory Detail </h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                      </ul>
-                      <div align="right">
-                        <button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-
-                    <div class="x_content">
-                      <div class="card-box table-responsive" id="data_detail">
-                        <!-- Import From Form File -->
-                      </div>
+                  <div class="x_content">
+                    <div class="card-box table-responsive" id="data_detail">
+                      <!-- Import From Form File -->
                     </div>
                   </div>
                 </div>
@@ -83,12 +71,10 @@ check_user_menu_acces("62b12256-7b2b-46d9-8ca5-b870738ee603");
           </div>
         </div>
       </div>
-      <!--page content -->
     </div>
+    <!--page content -->
   </div>
-</body>
-
-</html>
+</div>
 
 <!-- Pop up Selected -->
 <div id="selectModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -125,9 +111,8 @@ check_user_menu_acces("62b12256-7b2b-46d9-8ca5-b870738ee603");
       },
       success: function(data) {
         $("#data_detail").html(data);
-        $("table#datatable").pretty_format_table();
-        $("table#datatable").DataTable({
-          pageLength: "100"
+        $("table#datatable").data_table_with_export({
+          title_name: $("#jq_process_name").text()
         });
       }
     });
@@ -148,10 +133,7 @@ check_user_menu_acces("62b12256-7b2b-46d9-8ca5-b870738ee603");
         },
         success: function(data) {
           $("tr#" + concat_id).after(data);
-          $("table#detail_ending_table" + concat_id).pretty_format_table();
-          $("table#detail_ending_table" + concat_id).DataTable({
-            pageLength: "100"
-          });
+          $("table#detail_ending_table" + concat_id).data_table();
         }
       });
     } else {
@@ -187,8 +169,7 @@ check_user_menu_acces("62b12256-7b2b-46d9-8ca5-b870738ee603");
         },
         success: function(data) {
           $("#form_select").html(data);
-          $("table#select_table").pretty_format_table();
-          $("table#select_table").DataTable();
+          $("table#select_table").data_table();
           $("#selectModal").modal("show");
         }
       });
@@ -233,8 +214,7 @@ check_user_menu_acces("62b12256-7b2b-46d9-8ca5-b870738ee603");
         },
         success: function(data) {
           $("#form_select").html(data);
-          $("table#select_table").pretty_format_table();
-          $("table#select_table").DataTable();
+          $("table#select_table").data_table();
           $("#selectModal").modal("show");
         }
       });

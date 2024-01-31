@@ -6,9 +6,10 @@ function check_user_menu_acces($input_function)
         $hasil = $_SESSION["menu_proces"];
         $is_allow_menu_acces = false;
         if (is_array($hasil) && count($hasil)) {
-            foreach ($hasil as $baris) :
-                if ($baris["id"] == $input_function) {
+            foreach ($hasil as $row) :
+                if ($row["id"] == $input_function) {
                     $is_allow_menu_acces = true;
+                    $_SESSION["jq_process_name"] = $row["menu_name"];
                     break;
                 }
             endforeach;
@@ -56,4 +57,14 @@ function validate_master_data($input_function)
     $query = "SELECT settings.validate_data(:input) as result";
     require_once "../asset_default/db_function.php";
     return get_execute_query($query, $input);
+}
+
+function format_decimal($input_function)
+{
+    return number_format($input_function, 2, ',', '.');
+}
+
+function format_date($input_function)
+{
+    return date("d M Y", strtotime($input_function));
 }

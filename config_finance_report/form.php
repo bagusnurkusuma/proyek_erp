@@ -2,17 +2,6 @@
 require_once "../asset_default/global_function.php";
 check_user_menu_acces("7a691d44-bf4b-4548-ac09-2bfcfcc83f2a");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" type="image/ico" />
-</head>
-
-<body class="nav-md">
   <div class="container body">
     <!-- page content -->
     <div class="right_col" role="main">
@@ -22,7 +11,7 @@ check_user_menu_acces("7a691d44-bf4b-4548-ac09-2bfcfcc83f2a");
           <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
               <div class="x_title">
-                <h2>Config Finance Report</h2>
+                <h2 id="jq_process_name"><?php echo $_SESSION["jq_process_name"] ?></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up justify-content-end"></i></a>
                   </li>
@@ -70,10 +59,6 @@ check_user_menu_acces("7a691d44-bf4b-4548-ac09-2bfcfcc83f2a");
       <!--page content -->
     </div>
   </div>
-</body>
-
-</html>
-
 <!-- Pop up Selected -->
 <div id="selectModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">

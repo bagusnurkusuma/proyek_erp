@@ -10,21 +10,16 @@ function get_sort_mode()
 {
     $query = "SELECT inventory.get_stock_ledger_sort_mode() as result";
     require_once "../asset_default/db_function.php";
-    return get_execute_query($query, $input);
+    return get_execute_query($query);
 }
 
 // Get Data Warehouse
 function get_data_warehouse($input_function)
 {
-    include "../asset_default/koneksi.php";
     $input = json_encode($input_function);
     $query = "SELECT master.list_master_warehouse(:input) as result";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-    $row = $stmt->fetch();
-    $results = json_decode($row['result'], true);
-    $results = $results['body'];
-    return $results;
+    require_once "../asset_default/db_function.php";
+    return get_execute_query($query, $input);
 }
 
 // Get Data Inventory

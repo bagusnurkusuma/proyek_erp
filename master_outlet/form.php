@@ -2,52 +2,36 @@
 require_once "../asset_default/global_function.php";
 check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body class="nav-md">
-  <div class="container body">
-    <!-- page content -->
-    <div class="right_col" role="main">
-      <div class="content">
-        <div class="clearfix"></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 ">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Master Outlet</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                </ul>
-                <div align="right">
-                  <button type="button" name="show_archive" id="jq_show_archive" class="btn btn-primary show_archive"><i class="fa fa-inbox"></i></button>
-                  <button type="button" name="add_data" id="jq_add_data" class="btn btn-warning add_data"><i class="fa fa-plus-circle"></i></button>
-                  <button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <div class="card-box table-responsive" id="data_detail">
-                  <!-- Import From Form File -->
-                </div>
+<div class="container body">
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="content">
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2 id="jq_process_name"><?php echo $_SESSION["jq_process_name"] ?></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><button type="button" name="show_archive" id="jq_show_archive" class="btn btn-primary show_archive"><i class="fa fa-inbox"></i></button></li>
+                <li><button type="button" name="add_data" id="jq_add_data" class="btn btn-warning add_data"><i class="fa fa-plus-circle"></i></button></li>
+                <li><button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button></li>
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div class="card-box table-responsive" id="data_detail">
+                <!-- Import From Form File -->
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- /page content -->
     </div>
+    <!-- /page content -->
   </div>
-
-</html>
+</div>
 
 <!-- Popup Archive-->
 <div id="archiveModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -125,8 +109,9 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
       },
       success: function(data) {
         $("#data_detail").html(data);
-        $("table#master_table").pretty_format_table();
-        $('table#master_table').DataTable();
+        $("table#master_table").data_table_with_export({
+          title_name: $("#jq_process_name").text()
+        });
       }
     });
   }
@@ -140,8 +125,7 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
       },
       success: function(data) {
         $("#form_archive").html(data);
-        $("table#archive_table").pretty_format_table();
-        $('table#archive_table').DataTable();
+        $("table#archive_table").data_table();
       }
     });
   }
@@ -155,8 +139,8 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
         action_status: arg_action_status
       },
       success: function(data) {
-        $('#form_edit').html(data);
-        $('#editModal').modal('show');
+        $("#form_edit").html(data);
+        $("#editModal").modal("show");
       }
     });
   }
@@ -166,12 +150,12 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
       url: "property.php",
       method: "POST",
       data: {
-        action_status: 'choose_warehouse_data'
+        action_status: "choose_warehouse_data"
       },
       success: function(data) {
-        $('#form_select').html(data);
+        $("#form_select").html(data);
         $("table#select_table").pretty_format_table();
-        $('table#select_table').DataTable();
+        $("table#select_table").data_table();
       }
     });
   }
@@ -184,31 +168,31 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
   $(document).ready(function() {
 
     //Refresh Table
-    $(document).on('click', '.refresh', function() {
+    $(document).on("click", ".refresh", function() {
       act_refresh_data_detail();
     })
 
     //Add Data
-    $(document).on('click', '.add_data', function() {
+    $(document).on("click", ".add_data", function() {
       get_data_detail_edit(null, "insert_detail");
     });
 
     //Detail Data
-    $(document).on('click', '.view_data', function() {
+    $(document).on("click", ".view_data", function() {
       var data_id = $(this).attr("id");
       get_data_detail_edit(data_id, "view_detail");
     });
 
     //Edit Data
-    $(document).on('click', '.edit_data', function() {
+    $(document).on("click", ".edit_data", function() {
       var data_id = $(this).attr("id");
       get_data_detail_edit(data_id, "edit_detail");
     });
 
     //Show Popup Archive Data
-    $(document).on('click', '.archive_data', function() {
+    $(document).on("click", ".archive_data", function() {
       var data_id = $(this).attr("id");
-      var action_status = 'archive_detail';
+      var action_status = "archive_detail";
       $.ajax({
         url: "property.php",
         method: "POST",
@@ -217,16 +201,16 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
           action_status: action_status
         },
         success: function(data) {
-          $('#form_archive').html(data);
-          $('#archiveModal').modal('show');
+          $("#form_archive").html(data);
+          $("#archiveModal").modal("show");
         }
       });
     });
 
 
     //Archive Detail
-    $(document).on('click', '.archive_detail', function() {
-      if ($('#jq_archive_reason').val() == '') {
+    $(document).on("click", ".archive_detail", function() {
+      if ($("#jq_archive_reason").val() == "") {
         Swal.fire({
           position: "top",
           title: "Warning",
@@ -237,13 +221,13 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
         $.ajax({
           url: "action.php",
           method: "POST",
-          data: $('#archive_form').serialize(),
+          data: $("#archive_form").serialize(),
           beforeSend: function() {
-            $('#archive').val("Archiving");
+            $("#archive").val("Archiving");
           },
           success: function(data) {
-            $('#archive_form')[0].reset();
-            $('#archiveModal').modal('hide');
+            $("#archive_form")[0].reset();
+            $("#archiveModal").modal("hide");
             act_refresh_data_detail();
           }
         });
@@ -251,15 +235,15 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
     });
 
     //Show Archive Data
-    $(document).on('click', '.show_archive', function() {
+    $(document).on("click", ".show_archive", function() {
       act_refresh_data_archive();
-      $('#archiveModal').modal('show');
+      $("#archiveModal").modal("show");
     });
 
     //Unarchive Data
-    $(document).on('click', '.unarchive_data', function() {
+    $(document).on("click", ".unarchive_data", function() {
       var data_id = $(this).attr("id");
-      var action_status = 'unarchive_detail';
+      var action_status = "unarchive_detail";
       $.ajax({
         url: "action.php",
         method: "POST",
@@ -275,28 +259,28 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
     });
 
     //Refresh Unarchive
-    $(document).on('click', '.refresh_unarchive_data', function() {
+    $(document).on("click", ".refresh_unarchive_data", function() {
       act_refresh_data_archive();
       act_refresh_data_detail();
     });
 
     //Update Detail
-    $(document).on('click', '.update_detail', function() {
-      if ($('#jq_outlet_code').val() == '') {
+    $(document).on("click", ".update_detail", function() {
+      if ($("#jq_outlet_code").val() == "") {
         Swal.fire({
           position: "top",
           title: "Warning",
           text: "Outlet Code Must be Filled !",
           icon: "warning"
         });
-      } else if ($('#jq_outlet_name').val() == "") {
+      } else if ($("#jq_outlet_name").val() == "") {
         Swal.fire({
           position: "top",
           title: "Warning",
           text: "Outlet Name Must be Filled !",
           icon: "warning"
         });
-      } else if ($('#jq_warehouse_id').val() == '') {
+      } else if ($("#jq_warehouse_id").val() == "") {
         Swal.fire({
           position: "top",
           title: "Warning",
@@ -309,9 +293,9 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
           method: "POST",
           data: {
             action_status: "validate_detail",
-            id: $('#jq_id').val(),
-            code: $('#jq_outlet_code').val(),
-            name: $('#jq_outlet_name').val()
+            id: $("#jq_id").val(),
+            code: $("#jq_outlet_code").val(),
+            name: $("#jq_outlet_name").val()
           },
           success: function(data) {
             var parsedData = $.parseJSON(data);
@@ -320,13 +304,13 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
               $.ajax({
                 url: "action.php",
                 method: "POST",
-                data: $('#update_form').serialize(),
+                data: $("#update_form").serialize(),
                 beforeSend: function() {
-                  $('#update').val("Updating");
+                  $("#update").val("Updating");
                 },
                 success: function(data) {
-                  $('#update_form')[0].reset();
-                  $('#editModal').modal('hide');
+                  $("#update_form")[0].reset();
+                  $("#editModal").modal("hide");
                   act_refresh_data_detail();
                 }
               });
@@ -344,15 +328,15 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
     });
 
     //Choose Warehouse Data
-    $(document).on('click', '.choose_warehouse_data', function() {
+    $(document).on("click", ".choose_warehouse_data", function() {
       act_refresh_data_warehouse();
-      $('#selectModal').modal('show');
+      $("#selectModal").modal("show");
     });
 
     //Select Warehouse Data
-    $(document).on('click', '.select_warehouse_data', function() {
+    $(document).on("click", ".select_warehouse_data", function() {
       var data_id = $(this).attr("id");
-      var action_status = 'select_warehouse_data';
+      var action_status = "select_warehouse_data";
       $.ajax({
         url: "action.php",
         method: "POST",
@@ -364,7 +348,7 @@ check_user_menu_acces("c035aa0a-2310-4225-988a-af3e46142dab");
           var parsedData = $.parseJSON(data);
           $("#jq_warehouse_id").val(parsedData[0].id);
           $("#jq_warehouse_name").val(parsedData[0].warehouse_name);
-          $('#selectModal').modal('hide');
+          $("#selectModal").modal("hide");
         }
       });
     });

@@ -65,7 +65,9 @@ if (!empty($_POST)) {
          ';
             $sum_debet = $sum_debet + $row["debet"];
             $sum_credit = $sum_credit + $row["credit"];
-            $sum_ending = $sum_ending + $row["ending"];
+            if (!empty($row["ending"])) {
+               $sum_ending = $sum_ending + $row["ending"];
+            }
             $sum_amount_debet = $sum_amount_debet + $row["amount_debet"];
             $sum_amount_credit = $sum_amount_credit + $row["amount_credit"];
          endforeach;

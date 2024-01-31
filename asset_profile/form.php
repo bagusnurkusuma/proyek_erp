@@ -1,50 +1,37 @@
 <?php
-require_once "../asset_default/side_bar.php";
+include_once "../asset_default/side_bar.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body class="nav-md">
-    <div class="container body">
-        <!-- page content -->
-        <div class="right_col" role="main">
-            <div class="content">
-                <div class="clearfix"></div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 ">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Profile</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><button type="button" title="Change Password" name="change" id="jq_change_password_user" class="btn btn-info btn-xs change_password_user"><i class="fa fa-key"></i></button></li>
-                                    <li><button type="button" title="Edit Profile" name="edit_profile" id="jq_edit_profile" class="btn btn-warning edit_profile"><i class="fa fa-pencil-square"></i></button></li>
-                                    <li><button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button></li>
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <div class="card-box table-responsive" id="data_detail">
-                                    <!-- Import From Form File -->
-                                </div>
+<div class="container body">
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="content">
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Profile</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><button type="button" title="Change Password" name="change" id="jq_change_password_user" class="btn btn-info btn-xs change_password_user"><i class="fa fa-key"></i></button></li>
+                                <li><button type="button" title="Edit Profile" name="edit_profile" id="jq_edit_profile" class="btn btn-warning edit_profile"><i class="fa fa-pencil-square"></i></button></li>
+                                <li><button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button></li>
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="card-box table-responsive" id="data_detail">
+                                <!-- Import From Form File -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- /page content -->
         </div>
+        <!-- /page content -->
     </div>
-
-</html>
+</div>
 
 <!-- Popup Change Password-->
 <div id="changepassModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
