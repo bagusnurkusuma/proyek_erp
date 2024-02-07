@@ -5,17 +5,6 @@ if ($result_check_user_menu_acces) {
   require_once "api.php";
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" type="image/ico" />
-</head>
-
-<body class="nav-md">
   <div class="container body">
     <!-- page content -->
     <div class="right_col" role="main">
@@ -25,7 +14,7 @@ if ($result_check_user_menu_acces) {
           <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
               <div class="x_title">
-                <h2>Material Conversion</h2>
+                <h2 id="jq_process_name"><?php echo $_SESSION["jq_process_name"] ?></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><button type="button" name="pay" id="jq_pay" class="btn btn-success save_transaction">Save</button></li>
                   <li><button type="button" name="cancel" id="jq_cancel" class="btn btn-primary cancel_transaction" onclick="act_cancel()">Cancel</button></li>
@@ -112,9 +101,6 @@ if ($result_check_user_menu_acces) {
       </div>
     </div>
   </div>
-</body>
-
-</html>
 
 <!-- Popup List Product-->
 <div id="add_product" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">

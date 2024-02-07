@@ -33,7 +33,7 @@ if ($result_check_user_menu_acces) {
           <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
               <div class="x_title">
-                <h2>Point of Sales</h2>
+                <h2 id="jq_process_name"><?php echo $_SESSION["jq_process_name"] ?></h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><button type="button" name="pay" id="jq_pay" class="btn btn-success pay">Pay</button></li>
                   <li><button type="button" name="cancel" id="jq_cancel" class="btn btn-primary cancel" onclick="act_cancel()">Cancel</button></li>

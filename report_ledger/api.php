@@ -9,8 +9,8 @@ function get_data_detail($input_function)
 
 function get_data_structure($input_function)
 {
-    $input = json_encode($input_function);
-    $query = "SELECT * FROM accounting.get_all_parent_account(null) as result";
+    $input = json_encode(null);
+    $query = "SELECT * FROM accounting.get_all_parent_account(:input) as result";
     require_once "../asset_default/db_function.php";
     return get_execute_query($query, $input);
 }

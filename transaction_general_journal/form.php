@@ -5,115 +5,83 @@ if ($result_check_user_menu_acces) {
   require_once "api.php";
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/favicon.ico" type="image/ico" />
-</head>
-
-<?php
-if (is_array($hasil) && count($hasil)) {
-  foreach ($hasil as $baris) :
-    if ($baris["id"] == "81a4fda2-4d5e-4f43-a54d-ef5b57ea5df8") {
-      include_once "../asset_default/side_bar.php";
-      require_once "api.php";
-      break;
-    } else {
-      header($_SESSION["go_to_home_pages"]);
-      exit;
-    }
-  endforeach;
-} else {
-  header($_SESSION["go_to_home_pages"]);
-  exit;
-}
-?>
-
-<body class="nav-md">
-  <div class="container body">
-    <!-- page content -->
-    <div class="right_col" role="main">
-      <div class="content">
-        <div class="clearfix"></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 ">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>General Journal</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><button type="button" name="pay" id="jq_pay" class="btn btn-success save_transaction">Save</button></li>
-                  <li><button type="button" name="cancel" id="jq_cancel" class="btn btn-primary cancel" onclick="act_cancel()">Cancel</button></li>
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up justify-content-end"></i></a></li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <br />
-                <?php foreach (get_transaction_number($_SESSION['user_role_id']) as $parent) : ?>
-                  <input type="hidden" name="transaction_id" id="jq_transaction_id" value=<?php echo $parent["transaction_id"]; ?> class="form-control" readonly="true">
-                  <div class="row">
-                    <div class="col-md-6 col-sm-12  form-group">
-                      <label class="control-label col-md-3">Trx Number</label>
-                      <div class="col-md-9">
-                        <input type="text" name="transaction_number" id="jq_transaction_number" value=<?php echo $parent["transaction_number"]; ?> class="form-control" readonly="true" style="margin-bottom: 10px;">
-                      </div>
-                    <?php endforeach; ?>
-                    <label class="control-label col-md-3">Trx Date</label>
+<div class="container body">
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="content">
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2 id="jq_process_name"><?php echo $_SESSION["jq_process_name"] ?></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><button type="button" name="pay" id="jq_pay" class="btn btn-success save_transaction">Save</button></li>
+                <li><button type="button" name="cancel" id="jq_cancel" class="btn btn-primary cancel" onclick="act_cancel()">Cancel</button></li>
+                <li><a class="collapse-link"><i class="fa fa-chevron-up justify-content-end"></i></a></li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <br />
+              <?php foreach (get_transaction_number($_SESSION['user_role_id']) as $parent) : ?>
+                <input type="hidden" name="transaction_id" id="jq_transaction_id" value=<?php echo $parent["transaction_id"]; ?> class="form-control" readonly="true">
+                <div class="row">
+                  <div class="col-md-6 col-sm-12  form-group">
+                    <label class="control-label col-md-3">Trx Number</label>
                     <div class="col-md-9">
-                      <input type="date" name="transaction_date" id="jq_transaction_date" value="" class="form-control" style="margin-bottom: 10px;">
+                      <input type="text" name="transaction_number" id="jq_transaction_number" value=<?php echo $parent["transaction_number"]; ?> class="form-control" readonly="true" style="margin-bottom: 10px;">
                     </div>
-                    <label class="control-label col-md-3">Ref Number</label>
+                  <?php endforeach; ?>
+                  <label class="control-label col-md-3">Trx Date</label>
+                  <div class="col-md-9">
+                    <input type="date" name="transaction_date" id="jq_transaction_date" value="" class="form-control" style="margin-bottom: 10px;">
+                  </div>
+                  <label class="control-label col-md-3">Ref Number</label>
+                  <div class="col-md-9">
+                    <input type="text" name="reference_number" id="jq_reference_number" value="" class="form-control" style="margin-bottom: 10px;">
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-group">
+                    <label class="control-label col-md-3">Total Debet</label>
                     <div class="col-md-9">
-                      <input type="text" name="reference_number" id="jq_reference_number" value="" class="form-control" style="margin-bottom: 10px;">
+                      <input type="text" name="debet_parent" id="jq_debet_parent" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
                     </div>
+                    <label class="control-label col-md-3">Total Credit</label>
+                    <div class="col-md-9">
+                      <input type="text" name="credit_parent" id="jq_credit_parent" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
                     </div>
-                    <div class="col-md-6 col-sm-12 form-group">
-                      <label class="control-label col-md-3">Total Debet</label>
-                      <div class="col-md-9">
-                        <input type="text" name="debet_parent" id="jq_debet_parent" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
-                      </div>
-                      <label class="control-label col-md-3">Total Credit</label>
-                      <div class="col-md-9">
-                        <input type="text" name="credit_parent" id="jq_credit_parent" value="" class="form-control" style="margin-bottom: 10px;" readonly="true">
-                      </div>
-                      <label class="control-label col-md-3">Description</label>
-                      <div class="col-md-9">
-                        <textarea class="form-control" name="description_parent" id="jq_description_parent" value=""></textarea>
-                      </div>
+                    <label class="control-label col-md-3">Description</label>
+                    <div class="col-md-9">
+                      <textarea class="form-control" name="description_parent" id="jq_description_parent" value=""></textarea>
                     </div>
                   </div>
+                </div>
 
-                  <div class=" x_panel">
-                    <div class="x_title">
-                      <h2>Account Detail </h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><button type="button" name="add_data" id="jq_add_data" class="btn btn-warning add_data"><i class="fa fa-plus-circle"></i></button></li>
-                        <li><button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button></li>
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                      </ul>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                      <div class="card-box table-responsive" id="data_detail">
-                        <!-- Import From Form File -->
-                      </div>
+                <div class=" x_panel">
+                  <div class="x_title">
+                    <h2>Account Detail </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><button type="button" name="add_data" id="jq_add_data" class="btn btn-warning add_data"><i class="fa fa-plus-circle"></i></button></li>
+                      <li><button type="button" name="refresh" id="jq_refresh" class="btn btn-success refresh_data"><i class="fa fa-refresh"></i></button></li>
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="card-box table-responsive" id="data_detail">
+                      <!-- Import From Form File -->
                     </div>
                   </div>
-              </div>
+                </div>
             </div>
           </div>
         </div>
-        <!--page content -->
       </div>
+      <!--page content -->
     </div>
   </div>
-</body>
-
-</html>
+</div>
 
 <!-- Popup Edit Item  -->
 <div id="edit_data" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
