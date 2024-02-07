@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 if (empty($_SESSION["user_role_id"])) {
-  header("location:../asset_default/login.html");
+  header("location:../asset_default/login.php");
   exit;
 }
 ?>
@@ -36,6 +36,8 @@ if (empty($_SESSION["user_role_id"])) {
       text-align: center;
     }
   </style>
+  <!-- High Chart -->
+  <link rel="stylesheet" href="..\asset_design\chart\css\chart.css">
   <!-- Include SweetAlert2 CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
   <!-- Include SweetAlert2 JS -->
@@ -72,7 +74,7 @@ if (empty($_SESSION["user_role_id"])) {
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view footer">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="../asset_default/side_bar.php" class="site_title"><i class="fa fa-paw"></i>
+            <a href="../dashboard/form.php" class="site_title"><i class="fa fa-building-o"></i>
               <span id="jq_company_name"> <?php echo $_SESSION["company_name"] ?> </span></a>
           </div>
 
@@ -194,7 +196,7 @@ if (empty($_SESSION["user_role_id"])) {
                   <img src="<?php echo $_SESSION["file_location"] ?>" alt="<?php echo $_SESSION["employee_name"] ?>" height="15px"><?php echo $_SESSION["employee_name"]; ?>
                 </a>
                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="../asset_profile/form.php"> Profile</a>
+                  <a class="dropdown-item" href="../asset_profile/form.php"><i class="fa fa-user pull-right"></i> Profile</a>
                   <a class="dropdown-item" href="../asset_default/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                 </div>
               </li>
@@ -292,7 +294,10 @@ if (empty($_SESSION["user_role_id"])) {
   <script src="../asset_design/datatable/DataTables/Buttons-1.5.6/js/buttons.colVis.min.js"></script>
   <!-- jQuery custom content scroller -->
   <script src="../asset_design/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-  <!-- Custom Theme Scripts -->
+  <!-- High Chart -->
+  <script src="..\asset_design\chart\js\chart.js"></script>
+  <script src="..\asset_design\chart\js\exporting.js"></script>
+  <script src="..\asset_design\chart\js\export-data.js"></script>
   <script src="../asset_design/build/js/custom.min.js"></script>
   <script type="text/javascript" src="../asset_default/fungsi.js"></script>
 </body>

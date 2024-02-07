@@ -24,7 +24,6 @@ if (is_array($results) && count($results)) {
 		$_SESSION['file_type'] = $row['file_type'];
 		$_SESSION['file_location'] = $row['file_location'];
 		$_SESSION['file_default_location'] = $row['file_default_location'];
-		header("location: side_bar.php");
 	endforeach;
 
 	require_once "api.php";
@@ -42,8 +41,9 @@ if (is_array($results) && count($results)) {
 		endforeach;
 	}
 	$_SESSION['menu_proces'] = get_menu_proces($_SESSION["user_role_id"]);
-	$_SESSION['go_to_home_pages'] = "location:../asset_default/side_bar.php";
+	$_SESSION['go_to_home_pages'] = "location:../dashboard/form.php";
+	header($_SESSION['go_to_home_pages']);
 } else {
 	echo "<center>Username atau Password anda Salah";
-	echo " <a href='login.html'>login</a></p>";
+	echo " <a href='login.php'>login</a></p>";
 }

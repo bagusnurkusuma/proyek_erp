@@ -22,7 +22,7 @@ function check_user_menu_acces($input_function)
             exit;
         }
     } else {
-        header("location:../asset_default/login.html");
+        header("location:../asset_default/login.php");
         exit;
     }
 }

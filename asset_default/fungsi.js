@@ -93,7 +93,7 @@ function format_input_date(arg_input) {
 }
 
 function go_to_home_pages() {
-  return (window.location = "../asset_default/side_bar.php");
+  return (window.location = "../dashboard/form.php");
 }
 
 function formatRupiah(angka, prefix) {
