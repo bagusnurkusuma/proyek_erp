@@ -105,69 +105,25 @@ if (empty($_SESSION["user_role_id"])) {
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
               <ul class="nav side-menu">
-                <li><a><i class="fa fa-book"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <?php
-                    $hasil = $_SESSION['menu_proces'];
-                    if (is_array($hasil) && count($hasil)) {
-                      foreach ($hasil as $baris) : ?>
-                        <li><a href=<?php echo $baris["location_file"]; ?>><?php echo $baris["menu_name"]; ?></a></li>
-                    <?php endforeach;
-                    } ?>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../point_of_sales/content.php">Content</a></li>
-                    <li><a href="../point_of_sales/tabel.php">Tabel</a></li>
-                    <li><a href="../point_of_sales/form_tabel.php">Form Tabel</a></li>
-                    <li><a href="../point_of_sales/input.php">Input</a></li>
-                  </ul>
-                </li>
-                <li><a><i class=" fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../asset_design/production/form.html">General Form</a></li>
-                    <li><a href="../asset_design/production/form_advanced.html">Advanced Components</a></li>
-                    <li><a href="../asset_design/production/form_validation.html">Form Validation</a></li>
-                    <li><a href="../asset_design/production/form_wizards.html">Form Wizard</a></li>
-                    <li><a href="../asset_design/production/form_upload.html">Form Upload</a></li>
-                    <li><a href="../asset_design/production/form_buttons.html">Form Buttons</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../asset_design/production/general_elements.html">General Elements</a></li>
-                    <li><a href="../asset_design/production/media_gallery.html">Media Gallery</a></li>
-                    <li><a href="../asset_design/production/typography.html">Typography</a></li>
-                    <li><a href="../asset_design/production/icons.html">Icons</a></li>
-                    <li><a href="../asset_design/production/glyphicons.html">Glyphicons</a></li>
-                    <li><a href="../asset_design/production/widgets.html">Widgets</a></li>
-                    <li><a href="../asset_design/production/invoice.html">Invoice</a></li>
-                    <li><a href="../asset_design/production/inbox.html">Inbox</a></li>
-                    <li><a href="../asset_design/production/calendar.html">Calendar</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../asset_design/production/tables.html">Tables</a></li>
-                    <li><a href="../asset_design/production/tables_dynamic.html">Table Dynamic</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../asset_design/production/chartjs.html">Chart JS</a></li>
-                    <li><a href="../asset_design/production/chartjs2.html">Chart JS2</a></li>
-                    <li><a href="../asset_design/production/morisjs.html">Moris JS</a></li>
-                    <li><a href="../asset_design/production/echarts.html">ECharts</a></li>
-                    <li><a href="../asset_design/production/other_charts.html">Other Charts</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a data-toggle="tooltip" data-placement="top" title="Logout" href="../asset_default/logout.php">
-                    <i class="fa fa-power-off" aria-hidden="true"></i>
-                    Log Out
-                  </a>
-                </li>
+                <?php
+                $hasil = $_SESSION['menu_parent'];
+                if (is_array($hasil) && count($hasil)) {
+                  foreach ($hasil as $baris) : ?>
+                    <li><a><i class="<?php echo $baris["icon"]; ?>"></i><?php echo $baris["menu_name"]; ?><span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <?php
+                        $hasil_proces = $_SESSION['menu_proces'];
+                        if (is_array($hasil_proces) && count($hasil_proces)) {
+                          foreach ($hasil_proces as $baris_proces) :
+                            if ($baris["menu_id"] == $baris_proces["parent_id"]) { ?>
+                              <li><a href=<?php echo $baris_proces["location_file"]; ?>><?php echo $baris_proces["menu_name"]; ?></a></li>
+                        <?php }
+                          endforeach;
+                        } ?>
+                      </ul>
+                    </li>
+                <?php endforeach;
+                } ?>
               </ul>
             </div>
           </div>
@@ -177,6 +133,9 @@ if (empty($_SESSION["user_role_id"])) {
           <div class="sidebar-footer hidden-small">
             <a data-toggle="tooltip" data-placement="top" title="Logout" href="../asset_default/logout.php">
               <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Referance" target="_blank" href="../asset_design/production/index.html">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>
           </div>
           <!-- /menu footer buttons -->

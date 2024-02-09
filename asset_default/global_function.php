@@ -7,7 +7,7 @@ function check_user_menu_acces($input_function)
         $is_allow_menu_acces = false;
         if (is_array($hasil) && count($hasil)) {
             foreach ($hasil as $row) :
-                if ($row["id"] == $input_function) {
+                if ($row["menu_id"] == $input_function) {
                     $is_allow_menu_acces = true;
                     $_SESSION["jq_process_name"] = $row["menu_name"];
                     break;

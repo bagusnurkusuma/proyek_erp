@@ -41,6 +41,7 @@ if (is_array($results) && count($results)) {
 		endforeach;
 	}
 	$_SESSION['menu_proces'] = get_menu_proces($_SESSION["user_role_id"]);
+	$_SESSION['menu_parent'] = get_menu_parent($_SESSION["user_role_id"]);
 	$_SESSION['go_to_home_pages'] = "location:../dashboard/form.php";
 	header($_SESSION['go_to_home_pages']);
 } else {
