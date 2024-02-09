@@ -68,7 +68,7 @@ include_once "../asset_default/side_bar.php";
             search: 'applied'
         }).every(function() {
             var name = this.data()[0];
-            var value = parseFloat(this.data()[2]);
+            var value = parseFloat((this.data()[2]).replace(/\./g, '')) || 0;
 
             // Update the sum for the current group
             if (sums[name]) {
@@ -92,9 +92,10 @@ include_once "../asset_default/side_bar.php";
             search: 'applied'
         }).every(function() {
             var name = this.data()[1];
-            var value = parseFloat(this.data()[2]);
+            var value = parseFloat((this.data()[2]).replace(/\./g, '')) || 0;
 
-            // Update the sum for the current group
+            // Update the sum for the current group+
+
             if (sums[name]) {
                 sums[name] += value;
             } else {
@@ -120,8 +121,102 @@ include_once "../asset_default/side_bar.php";
             },
             success: function(data) {
                 $("#data_detail").html(data);
+                var title_name = "Sales Report";
+                var file_name = title_name + " " + get_current_timestamp();
                 var table = $("table#report_sales_table");
-                table = table.DataTable();
+                var button = table.find("button");
+                var button_td = button.closest("td");
+                var index = button_td.index();
+                table.pretty_format_table();
+                table = table.DataTable({
+                    buttons: [{
+                            extend: "print",
+                            footer: true,
+                            exportOptions: {
+                                columns: ":visible:not(:eq(" + index + "))",
+                            },
+                            title: title_name,
+                        },
+                        {
+                            extend: "copyHtml5",
+                            footer: true,
+                            exportOptions: {
+                                columns: ":visible:not(:eq(" + index + "))",
+                            },
+                            title: title_name,
+                        },
+                        {
+                            extend: "csvHtml5",
+                            filename: file_name,
+                            footer: true,
+                            exportOptions: {
+                                columns: ":visible:not(:eq(" + index + "))",
+                            },
+                            title: title_name,
+                        },
+                        {
+                            extend: "excelHtml5",
+                            filename: file_name,
+                            footer: true,
+                            exportOptions: {
+                                columns: ":visible:not(:eq(" + index + "))",
+                            },
+                            title: title_name,
+                            autoFilter: true,
+                            sheetName: title_name,
+                        },
+                        {
+                            extend: "pdfHtml5",
+                            filename: file_name,
+                            footer: true,
+                            exportOptions: {
+                                columns: ":visible:not(:eq(" + index + "))",
+                            },
+                            orientation: "potrait",
+                            pageSize: "A4",
+                            download: "open",
+                            title: title_name,
+                            customize: function(doc) {
+                                doc["header"] = function(currentPage, pageCount) {
+                                    return {
+                                        text: document.title,
+                                        alignment: "center",
+                                    };
+                                };
+                                doc["footer"] = function(currentPage, pageCount) {
+                                    return {
+                                        text: "Page " + currentPage.toString() + " of " + pageCount,
+                                        alignment: "center",
+                                    };
+                                };
+                                doc.watermark = {
+                                    text: document.title,
+                                    color: "#3498db ",
+                                    opacity: 0.3,
+                                    bold: true,
+                                    italics: false,
+                                };
+                            },
+                        },
+                        {
+                            extend: "colvis",
+                            postfixButtons: ["colvisRestore"],
+                        },
+                    ],
+                    dom: "<'row'<'col-md-3'l><'col-md-5'B><'col-md-4'f>>" +
+                        "<'row'<'col-md-12'tr>>" +
+                        "<'row'<'col-md-5'i><'col-md-7'p>>",
+                    lengthMenu: [
+                        [5, 10, 25, 50, 100, 250, 500, -1],
+                        [5, 10, 25, 50, 100, 250, 500, "All"],
+                    ],
+                    processing: true,
+                    pageLength: 100,
+                    pagingType: "full_numbers",
+                });
+
+                table.buttons().container().appendTo("#report_sales_table_wrapper .col-md-5:eq(0)");
+
                 table.on('draw', function() {
                     //Draw chart Inventory Category
                     chart_inv_category.update({
