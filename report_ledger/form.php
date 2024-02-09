@@ -194,21 +194,6 @@ check_user_menu_acces("c15f88c8-ac9e-4574-a284-0a98585ef006");
         "font-weight": bold
       })
     }
-    //Colspan td Total
-    // var data = arg_input.find("td#ending");
-    // data.attr('colspan', colspan);
-    // data.after(insert_td);
-  }
-
-  function printTable() {
-    // Hide elements not to be printed
-    $('body > *:not(#main_table)').hide();
-
-    // Print the specific table
-    window.print();
-    // Show all elements after printing is done
-    $('body > *').show();
-    $("table#structure_table").attr('hidden', 'hidden');
   }
 
   function act_refresh_table_ledger_detail(arg_input) {
