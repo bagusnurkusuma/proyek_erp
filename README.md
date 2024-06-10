@@ -17,6 +17,4 @@ Pada Repositry ini yang saya upload hanya file yang sering berubah saja
 Sementara yang tidak saya upload adalah File Boostrap dan File Database
 
 Titip
-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
-
-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
+PBO2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
